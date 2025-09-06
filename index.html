@@ -6,16 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lumniverse - Intelligent Incident Response Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+                        'gradient-shift': 'gradient-shift 15s ease infinite',
+                        'slide-up': 'slide-up 0.5s ease-out',
+                        'wave': 'wave 20s linear infinite',
+                        'shimmer': 'shimmer 3s linear infinite',
+                        'blob': 'blob 7s infinite'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         @keyframes float {
 
             0%,
             100% {
-                transform: translateY(0px);
+                transform: translate(0, 0) rotate(0deg);
             }
 
-            50% {
-                transform: translateY(-20px);
+            33% {
+                transform: translate(30px, -30px) rotate(120deg);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) rotate(240deg);
             }
         }
 
@@ -23,71 +45,43 @@
 
             0%,
             100% {
-                box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+                box-shadow: 0 0 20px rgba(147, 51, 234, 0.5),
+                    0 0 40px rgba(147, 51, 234, 0.3),
+                    0 0 60px rgba(147, 51, 234, 0.1);
             }
 
             50% {
-                box-shadow: 0 0 40px rgba(99, 102, 241, 0.8);
+                box-shadow: 0 0 30px rgba(147, 51, 234, 0.8),
+                    0 0 60px rgba(147, 51, 234, 0.5),
+                    0 0 90px rgba(147, 51, 234, 0.3);
             }
         }
 
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .pulse-glow {
-            animation: pulse-glow 3s ease-in-out infinite;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .hero-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 100%);
-            background-size: 400% 400%;
-            animation: gradient-shift 15s ease infinite;
-        }
-
         @keyframes gradient-shift {
-            0% {
+
+            0%,
+            100% {
                 background-position: 0% 50%;
             }
 
             50% {
                 background-position: 100% 50%;
             }
+        }
 
-            100% {
-                background-position: 0% 50%;
+        @keyframes slide-up {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
             }
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            transition: all 0.3s ease;
-        }
-
-        .metric-card {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
-        }
-
-        .workflow-line {
-            background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
-            height: 2px;
-            animation: flow 3s linear infinite;
-        }
-
-        @keyframes flow {
+        @keyframes wave {
             0% {
                 transform: translateX(-100%);
             }
@@ -96,321 +90,746 @@
                 transform: translateX(100%);
             }
         }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        /* Glassmorphism effects */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-light {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Light mode glass */
+        .light .glass {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradient-shift 5s ease infinite;
+        }
+
+        /* Animated gradient background */
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe);
+            background-size: 400% 400%;
+            animation: gradient-shift 20s ease infinite;
+        }
+
+        /* Shimmer effect */
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background-size: 1000px 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        /* Neon glow */
+        .neon-glow {
+            text-shadow: 0 0 10px currentColor,
+                0 0 20px currentColor,
+                0 0 30px currentColor,
+                0 0 40px currentColor;
+        }
+
+        /* Card hover effect */
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(147, 51, 234, 0.3);
+        }
+
+        /* Morphing blob */
+        .blob {
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: blob 7s infinite;
+        }
+
+        /* Grid pattern background */
+        .grid-pattern {
+            background-image:
+                linear-gradient(rgba(147, 51, 234, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(147, 51, 234, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* Dot pattern */
+        .dot-pattern {
+            background-image: radial-gradient(circle, rgba(147, 51, 234, 0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
     </style>
 </head>
 
-<body class="bg-gray-950 text-white overflow-x-hidden">
+<body class="dark bg-gray-950 text-gray-900 dark:text-white overflow-x-hidden transition-colors duration-300">
+    <!-- Grid/Dot pattern background -->
+    <div class="fixed inset-0 grid-pattern dark:opacity-20 opacity-10 pointer-events-none"></div>
+
+    <!-- Progress bar -->
+    <div class="fixed top-0 left-0 w-full h-1 z-50">
+        <div class="h-full hero-gradient" id="progress-bar" style="width: 0%; transition: width 0.3s;"></div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-effect px-6 py-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div class="w-10 h-10 hero-gradient rounded-lg pulse-glow"></div>
-                <span class="text-2xl font-bold">Lumniverse</span>
+    <nav class="fixed w-full z-40 glass-dark dark:glass-dark glass-light transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 hero-gradient rounded-xl animate-pulse-glow"></div>
+                    <span class="text-2xl font-bold">Lumniverse</span>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="hover:text-purple-500 transition-colors">Features</a>
+                    <a href="#how-it-works" class="hover:text-purple-500 transition-colors">How It Works</a>
+                    <a href="#integrations" class="hover:text-purple-500 transition-colors">Integrations</a>
+                    <a href="#metrics" class="hover:text-purple-500 transition-colors">Metrics</a>
+
+                    <!-- Dark/Light mode toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-lg glass hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z">
+                            </path>
+                        </svg>
+                        <svg class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                    </button>
+
+                    <a href="https://app.lumniverse.com"
+                        class="px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full hover:scale-105 transition-transform font-semibold text-white">
+                        Launch App
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
             </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#features" class="hover:text-purple-400 transition">Features</a>
-                <a href="#how-it-works" class="hover:text-purple-400 transition">How It Works</a>
-                <a href="#integrations" class="hover:text-purple-400 transition">Integrations</a>
-                <a href="#metrics" class="hover:text-purple-400 transition">Metrics</a>
-            </div>
-            <a href="https://app.lumniverse.com"
-                class="px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full hover:scale-105 transition font-semibold">
-                Launch App
-            </a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="min-h-screen flex items-center justify-center relative px-6 pt-20">
-        <div class="absolute inset-0 hero-gradient opacity-10"></div>
-        <div class="absolute top-20 left-10 w-72 h-72 bg-purple-600 rounded-full blur-3xl opacity-20 float-animation">
+        <!-- Animated background blobs -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div
+                class="absolute top-20 left-10 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob">
+            </div>
+            <div
+                class="absolute top-40 right-10 w-72 h-72 bg-yellow-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000">
+            </div>
+            <div
+                class="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000">
+            </div>
         </div>
-        <div class="absolute bottom-20 right-10 w-96 h-96 bg-pink-600 rounded-full blur-3xl opacity-20 float-animation"
-            style="animation-delay: 3s;"></div>
+
+        <!-- Floating particles -->
+        <div class="absolute inset-0" id="particles-container"></div>
 
         <div class="max-w-5xl mx-auto text-center relative z-10">
-            <div class="mb-6 inline-block px-4 py-2 glass-effect rounded-full">
-                <span class="text-sm font-semibold text-purple-400">🚀 Intelligent Incident Response Platform</span>
+            <!-- Badge -->
+            <div class="inline-block mb-8 animate-slide-up">
+                <div class="px-4 py-2 glass rounded-full inline-flex items-center space-x-2">
+                    <span class="relative flex h-3 w-3">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <span
+                        class="text-sm font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        Intelligent Incident Response Platform
+                    </span>
+                </div>
             </div>
-            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                Stop the Chaos.<br />
-                <span class="gradient-text text-5xl md:text-6xl lg:text-7xl">Automate the Response.</span>
+
+            <!-- Main headline -->
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight animate-slide-up"
+                style="animation-delay: 0.1s;">
+                <span class="block mb-2">Stop the Chaos.</span>
+                <span class="gradient-text block text-6xl md:text-7xl lg:text-8xl">Automate the Response.</span>
             </h1>
-            <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-3xl mx-auto">
+
+            <!-- Description -->
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto animate-slide-up"
+                style="animation-delay: 0.2s;">
                 Lumniverse transforms incident management with AI-powered triage, automated runbooks, and intelligent
                 routing.
-                Reduce interruptions by 70% and resolve incidents 3x faster.
+                <span class="font-semibold text-purple-600 dark:text-purple-400">Reduce interruptions by 70%</span> and
+                <span class="font-semibold text-pink-600 dark:text-pink-400">resolve incidents 3x faster</span>.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style="animation-delay: 0.3s;">
                 <a href="https://app.lumniverse.com"
-                    class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-lg font-semibold hover:scale-105 transition inline-block">
-                    Start Free Trial
+                    class="group relative px-8 py-4 overflow-hidden rounded-full font-semibold text-white">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 transition-transform group-hover:scale-110">
+                    </div>
+                    <span class="relative flex items-center justify-center space-x-2">
+                        <span>Start Free Trial</span>
+                        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </span>
                 </a>
                 <button onclick="document.getElementById('demo-video').scrollIntoView()"
-                    class="px-8 py-4 glass-effect rounded-full text-lg font-semibold hover:scale-105 transition">
-                    Watch Demo
+                    class="px-8 py-4 glass rounded-full font-semibold hover:scale-105 transition-all hover-lift">
+                    <span class="flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                            <path fill-rule="evenodd"
+                                d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span>Watch Demo</span>
+                    </span>
                 </button>
+            </div>
+
+            <!-- Trust indicators -->
+            <div class="mt-16 flex flex-wrap justify-center gap-8 animate-slide-up" style="animation-delay: 0.4s;">
+                <div class="text-center">
+                    <div class="text-2xl font-bold gradient-text">500+</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Teams Trust Us</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold gradient-text">10M+</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Incidents Resolved</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold gradient-text">99.9%</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Uptime SLA</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Key Features Grid -->
-    <section id="features" class="py-20 px-6">
-        <div class="max-w-7xl mx-auto">
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-6 relative">
+        <!-- Section background -->
+        <div class="absolute inset-0 dot-pattern opacity-5"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Intelligent Features</h2>
-                <p class="text-xl text-gray-400">Everything you need to manage incidents at scale</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    <span class="gradient-text">Intelligent Features</span>
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">Everything you need to manage incidents at scale</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Interrupt Firewall -->
-                <div class="feature-card glass-effect p-8 rounded-2xl cursor-pointer">
+                <!-- Feature Card 1 -->
+                <div class="group relative overflow-hidden rounded-2xl glass hover-lift cursor-pointer">
                     <div
-                        class="w-14 h-14 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
-                        <span class="text-2xl">🛡️</span>
+                        class="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
                     </div>
-                    <h3 class="text-2xl font-bold mb-3">Interrupt Firewall</h3>
-                    <p class="text-gray-400 mb-4">Stop random DMs. AI classifies and routes requests, answering 50-70%
-                        autonomously.</p>
-                    <div class="text-sm text-purple-400">
-                        • Smart classification • Context fetching • Auto-response
+                    <div class="relative p-8">
+                        <div
+                            class="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-2xl shadow-lg">
+                            🛡️
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Interrupt Firewall</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Stop random DMs. AI classifies and routes
+                            requests, answering 50-70% autonomously.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 text-xs rounded-full glass text-blue-400">Smart Classification</span>
+                            <span class="px-3 py-1 text-xs rounded-full glass text-purple-400">Auto-Response</span>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform">
                     </div>
                 </div>
 
-                <!-- Auto-Status Broadcaster -->
-                <div class="feature-card glass-effect p-8 rounded-2xl cursor-pointer">
+                <!-- Feature Card 2 -->
+                <div class="group relative overflow-hidden rounded-2xl glass hover-lift cursor-pointer">
                     <div
-                        class="w-14 h-14 bg-gradient-to-r from-green-500 to-teal-500 rounded-lg flex items-center justify-center mb-4">
-                        <span class="text-2xl">📡</span>
+                        class="absolute inset-0 bg-gradient-to-br from-green-600/10 to-teal-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
                     </div>
-                    <h3 class="text-2xl font-bold mb-3">Auto-Status Updates</h3>
-                    <p class="text-gray-400 mb-4">Keep stakeholders informed with automated status broadcasts and timed
-                        updates.</p>
-                    <div class="text-sm text-green-400">
-                        • Real-time updates • Stakeholder digests • ETA tracking
+                    <div class="relative p-8">
+                        <div
+                            class="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center text-2xl shadow-lg">
+                            📡
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Auto-Status Updates</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Keep stakeholders informed with automated
+                            status broadcasts and timed updates.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 text-xs rounded-full glass text-green-400">Real-time</span>
+                            <span class="px-3 py-1 text-xs rounded-full glass text-teal-400">ETA Tracking</span>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-teal-500 transform scale-x-0 group-hover:scale-x-100 transition-transform">
                     </div>
                 </div>
 
-                <!-- War-Room Orchestrator -->
-                <div class="feature-card glass-effect p-8 rounded-2xl cursor-pointer">
+                <!-- Feature Card 3 -->
+                <div class="group relative overflow-hidden rounded-2xl glass hover-lift cursor-pointer">
                     <div
-                        class="w-14 h-14 bg-gradient-to-r from-red-500 to-orange-500 rounded-lg flex items-center justify-center mb-4">
-                        <span class="text-2xl">⚡</span>
+                        class="absolute inset-0 bg-gradient-to-br from-red-600/10 to-orange-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
                     </div>
-                    <h3 class="text-2xl font-bold mb-3">War-Room Orchestrator</h3>
-                    <p class="text-gray-400 mb-4">Instantly spin up incident channels with pinned timelines, graphs, and
-                        mitigation buttons.</p>
-                    <div class="text-sm text-orange-400">
-                        • One-click setup • Blast radius graphs • Quick actions
+                    <div class="relative p-8">
+                        <div
+                            class="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center text-2xl shadow-lg">
+                            ⚡
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">War-Room Orchestrator</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Instantly spin up incident channels with pinned
+                            timelines, graphs, and mitigation buttons.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 text-xs rounded-full glass text-red-400">One-click Setup</span>
+                            <span class="px-3 py-1 text-xs rounded-full glass text-orange-400">Quick Actions</span>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform">
                     </div>
                 </div>
 
-                <!-- Runbook Synthesizer -->
-                <div class="feature-card glass-effect p-8 rounded-2xl cursor-pointer">
+                <!-- Feature Card 4 -->
+                <div class="group relative overflow-hidden rounded-2xl glass hover-lift cursor-pointer">
                     <div
-                        class="w-14 h-14 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-lg flex items-center justify-center mb-4">
-                        <span class="text-2xl">📚</span>
+                        class="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
                     </div>
-                    <h3 class="text-2xl font-bold mb-3">Smart Runbooks</h3>
-                    <p class="text-gray-400 mb-4">Auto-generate and maintain runbooks from your actual incident
-                        responses.</p>
-                    <div class="text-sm text-indigo-400">
-                        • Self-updating • Searchable • Battle-tested
+                    <div class="relative p-8">
+                        <div
+                            class="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center text-2xl shadow-lg">
+                            📚
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Smart Runbooks</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Auto-generate and maintain runbooks from your
+                            actual incident responses.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 text-xs rounded-full glass text-purple-400">Self-updating</span>
+                            <span class="px-3 py-1 text-xs rounded-full glass text-indigo-400">Battle-tested</span>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-indigo-500 transform scale-x-0 group-hover:scale-x-100 transition-transform">
                     </div>
                 </div>
 
-                <!-- Explainer Mode -->
-                <div class="feature-card glass-effect p-8 rounded-2xl cursor-pointer">
+                <!-- Feature Card 5 -->
+                <div class="group relative overflow-hidden rounded-2xl glass hover-lift cursor-pointer">
                     <div
-                        class="w-14 h-14 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-lg flex items-center justify-center mb-4">
-                        <span class="text-2xl">🎓</span>
+                        class="absolute inset-0 bg-gradient-to-br from-yellow-600/10 to-amber-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
                     </div>
-                    <h3 class="text-2xl font-bold mb-3">Code Explainer</h3>
-                    <p class="text-gray-400 mb-4">Answer "what does this do?" with code summaries, call graphs, and test
-                        links.</p>
-                    <div class="text-sm text-yellow-400">
-                        • Tree-sitter analysis • PR history • Test coverage
+                    <div class="relative p-8">
+                        <div
+                            class="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-yellow-500 to-amber-500 flex items-center justify-center text-2xl shadow-lg">
+                            🎓
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Code Explainer</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Answer "what does this do?" with code
+                            summaries, call graphs, and test links.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 text-xs rounded-full glass text-yellow-400">Tree-sitter</span>
+                            <span class="px-3 py-1 text-xs rounded-full glass text-amber-400">PR History</span>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 to-amber-500 transform scale-x-0 group-hover:scale-x-100 transition-transform">
                     </div>
                 </div>
 
-                <!-- Focus Mode -->
-                <div class="feature-card glass-effect p-8 rounded-2xl cursor-pointer">
+                <!-- Feature Card 6 -->
+                <div class="group relative overflow-hidden rounded-2xl glass hover-lift cursor-pointer">
                     <div
-                        class="w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center mb-4">
-                        <span class="text-2xl">🎯</span>
+                        class="absolute inset-0 bg-gradient-to-br from-cyan-600/10 to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
                     </div>
-                    <h3 class="text-2xl font-bold mb-3">Focus Mode</h3>
-                    <p class="text-gray-400 mb-4">Protect deep work. AI deflects interruptions when engineers are in the
-                        zone.</p>
-                    <div class="text-sm text-cyan-400">
-                        • Smart queueing • Priority routing • Context preservation
+                    <div class="relative p-8">
+                        <div
+                            class="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-2xl shadow-lg">
+                            🎯
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Focus Mode</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Protect deep work. AI deflects interruptions
+                            when engineers are in the zone.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 text-xs rounded-full glass text-cyan-400">Smart Queue</span>
+                            <span class="px-3 py-1 text-xs rounded-full glass text-blue-400">Priority Routing</span>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works -->
-    <section id="how-it-works" class="py-20 px-6 relative">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/10 to-transparent"></div>
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 px-6 relative overflow-hidden">
+        <!-- Animated background wave -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0 hero-gradient transform skew-y-12"></div>
+        </div>
+
         <div class="max-w-7xl mx-auto relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">How Lumniverse Works</h2>
-                <p class="text-xl text-gray-400">Intelligent automation at every step</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    How <span class="gradient-text">Lumniverse</span> Works
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">Intelligent automation at every step</p>
             </div>
 
-            <div class="space-y-8">
-                <div class="flex flex-col md:flex-row items-center gap-8">
-                    <div class="flex-1">
-                        <div class="glass-effect p-8 rounded-2xl">
-                            <h3 class="text-2xl font-bold mb-4 text-purple-400">1. Intelligent Intake</h3>
-                            <p class="text-gray-300 mb-4">Every request flows through our AI-powered triage system.
-                                Questions are classified, context is fetched, and relevant data is assembled instantly.
-                            </p>
-                            <div class="relative overflow-hidden h-1 rounded-full bg-gray-800 mt-4">
-                                <div class="workflow-line"></div>
-                            </div>
+            <!-- Process Steps -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="relative">
+                    <div class="glass rounded-2xl p-6 hover-lift">
+                        <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white flex items-center justify-center font-bold text-xl mb-4">
+                            1
                         </div>
+                        <h3 class="text-xl font-bold mb-3 text-purple-500">Intelligent Intake</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Every request flows through our AI-powered
+                            triage system for instant classification.</p>
                     </div>
-                    <div class="flex-1">
-                        <div class="glass-effect p-8 rounded-2xl">
-                            <h3 class="text-2xl font-bold mb-4 text-green-400">2. Automated Resolution</h3>
-                            <p class="text-gray-300 mb-4">50-70% of issues resolved without human intervention. AI
-                                agents execute runbooks, provide answers, and handle routine tasks.</p>
-                            <div class="relative overflow-hidden h-1 rounded-full bg-gray-800 mt-4">
-                                <div class="workflow-line" style="animation-delay: 1s;"></div>
-                            </div>
-                        </div>
+                    <!-- Connector line -->
+                    <div
+                        class="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-purple-500 to-transparent">
                     </div>
                 </div>
 
-                <div class="flex flex-col md:flex-row items-center gap-8">
-                    <div class="flex-1">
-                        <div class="glass-effect p-8 rounded-2xl">
-                            <h3 class="text-2xl font-bold mb-4 text-orange-400">3. Smart Escalation</h3>
-                            <p class="text-gray-300 mb-4">Complex issues are enriched with full context and routed to
-                                the right expert. No more "who owns this?" confusion.</p>
-                            <div class="relative overflow-hidden h-1 rounded-full bg-gray-800 mt-4">
-                                <div class="workflow-line" style="animation-delay: 2s;"></div>
-                            </div>
+                <!-- Step 2 -->
+                <div class="relative">
+                    <div class="glass rounded-2xl p-6 hover-lift">
+                        <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-600 to-green-600 text-white flex items-center justify-center font-bold text-xl mb-4">
+                            2
                         </div>
+                        <h3 class="text-xl font-bold mb-3 text-green-500">Automated Resolution</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">50-70% of issues resolved without human
+                            intervention using AI agents.</p>
                     </div>
-                    <div class="flex-1">
-                        <div class="glass-effect p-8 rounded-2xl">
-                            <h3 class="text-2xl font-bold mb-4 text-blue-400">4. Continuous Learning</h3>
-                            <p class="text-gray-300 mb-4">Every incident improves the system. Runbooks update
-                                automatically, patterns are recognized, and responses get smarter.</p>
-                            <div class="relative overflow-hidden h-1 rounded-full bg-gray-800 mt-4">
-                                <div class="workflow-line" style="animation-delay: 3s;"></div>
-                            </div>
+                    <!-- Connector line -->
+                    <div
+                        class="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-green-500 to-transparent">
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative">
+                    <div class="glass rounded-2xl p-6 hover-lift">
+                        <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-r from-green-600 to-orange-600 text-white flex items-center justify-center font-bold text-xl mb-4">
+                            3
                         </div>
+                        <h3 class="text-xl font-bold mb-3 text-orange-500">Smart Escalation</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Complex issues are enriched with context and
+                            routed to the right expert.</p>
+                    </div>
+                    <!-- Connector line -->
+                    <div
+                        class="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-orange-500 to-transparent">
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="relative">
+                    <div class="glass rounded-2xl p-6 hover-lift">
+                        <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-r from-orange-600 to-red-600 text-white flex items-center justify-center font-bold text-xl mb-4">
+                            4
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-red-500">Continuous Learning</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Every incident improves the system with
+                            auto-updating runbooks.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Flow Diagram -->
+            <div class="mt-16 glass rounded-3xl p-8 relative overflow-hidden">
+                <div class="absolute inset-0 opacity-5">
+                    <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600"></div>
+                </div>
+                <div class="relative grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">🔄</div>
+                        <div class="text-3xl font-bold gradient-text">24/7</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Continuous Operation</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">⚡</div>
+                        <div class="text-3xl font-bold gradient-text">&lt;30s</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Average Response Time</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">🎯</div>
+                        <div class="text-3xl font-bold gradient-text">95%</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Accuracy Rate</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Integration Section -->
-    <section id="integrations" class="py-20 px-6">
+    <!-- Integrations Section -->
+    <section id="integrations" class="py-20 px-6 relative">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Seamless Integrations</h2>
-                <p class="text-xl text-gray-400">Works with your existing stack</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Seamless <span class="gradient-text">Integrations</span>
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">Works with your existing stack</p>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            <!-- Integration Cards Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-12">
                 <div
-                    class="glass-effect p-6 rounded-xl flex flex-col items-center justify-center hover:scale-105 transition">
-                    <div class="text-4xl mb-2">💬</div>
-                    <span class="text-sm">Slack</span>
+                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">💬</div>
+                    <span class="text-sm font-medium">Slack</span>
                 </div>
                 <div
-                    class="glass-effect p-6 rounded-xl flex flex-col items-center justify-center hover:scale-105 transition">
-                    <div class="text-4xl mb-2">🎯</div>
-                    <span class="text-sm">Kubernetes</span>
+                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">🎯</div>
+                    <span class="text-sm font-medium">Kubernetes</span>
                 </div>
                 <div
-                    class="glass-effect p-6 rounded-xl flex flex-col items-center justify-center hover:scale-105 transition">
-                    <div class="text-4xl mb-2">📊</div>
-                    <span class="text-sm">Prometheus</span>
+                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">📊</div>
+                    <span class="text-sm font-medium">Prometheus</span>
                 </div>
                 <div
-                    class="glass-effect p-6 rounded-xl flex flex-col items-center justify-center hover:scale-105 transition">
-                    <div class="text-4xl mb-2">🐙</div>
-                    <span class="text-sm">GitHub</span>
+                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">🐙</div>
+                    <span class="text-sm font-medium">GitHub</span>
                 </div>
                 <div
-                    class="glass-effect p-6 rounded-xl flex flex-col items-center justify-center hover:scale-105 transition">
-                    <div class="text-4xl mb-2">🚨</div>
-                    <span class="text-sm">Sentry</span>
+                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">🚨</div>
+                    <span class="text-sm font-medium">Sentry</span>
                 </div>
                 <div
-                    class="glass-effect p-6 rounded-xl flex flex-col items-center justify-center hover:scale-105 transition">
-                    <div class="text-4xl mb-2">⚡</div>
-                    <span class="text-sm">Kafka</span>
+                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">⚡</div>
+                    <span class="text-sm font-medium">Kafka</span>
                 </div>
                 <div
-                    class="glass-effect p-6 rounded-xl flex flex-col items-center justify-center hover:scale-105 transition">
-                    <div class="text-4xl mb-2">🔄</div>
-                    <span class="text-sm">ArgoCD</span>
+                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">🔄</div>
+                    <span class="text-sm font-medium">ArgoCD</span>
                 </div>
                 <div
-                    class="glass-effect p-6 rounded-xl flex flex-col items-center justify-center hover:scale-105 transition">
-                    <div class="text-4xl mb-2">🗂️</div>
-                    <span class="text-sm">Neo4j</span>
+                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">🗂️</div>
+                    <span class="text-sm font-medium">Neo4j</span>
                 </div>
                 <div
-                    class="glass-effect p-6 rounded-xl flex flex-col items-center justify-center hover:scale-105 transition">
-                    <div class="text-4xl mb-2">📈</div>
-                    <span class="text-sm">Grafana</span>
+                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">📈</div>
+                    <span class="text-sm font-medium">Grafana</span>
                 </div>
                 <div
-                    class="glass-effect p-6 rounded-xl flex flex-col items-center justify-center hover:scale-105 transition">
-                    <div class="text-4xl mb-2">🔍</div>
-                    <span class="text-sm">Elastic</span>
+                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">🔍</div>
+                    <span class="text-sm font-medium">Elastic</span>
                 </div>
                 <div
-                    class="glass-effect p-6 rounded-xl flex flex-col items-center justify-center hover:scale-105 transition">
-                    <div class="text-4xl mb-2">📱</div>
-                    <span class="text-sm">PagerDuty</span>
+                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">📱</div>
+                    <span class="text-sm font-medium">PagerDuty</span>
                 </div>
                 <div
-                    class="glass-effect p-6 rounded-xl flex flex-col items-center justify-center hover:scale-105 transition">
-                    <div class="text-4xl mb-2">➕</div>
-                    <span class="text-sm">100+ More</span>
+                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">➕</div>
+                    <span class="text-sm font-medium">100+ More</span>
+                </div>
+            </div>
+
+            <!-- API Showcase -->
+            <div class="glass rounded-3xl p-8 overflow-hidden">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Powerful API</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">
+                            Integrate Lumniverse into your workflow with our comprehensive REST API and webhooks.
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="w-8 h-8 rounded-lg bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center text-white">
+                                    ✓</div>
+                                <span>RESTful API with full CRUD operations</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="w-8 h-8 rounded-lg bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center text-white">
+                                    ✓</div>
+                                <span>Real-time webhooks for instant updates</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="w-8 h-8 rounded-lg bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center text-white">
+                                    ✓</div>
+                                <span>SDKs for Python, Node.js, Go, and more</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="bg-gray-900 rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                            <div class="text-gray-500 mb-2"># Quick Start</div>
+                            <div class="text-green-400">curl -X POST https://api.lumniverse.com/v1/incidents \</div>
+                            <div class="text-white ml-4">-H "Authorization: Bearer YOUR_API_KEY" \</div>
+                            <div class="text-white ml-4">-H "Content-Type: application/json" \</div>
+                            <div class="text-white ml-4">-d '{"service": "checkout", "severity": "high"}'</div>
+                        </div>
+                        <div
+                            class="absolute -top-2 -right-2 px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-xs text-white">
+                            Live Code
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Metrics Section -->
-    <section id="metrics" class="py-20 px-6">
-        <div class="max-w-7xl mx-auto">
+    <section id="metrics" class="py-20 px-6 relative">
+        <div class="absolute inset-0 hero-gradient opacity-5"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Proven Results</h2>
-                <p class="text-xl text-gray-400">Real impact on your incident response</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Proven <span class="gradient-text">Results</span>
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">Real impact on your incident response</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="metric-card p-8 rounded-2xl text-center">
-                    <div class="text-5xl font-bold gradient-text mb-2">70%</div>
-                    <div class="text-lg text-gray-300">Fewer Interruptions</div>
-                    <div class="text-sm text-gray-500 mt-2">Questions deflected automatically</div>
+                <div class="glass rounded-2xl p-8 text-center hover-lift relative overflow-hidden group">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="relative">
+                        <div class="text-5xl font-bold gradient-text mb-2" data-target="70" data-suffix="%">0%</div>
+                        <div class="text-lg font-semibold mb-2">Fewer Interruptions</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Questions deflected automatically</div>
+                    </div>
                 </div>
-                <div class="metric-card p-8 rounded-2xl text-center">
-                    <div class="text-5xl font-bold gradient-text mb-2">3x</div>
-                    <div class="text-lg text-gray-300">Faster MTTR</div>
-                    <div class="text-sm text-gray-500 mt-2">Mean time to resolution</div>
+
+                <div class="glass rounded-2xl p-8 text-center hover-lift relative overflow-hidden group">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-green-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="relative">
+                        <div class="text-5xl font-bold gradient-text mb-2" data-target="3" data-suffix="x">0x</div>
+                        <div class="text-lg font-semibold mb-2">Faster MTTR</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Mean time to resolution</div>
+                    </div>
                 </div>
-                <div class="metric-card p-8 rounded-2xl text-center">
-                    <div class="text-5xl font-bold gradient-text mb-2">90%</div>
-                    <div class="text-lg text-gray-300">Runbook Accuracy</div>
-                    <div class="text-sm text-gray-500 mt-2">First-try mitigation success</div>
+
+                <div class="glass rounded-2xl p-8 text-center hover-lift relative overflow-hidden group">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="relative">
+                        <div class="text-5xl font-bold gradient-text mb-2" data-target="90" data-suffix="%">0%</div>
+                        <div class="text-lg font-semibold mb-2">Runbook Accuracy</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">First-try mitigation success</div>
+                    </div>
                 </div>
-                <div class="metric-card p-8 rounded-2xl text-center">
-                    <div class="text-5xl font-bold gradient-text mb-2">24/7</div>
-                    <div class="text-lg text-gray-300">Always On</div>
-                    <div class="text-sm text-gray-500 mt-2">Instant response, every time</div>
+
+                <div class="glass rounded-2xl p-8 text-center hover-lift relative overflow-hidden group">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-orange-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="relative">
+                        <div class="text-5xl font-bold gradient-text mb-2">24/7</div>
+                        <div class="text-lg font-semibold mb-2">Always On</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Instant response, every time</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROI Calculator -->
+            <div class="mt-16 glass rounded-3xl p-8">
+                <h3 class="text-2xl font-bold mb-6 text-center">Calculate Your ROI</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Team Size</label>
+                        <input type="range" id="team-size" min="5" max="100" value="20" class="w-full">
+                        <div class="text-center mt-2 font-semibold"><span id="team-size-value">20</span> engineers</div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Incidents/Month</label>
+                        <input type="range" id="incidents" min="10" max="500" value="50" class="w-full">
+                        <div class="text-center mt-2 font-semibold"><span id="incidents-value">50</span> incidents</div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Avg Resolution Time</label>
+                        <input type="range" id="resolution" min="30" max="240" value="60" class="w-full">
+                        <div class="text-center mt-2 font-semibold"><span id="resolution-value">60</span> minutes</div>
+                    </div>
+                </div>
+                <div class="mt-8 p-6 bg-gradient-to-r from-purple-600/10 to-pink-600/10 rounded-xl">
+                    <div class="text-center">
+                        <div class="text-sm text-gray-600 dark:text-gray-400 mb-2">Estimated Annual Savings</div>
+                        <div class="text-4xl font-bold gradient-text">$<span id="savings">240,000</span></div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400 mt-2">Plus <span
+                                class="font-semibold">2,400 hours</span> saved per year</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -420,18 +839,28 @@
     <section id="demo-video" class="py-20 px-6">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">See It In Action</h2>
-                <p class="text-xl text-gray-400">Watch how Lumniverse transforms incident response</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    See It In <span class="gradient-text">Action</span>
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">Watch how Lumniverse transforms incident response
+                </p>
             </div>
-            <div class="glass-effect p-2 rounded-2xl">
+            <div class="glass rounded-3xl p-2 relative group">
                 <div
-                    class="aspect-video bg-gradient-to-br from-purple-900/50 to-pink-900/50 rounded-xl flex items-center justify-center">
+                    class="aspect-video bg-gradient-to-br from-purple-900/50 to-pink-900/50 rounded-2xl flex items-center justify-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-black/50"></div>
                     <button
-                        class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                        class="relative z-10 w-20 h-20 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-all hover:scale-110 glass">
                         <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M8 5v14l11-7z" />
                         </svg>
                     </button>
+                    <div class="absolute bottom-4 left-4 right-4 glass rounded-lg p-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">Introduction to Lumniverse</span>
+                            <span class="text-sm">5:42</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -439,24 +868,30 @@
 
     <!-- CTA Section -->
     <section class="py-20 px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="glass-effect p-12 rounded-3xl relative overflow-hidden">
-                <div class="absolute inset-0 hero-gradient opacity-20"></div>
-                <div class="relative z-10">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready to Transform Your Incident Response?</h2>
-                    <p class="text-xl text-gray-300 mb-8">Join leading engineering teams using Lumniverse to eliminate
-                        chaos and accelerate resolution.</p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass rounded-3xl p-12 relative overflow-hidden">
+                <div class="absolute inset-0 hero-gradient opacity-10"></div>
+                <div class="relative z-10 text-center">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                        Ready to <span class="gradient-text">Transform</span> Your Incident Response?
+                    </h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
+                        Join leading engineering teams using Lumniverse to eliminate chaos and accelerate resolution.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
                         <a href="https://app.lumniverse.com"
-                            class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-lg font-semibold hover:scale-105 transition">
-                            Start 14-Day Free Trial
+                            class="group relative px-8 py-4 overflow-hidden rounded-full font-semibold text-white">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 transition-transform group-hover:scale-110">
+                            </div>
+                            <span class="relative">Start 14-Day Free Trial</span>
                         </a>
-                        <button
-                            class="px-8 py-4 glass-effect rounded-full text-lg font-semibold hover:scale-105 transition">
+                        <button class="px-8 py-4 glass rounded-full font-semibold hover:scale-105 transition-all">
                             Schedule Demo
                         </button>
                     </div>
-                    <p class="text-sm text-gray-500 mt-6">No credit card required • Setup in 5 minutes • Cancel anytime
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                        ✓ No credit card required &nbsp;&nbsp; ✓ Setup in 5 minutes &nbsp;&nbsp; ✓ Cancel anytime
                     </p>
                 </div>
             </div>
@@ -464,57 +899,82 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 border-t border-gray-800">
+    <footer class="py-12 px-6 border-t border-gray-200 dark:border-gray-800">
         <div class="max-w-7xl mx-auto">
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
-                    <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-8 h-8 hero-gradient rounded-lg"></div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 hero-gradient rounded-xl"></div>
                         <span class="text-xl font-bold">Lumniverse</span>
                     </div>
-                    <p class="text-gray-400 text-sm">Intelligent incident response for modern engineering teams.</p>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                        Intelligent incident response for modern engineering teams.
+                    </p>
                 </div>
                 <div>
                     <h4 class="font-semibold mb-4">Product</h4>
-                    <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a href="#" class="hover:text-white transition">Features</a></li>
-                        <li><a href="#" class="hover:text-white transition">Integrations</a></li>
-                        <li><a href="#" class="hover:text-white transition">Pricing</a></li>
-                        <li><a href="#" class="hover:text-white transition">Roadmap</a></li>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-purple-500 transition">Features</a></li>
+                        <li><a href="#" class="hover:text-purple-500 transition">Integrations</a></li>
+                        <li><a href="#" class="hover:text-purple-500 transition">Pricing</a></li>
+                        <li><a href="#" class="hover:text-purple-500 transition">Roadmap</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-semibold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a href="#" class="hover:text-white transition">Documentation</a></li>
-                        <li><a href="#" class="hover:text-white transition">API Reference</a></li>
-                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
-                        <li><a href="#" class="hover:text-white transition">Case Studies</a></li>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-purple-500 transition">Documentation</a></li>
+                        <li><a href="#" class="hover:text-purple-500 transition">API Reference</a></li>
+                        <li><a href="#" class="hover:text-purple-500 transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-purple-500 transition">Case Studies</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-semibold mb-4">Company</h4>
-                    <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a href="#" class="hover:text-white transition">About</a></li>
-                        <li><a href="#" class="hover:text-white transition">Careers</a></li>
-                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
-                        <li><a href="#" class="hover:text-white transition">Security</a></li>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-purple-500 transition">About</a></li>
+                        <li><a href="#" class="hover:text-purple-500 transition">Careers</a></li>
+                        <li><a href="#" class="hover:text-purple-500 transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-purple-500 transition">Security</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm">© 2025 Lumniverse. All rights reserved.</p>
+            <div
+                class="pt-8 border-t border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row justify-between items-center">
+                <p class="text-gray-600 dark:text-gray-400 text-sm">
+                    © 2025 Lumniverse. All rights reserved.
+                </p>
                 <div class="flex space-x-6 mt-4 sm:mt-0">
-                    <a href="#" class="text-gray-400 hover:text-white transition">Privacy</a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">Terms</a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">Cookies</a>
+                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-purple-500 transition">Privacy</a>
+                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-purple-500 transition">Terms</a>
+                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-purple-500 transition">Cookies</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for anchor links
+        // Dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            html.classList.remove('dark');
+        }
+
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -525,97 +985,91 @@
             });
         });
 
-        // Add parallax effect on scroll
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelectorAll('.float-animation');
-            parallax.forEach(element => {
-                const speed = element.dataset.speed || 0.5;
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+        // Animated counters
+        const animateCounter = (element) => {
+            const target = parseInt(element.dataset.target);
+            const suffix = element.dataset.suffix || '';
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + suffix;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + suffix;
+                }
+            }, 20);
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.feature-card, .metric-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-
-        // Animate metrics when they come into view
-        const animateValue = (element, start, end, duration) => {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const value = Math.floor(progress * (end - start) + start);
-                element.textContent = element.dataset.suffix ? value + element.dataset.suffix : value;
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
-        };
-
-        // Setup metric animations
-        const metricObserver = new IntersectionObserver((entries) => {
+        // Intersection Observer for counters
+        const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !entry.target.dataset.animated) {
                     entry.target.dataset.animated = 'true';
-                    const value = parseInt(entry.target.textContent);
-                    if (!isNaN(value)) {
-                        animateValue(entry.target, 0, value, 2000);
-                    }
+                    animateCounter(entry.target);
                 }
             });
         }, { threshold: 0.5 });
 
-        document.querySelectorAll('.metric-card .text-5xl').forEach(el => {
-            if (el.textContent.includes('%')) {
-                el.dataset.suffix = '%';
-                el.textContent = '0%';
-                metricObserver.observe(el);
-            } else if (el.textContent.includes('x')) {
-                // Handle the 3x metric specially
-                el.dataset.suffix = 'x';
-                el.textContent = '0x';
-                metricObserver.observe(el);
-            }
+        document.querySelectorAll('[data-target]').forEach(counter => {
+            counterObserver.observe(counter);
         });
 
-        // Mobile menu toggle
-        const mobileMenuBtn = document.createElement('button');
-        mobileMenuBtn.className = 'md:hidden text-white';
-        mobileMenuBtn.innerHTML = `
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        `;
+        // ROI Calculator
+        const teamSize = document.getElementById('team-size');
+        const incidents = document.getElementById('incidents');
+        const resolution = document.getElementById('resolution');
+        const savings = document.getElementById('savings');
 
-        const nav = document.querySelector('nav .max-w-7xl');
-        const navLinks = document.querySelector('nav .hidden.md\\:flex');
-        nav.insertBefore(mobileMenuBtn, nav.lastElementChild);
+        const calculateROI = () => {
+            const team = parseInt(teamSize.value);
+            const inc = parseInt(incidents.value);
+            const res = parseInt(resolution.value);
 
+            // Simple ROI calculation
+            const hoursSaved = (inc * res * 0.7) / 60; // 70% reduction
+            const costPerHour = 100; // Average engineer hourly rate
+            const annualSavings = hoursSaved * costPerHour * 12;
+
+            savings.textContent = annualSavings.toLocaleString();
+            document.getElementById('team-size-value').textContent = team;
+            document.getElementById('incidents-value').textContent = inc;
+            document.getElementById('resolution-value').textContent = res;
+        };
+
+        teamSize?.addEventListener('input', calculateROI);
+        incidents?.addEventListener('input', calculateROI);
+        resolution?.addEventListener('input', calculateROI);
+
+        // Create floating particles
+        const createParticle = () => {
+            const container = document.getElementById('particles-container');
+            if (!container) return;
+
+            const particle = document.createElement('div');
+            particle.className = 'absolute w-2 h-2 bg-purple-400 rounded-full opacity-30';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animation = `float ${10 + Math.random() * 20}s ease-in-out infinite`;
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            container.appendChild(particle);
+
+            setTimeout(() => particle.remove(), 30000);
+        };
+
+        // Create initial particles
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createParticle, i * 200);
+        }
+
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.createElement('div');
-        mobileMenu.className = 'fixed inset-0 bg-gray-950/95 z-50 hidden';
+        mobileMenu.className = 'fixed inset-0 bg-gray-950/95 dark:bg-gray-950/95 z-50 hidden';
         mobileMenu.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
-                <button class="absolute top-6 right-6 text-white">
+                <button class="absolute top-6 right-6">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
@@ -624,16 +1078,16 @@
                 <a href="#how-it-works" class="hover:text-purple-400 transition">How It Works</a>
                 <a href="#integrations" class="hover:text-purple-400 transition">Integrations</a>
                 <a href="#metrics" class="hover:text-purple-400 transition">Metrics</a>
-                <a href="https://app.lumniverse.com" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full">Launch App</a>
+                <a href="https://app.lumniverse.com" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white">Launch App</a>
             </div>
         `;
         document.body.appendChild(mobileMenu);
 
-        mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn?.addEventListener('click', () => {
             mobileMenu.classList.remove('hidden');
         });
 
-        mobileMenu.querySelector('button').addEventListener('click', () => {
+        mobileMenu.querySelector('button')?.addEventListener('click', () => {
             mobileMenu.classList.add('hidden');
         });
 
@@ -643,7 +1097,31 @@
             });
         });
 
-        // Type writer effect for hero headline
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply fade-in animation to all sections
+        document.querySelectorAll('section').forEach((section, index) => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            section.style.transitionDelay = `${index * 0.1}s`;
+            fadeInObserver.observe(section);
+        });
+
+        // Typing animation for hero text
         const typeWriter = (element, text, speed = 50) => {
             let i = 0;
             element.textContent = '';
@@ -657,20 +1135,35 @@
             type();
         };
 
-        // Apply typewriter to hero headline on load
+        // Apply typewriter effect on load
         window.addEventListener('load', () => {
-            const headline = document.querySelector('h1 .gradient-text');
-            if (headline) {
-                const originalText = headline.textContent;
-                typeWriter(headline, originalText, 60);
+            const heroText = document.querySelector('.gradient-text');
+            if (heroText && heroText.textContent.includes('Automate')) {
+                const originalText = heroText.textContent;
+                setTimeout(() => {
+                    typeWriter(heroText, originalText, 60);
+                }, 500);
             }
         });
 
-        // Add toast notification for demo
-        const showToast = (message) => {
+        // Add toast notification system
+        const showToast = (message, type = 'info') => {
             const toast = document.createElement('div');
-            toast.className = 'fixed bottom-8 right-8 glass-effect px-6 py-4 rounded-lg z-50 transform translate-y-full transition-transform';
-            toast.textContent = message;
+            toast.className = `fixed bottom-8 right-8 glass px-6 py-4 rounded-lg z-50 transform translate-y-full transition-transform`;
+
+            const colors = {
+                info: 'text-blue-400',
+                success: 'text-green-400',
+                error: 'text-red-400'
+            };
+
+            toast.innerHTML = `
+                <div class="flex items-center space-x-3">
+                    <span class="${colors[type]}">●</span>
+                    <span>${message}</span>
+                </div>
+            `;
+
             document.body.appendChild(toast);
 
             setTimeout(() => {
@@ -683,16 +1176,16 @@
             }, 3000);
         };
 
-        // Demo video play button
-        document.querySelector('#demo-video button').addEventListener('click', () => {
-            showToast('Demo video coming soon! Contact us for a personalized demo.');
+        // Demo video click handler
+        document.querySelector('#demo-video button')?.addEventListener('click', () => {
+            showToast('Demo video coming soon! Contact us for a personalized demo.', 'info');
         });
 
-        // Schedule demo button
-        document.querySelectorAll('button:not([onclick])').forEach(btn => {
+        // Schedule demo button handler
+        document.querySelectorAll('button').forEach(btn => {
             if (btn.textContent.includes('Schedule Demo')) {
                 btn.addEventListener('click', () => {
-                    showToast('Redirecting to scheduling page...');
+                    showToast('Redirecting to scheduling page...', 'success');
                     setTimeout(() => {
                         window.open('https://calendly.com/lumniverse-demo', '_blank');
                     }, 1500);
@@ -700,24 +1193,85 @@
             }
         });
 
-        // Add floating particles background
-        const createParticle = () => {
-            const particle = document.createElement('div');
-            particle.className = 'absolute w-1 h-1 bg-purple-400 rounded-full opacity-50';
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = Math.random() * window.innerHeight + 'px';
-            particle.style.animation = `float ${10 + Math.random() * 20}s ease-in-out infinite`;
-            particle.style.animationDelay = Math.random() * 5 + 's';
-            document.querySelector('.hero-gradient').parentElement.appendChild(particle);
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            // ESC to close mobile menu
+            if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
 
-            setTimeout(() => particle.remove(), 30000);
+            // Ctrl/Cmd + K to focus search (if you add search later)
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                showToast('Search feature coming soon!', 'info');
+            }
+        });
+
+        // Performance optimization: Lazy load images
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+
+        lazyImages.forEach(img => imageObserver.observe(img));
+
+        // Add confetti effect for CTA clicks
+        const createConfetti = (x, y) => {
+            const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c'];
+            for (let i = 0; i < 20; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'absolute w-2 h-2 rounded-full pointer-events-none';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = x + 'px';
+                confetti.style.top = y + 'px';
+                confetti.style.zIndex = '9999';
+
+                const angle = (Math.PI * 2 * i) / 20;
+                const velocity = 5 + Math.random() * 5;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity - 10;
+
+                document.body.appendChild(confetti);
+
+                let posX = x;
+                let posY = y;
+                let velocityY = vy;
+
+                const animate = () => {
+                    posX += vx;
+                    posY += velocityY;
+                    velocityY += 0.5; // gravity
+
+                    confetti.style.left = posX + 'px';
+                    confetti.style.top = posY + 'px';
+                    confetti.style.opacity = Math.max(0, 1 - (posY - y) / 500);
+
+                    if (posY < window.innerHeight) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        confetti.remove();
+                    }
+                };
+
+                requestAnimationFrame(animate);
+            }
         };
 
-        // Create particles periodically
-        setInterval(createParticle, 2000);
-        for (let i = 0; i < 10; i++) {
-            setTimeout(createParticle, i * 200);
-        }
+        // Add confetti to main CTA button
+        document.querySelector('a[href="https://app.lumniverse.com"]')?.addEventListener('click', (e) => {
+            const rect = e.target.getBoundingClientRect();
+            createConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        });
+
+        console.log('🚀 Lumniverse Landing Page Loaded Successfully!');
+        console.log('💡 Pro tip: Press Ctrl/Cmd + K to try search (coming soon)');
     </script>
 </body>
 
