@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -12,32 +12,51 @@
             theme: {
                 extend: {
                     animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
-                        'gradient-shift': 'gradient-shift 15s ease infinite',
-                        'slide-up': 'slide-up 0.5s ease-out',
-                        'wave': 'wave 20s linear infinite',
-                        'shimmer': 'shimmer 3s linear infinite',
-                        'blob': 'blob 7s infinite'
+                        'float': 'float 8s ease-in-out infinite',
+                        'float-delayed': 'float 8s ease-in-out 2s infinite',
+                        'pulse-glow': 'pulse-glow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient-shift': 'gradient-shift 8s ease infinite',
+                        'slide-up': 'slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+                        'slide-down': 'slide-down 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+                        'wave': 'wave 15s linear infinite',
+                        'shimmer': 'shimmer 2.5s linear infinite',
+                        'blob': 'blob 10s infinite',
+                        'morph': 'morph 8s ease-in-out infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
+                        'text-shimmer': 'text-shimmer 3s linear infinite',
+                        'rotate-gradient': 'rotate-gradient 10s linear infinite',
                     }
                 }
             }
         }
     </script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Smooth transitions for theme switching */
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
         @keyframes float {
 
             0%,
             100% {
-                transform: translate(0, 0) rotate(0deg);
+                transform: translateY(0px) rotate(0deg);
             }
 
-            33% {
-                transform: translate(30px, -30px) rotate(120deg);
+            25% {
+                transform: translateY(-20px) rotate(2deg);
             }
 
-            66% {
-                transform: translate(-20px, 20px) rotate(240deg);
+            75% {
+                transform: translateY(20px) rotate(-2deg);
             }
         }
 
@@ -45,15 +64,15 @@
 
             0%,
             100% {
-                box-shadow: 0 0 20px rgba(147, 51, 234, 0.5),
-                    0 0 40px rgba(147, 51, 234, 0.3),
-                    0 0 60px rgba(147, 51, 234, 0.1);
+                box-shadow: 0 0 20px rgba(99, 102, 241, 0.5),
+                    0 0 40px rgba(99, 102, 241, 0.3),
+                    0 0 80px rgba(99, 102, 241, 0.1);
             }
 
             50% {
-                box-shadow: 0 0 30px rgba(147, 51, 234, 0.8),
-                    0 0 60px rgba(147, 51, 234, 0.5),
-                    0 0 90px rgba(147, 51, 234, 0.3);
+                box-shadow: 0 0 30px rgba(99, 102, 241, 0.8),
+                    0 0 60px rgba(99, 102, 241, 0.6),
+                    0 0 120px rgba(99, 102, 241, 0.3);
             }
         }
 
@@ -71,23 +90,35 @@
 
         @keyframes slide-up {
             from {
-                transform: translateY(100px);
                 opacity: 0;
+                transform: translateY(60px);
             }
 
             to {
-                transform: translateY(0);
                 opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slide-down {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
         @keyframes wave {
             0% {
-                transform: translateX(-100%);
+                transform: translateX(-100%) translateZ(0);
             }
 
             100% {
-                transform: translateX(100%);
+                transform: translateX(100%) translateZ(0);
             }
         }
 
@@ -102,159 +133,418 @@
         }
 
         @keyframes blob {
+
+            0%,
+            100% {
+                transform: translate(0px, 0px) scale(1) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(20px, -30px) scale(1.1) rotate(90deg);
+            }
+
+            50% {
+                transform: translate(-20px, 20px) scale(0.95) rotate(180deg);
+            }
+
+            75% {
+                transform: translate(30px, 10px) scale(1.05) rotate(270deg);
+            }
+        }
+
+        @keyframes morph {
+
+            0%,
+            100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+
+            50% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
+        }
+
+        @keyframes glow-pulse {
+
+            0%,
+            100% {
+                filter: brightness(1);
+            }
+
+            50% {
+                filter: brightness(1.2);
+            }
+        }
+
+        @keyframes text-shimmer {
             0% {
-                transform: translate(0px, 0px) scale(1);
-            }
-
-            33% {
-                transform: translate(30px, -50px) scale(1.1);
-            }
-
-            66% {
-                transform: translate(-20px, 20px) scale(0.9);
+                background-position: 0% 50%;
             }
 
             100% {
-                transform: translate(0px, 0px) scale(1);
+                background-position: 200% 50%;
             }
         }
 
-        /* Glassmorphism effects */
+        @keyframes rotate-gradient {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Premium glassmorphism */
         .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
         }
 
         .glass-dark {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
         .glass-light {
             background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
         }
 
-        /* Light mode glass */
-        .light .glass {
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+        /* Enhanced glass for cards */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
-        /* Gradient text */
+        .dark .glass-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(17, 24, 39, 0.8) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Gradient text animation */
         .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 25%, #a855f7 50%, #ec4899 75%, #f59e0b 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            background-size: 200% 200%;
-            animation: gradient-shift 5s ease infinite;
+            background-size: 300% 300%;
+            animation: gradient-shift 4s ease infinite;
+            filter: brightness(1.2);
         }
 
         /* Animated gradient background */
         .hero-gradient {
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe);
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7, #ec4899, #3b82f6, #06b6d4, #10b981);
             background-size: 400% 400%;
-            animation: gradient-shift 20s ease infinite;
+            animation: gradient-shift 15s ease infinite;
         }
 
-        /* Shimmer effect */
-        .shimmer {
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            background-size: 1000px 100%;
+        /* Iridescent effect */
+        .iridescent {
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.1) 0%,
+                    rgba(255, 255, 255, 0.05) 40%,
+                    rgba(255, 255, 255, 0.1) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .iridescent::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                    transparent 30%,
+                    rgba(255, 255, 255, 0.1) 50%,
+                    transparent 70%);
             animation: shimmer 3s infinite;
         }
 
-        /* Neon glow */
-        .neon-glow {
-            text-shadow: 0 0 10px currentColor,
-                0 0 20px currentColor,
-                0 0 30px currentColor,
-                0 0 40px currentColor;
-        }
-
-        /* Card hover effect */
+        /* Card hover with depth */
         .hover-lift {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            transform: perspective(1000px) translateZ(0);
         }
 
         .hover-lift:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(147, 51, 234, 0.3);
+            transform: perspective(1000px) translateZ(20px) rotateX(5deg);
+            box-shadow: 0 30px 60px rgba(99, 102, 241, 0.3),
+                0 40px 80px rgba(99, 102, 241, 0.15);
         }
 
         /* Morphing blob */
-        .blob {
+        .blob-shape {
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            animation: blob 7s infinite;
+            animation: morph 8s ease-in-out infinite;
+            filter: blur(40px);
+            opacity: 0.7;
         }
 
-        /* Grid pattern background */
-        .grid-pattern {
+        /* Noise texture overlay */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.02;
+            z-index: 1;
             background-image:
-                linear-gradient(rgba(147, 51, 234, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(147, 51, 234, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
+                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255, 255, 255, .1) 2px, rgba(255, 255, 255, .1) 4px);
         }
 
-        /* Dot pattern */
-        .dot-pattern {
-            background-image: radial-gradient(circle, rgba(147, 51, 234, 0.2) 1px, transparent 1px);
-            background-size: 20px 20px;
+        /* Better header scroll effect */
+        nav {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav.scrolled {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .dark nav.scrolled {
+            background: rgba(17, 24, 39, 0.85);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Smooth anchor scroll */
+        section[id] {
+            scroll-margin-top: 100px;
+        }
+
+        /* Glow button */
+        .glow-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .glow-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .glow-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Text gradient animation on hover */
+        .hover-gradient {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .hover-gradient:hover {
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: text-shimmer 2s linear infinite;
+        }
+
+        /* Loading animation */
+        .loading-dots span {
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .loading-dots span:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #8b5cf6, #a855f7);
+        }
+
+        /* Mobile menu animation */
+        .mobile-menu-enter {
+            animation: slide-up 0.3s ease-out;
+        }
+
+        .mobile-menu-exit {
+            animation: slide-down 0.3s ease-out reverse;
+        }
+
+        /* Focus styles */
+        button:focus-visible,
+        a:focus-visible {
+            outline: 2px solid #6366f1;
+            outline-offset: 2px;
+        }
+
+        /* Parallax wrapper */
+        .parallax {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+
+        .parallax>* {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        /* Improved responsive typography */
+        .text-hero {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            line-height: 1.2;
+        }
+
+        .text-hero-gradient {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1.1;
+        }
+
+        .text-section {
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            line-height: 1.3;
+        }
+
+        /* Card shape variations */
+        .shape-card-1 {
+            border-radius: 1.5rem 0.5rem 1.5rem 0.5rem;
+        }
+
+        .shape-card-2 {
+            border-radius: 0.5rem 1.5rem 0.5rem 1.5rem;
+        }
+
+        .shape-card-3 {
+            border-radius: 2rem 1rem 2rem 1rem;
+        }
+
+        .shape-card-4 {
+            border-radius: 50% 20% 50% 20%;
+        }
+
+        .shape-card-5 {
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+        }
+
+        .shape-card-6 {
+            clip-path: polygon(0% 10%, 100% 0%, 100% 90%, 0% 100%);
         }
     </style>
 </head>
 
-<body class="dark bg-gray-950 text-gray-900 dark:text-white overflow-x-hidden transition-colors duration-300">
-    <!-- Grid/Dot pattern background -->
-    <div class="fixed inset-0 grid-pattern dark:opacity-20 opacity-10 pointer-events-none"></div>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-white overflow-x-hidden">
+    <!-- Noise texture overlay -->
+    <div class="noise"></div>
 
     <!-- Progress bar -->
-    <div class="fixed top-0 left-0 w-full h-1 z-50">
+    <div class="fixed top-0 left-0 w-full h-1 z-[60]">
         <div class="h-full hero-gradient" id="progress-bar" style="width: 0%; transition: width 0.3s;"></div>
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-40 glass-dark dark:glass-dark glass-light transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 py-4">
+    <nav class="fixed w-full z-50 py-6 transition-all duration-500">
+        <div class="absolute inset-0 glass-light dark:glass-dark"></div>
+        <div class="relative max-w-7xl mx-auto px-6">
             <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 hero-gradient rounded-xl animate-pulse-glow"></div>
-                    <span class="text-2xl font-bold">Lumniverse</span>
+                <div class="flex items-center space-x-4 group cursor-pointer">
+                    <div class="relative">
+                        <div
+                            class="absolute inset-0 hero-gradient rounded-xl blur-lg opacity-60 group-hover:opacity-100 transition-opacity">
+                        </div>
+                        <div
+                            class="relative w-12 h-12 hero-gradient rounded-xl flex items-center justify-center shadow-2xl">
+                            <span class="text-white font-bold text-xl">L</span>
+                        </div>
+                    </div>
+                    <span
+                        class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
+                        Lumniverse
+                    </span>
                 </div>
 
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#features" class="hover:text-purple-500 transition-colors">Features</a>
-                    <a href="#how-it-works" class="hover:text-purple-500 transition-colors">How It Works</a>
-                    <a href="#integrations" class="hover:text-purple-500 transition-colors">Integrations</a>
-                    <a href="#metrics" class="hover:text-purple-500 transition-colors">Metrics</a>
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+                    <a href="#features"
+                        class="hover-gradient font-medium hover:scale-105 transition-all text-sm">Features</a>
+                    <a href="#how-it-works"
+                        class="hover-gradient font-medium hover:scale-105 transition-all text-sm">How It Works</a>
+                    <a href="#integrations"
+                        class="hover-gradient font-medium hover:scale-105 transition-all text-sm">Integrations</a>
+                    <a href="#metrics"
+                        class="hover-gradient font-medium hover:scale-105 transition-all text-sm">Metrics</a>
 
-                    <!-- Dark/Light mode toggle -->
-                    <button id="theme-toggle" class="p-2 rounded-lg glass hover:scale-110 transition-transform">
-                        <svg class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                    <!-- Theme toggle with animation -->
+                    <button id="theme-toggle"
+                        class="relative p-3 rounded-xl glass hover:scale-110 transition-all group">
+                        <svg class="w-5 h-5 hidden dark:block transform group-hover:rotate-180 transition-transform duration-500"
+                            fill="currentColor" viewBox="0 0 20 20">
                             <path
                                 d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z">
                             </path>
                         </svg>
-                        <svg class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                        <svg class="w-5 h-5 block dark:hidden transform group-hover:rotate-12 transition-transform duration-500"
+                            fill="currentColor" viewBox="0 0 20 20">
                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                         </svg>
                     </button>
 
-                    <a href="https://app.lumniverse.com"
-                        class="px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full hover:scale-105 transition-transform font-semibold text-white">
-                        Launch App
+                    <a href="https://app.lumniverse.com" class="relative group">
+                        <div
+                            class="absolute -inset-1 hero-gradient rounded-full blur opacity-70 group-hover:opacity-100 transition duration-500">
+                        </div>
+                        <div
+                            class="relative px-4 lg:px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full font-semibold text-white transform group-hover:scale-105 transition-all text-sm">
+                            Launch App
+                        </div>
                     </a>
                 </div>
 
                 <!-- Mobile menu button -->
-                <button id="mobile-menu-btn" class="md:hidden p-2">
+                <button id="mobile-menu-btn" class="md:hidden p-3 rounded-xl glass">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16"></path>
@@ -265,252 +555,292 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center relative px-6 pt-20">
-        <!-- Animated background blobs -->
+    <section class="min-h-screen flex items-center justify-center relative px-6 pt-32 pb-20">
+        <!-- Animated background elements -->
         <div class="absolute inset-0 overflow-hidden">
             <div
-                class="absolute top-20 left-10 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob">
+                class="absolute top-20 -left-20 w-72 h-72 lg:w-96 lg:h-96 bg-indigo-600 blob-shape mix-blend-multiply dark:mix-blend-screen opacity-20 animate-blob">
             </div>
             <div
-                class="absolute top-40 right-10 w-72 h-72 bg-yellow-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000">
+                class="absolute top-60 -right-20 w-72 h-72 lg:w-96 lg:h-96 bg-purple-600 blob-shape mix-blend-multiply dark:mix-blend-screen opacity-20 animate-blob animation-delay-2000">
             </div>
             <div
-                class="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000">
+                class="absolute -bottom-20 left-1/2 w-72 h-72 lg:w-96 lg:h-96 bg-cyan-600 blob-shape mix-blend-multiply dark:mix-blend-screen opacity-20 animate-blob animation-delay-4000">
             </div>
         </div>
 
         <!-- Floating particles -->
         <div class="absolute inset-0" id="particles-container"></div>
 
-        <div class="max-w-5xl mx-auto text-center relative z-10">
-            <!-- Badge -->
-            <div class="inline-block mb-8 animate-slide-up">
-                <div class="px-4 py-2 glass rounded-full inline-flex items-center space-x-2">
-                    <span class="relative flex h-3 w-3">
-                        <span
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                    </span>
-                    <span
-                        class="text-sm font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        Intelligent Incident Response Platform
-                    </span>
+        <div class="max-w-6xl mx-auto text-center relative z-10">
+            <!-- Badge with glow -->
+            <div class="inline-block mb-6 lg:mb-8 animate-slide-down">
+                <div class="relative group">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full blur opacity-40 group-hover:opacity-60 transition duration-500">
+                    </div>
+                    <div
+                        class="relative px-4 lg:px-5 py-2 lg:py-2.5 glass-card rounded-full inline-flex items-center space-x-2 lg:space-x-3">
+                        <span class="relative flex h-2 w-2 lg:h-2.5 lg:w-2.5">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span
+                                class="relative inline-flex rounded-full h-2 w-2 lg:h-2.5 lg:w-2.5 bg-emerald-500"></span>
+                        </span>
+                        <span class="text-xs lg:text-sm font-semibold gradient-text">
+                            AI-Powered Incident Response
+                        </span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Main headline -->
-            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight animate-slide-up"
-                style="animation-delay: 0.1s;">
-                <span class="block mb-2">Stop the Chaos.</span>
-                <span class="gradient-text block text-6xl md:text-7xl lg:text-8xl">Automate the Response.</span>
+            <!-- Main headline with stagger animation -->
+            <h1 class="font-black mb-5 lg:mb-6 leading-tight">
+                <span class="block mb-2 animate-slide-up text-hero">Stop the Chaos.</span>
+                <span class="gradient-text block text-hero-gradient animate-slide-up" style="animation-delay: 0.1s;">
+                    Automate the Response.
+                </span>
             </h1>
 
-            <!-- Description -->
-            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto animate-slide-up"
-                style="animation-delay: 0.2s;">
-                Lumniverse transforms incident management with AI-powered triage, automated runbooks, and intelligent
-                routing.
-                <span class="font-semibold text-purple-600 dark:text-purple-400">Reduce interruptions by 70%</span> and
-                <span class="font-semibold text-pink-600 dark:text-pink-400">resolve incidents 3x faster</span>.
-            </p>
+            <!-- Description with glass background -->
+            <div class="max-w-3xl mx-auto mb-8 lg:mb-10 animate-slide-up" style="animation-delay: 0.2s;">
+                <div class="glass-card rounded-2xl p-5 lg:p-6 backdrop-blur-xl">
+                    <p class="text-base lg:text-lg text-gray-700 dark:text-gray-300">
+                        Lumniverse transforms incident management with AI-powered triage, automated runbooks, and
+                        intelligent routing.
+                        <span class="font-bold text-indigo-600 dark:text-indigo-400">Reduce interruptions by 70%</span>
+                        and
+                        <span class="font-bold text-purple-600 dark:text-purple-400">resolve incidents 3x faster</span>.
+                    </p>
+                </div>
+            </div>
 
-            <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style="animation-delay: 0.3s;">
-                <a href="https://app.lumniverse.com"
-                    class="group relative px-8 py-4 overflow-hidden rounded-full font-semibold text-white">
+            <!-- CTA Buttons with enhanced effects -->
+            <div class="flex flex-col sm:flex-row gap-4 lg:gap-5 justify-center animate-slide-up"
+                style="animation-delay: 0.3s;">
+                <a href="https://app.lumniverse.com" class="group relative">
                     <div
-                        class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 transition-transform group-hover:scale-110">
+                        class="absolute -inset-1 hero-gradient rounded-full blur-lg opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse-glow">
                     </div>
-                    <span class="relative flex items-center justify-center space-x-2">
-                        <span>Start Free Trial</span>
-                        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                        </svg>
-                    </span>
+                    <div
+                        class="relative px-7 lg:px-8 py-3 lg:py-3.5 bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 rounded-full font-bold text-white text-base transform group-hover:scale-105 transition-all shadow-2xl">
+                        <span class="flex items-center justify-center space-x-2">
+                            <span>Start Free Trial</span>
+                            <svg class="w-4 h-4 group-hover:translate-x-2 transition-transform" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </span>
+                    </div>
                 </a>
-                <button onclick="document.getElementById('demo-video').scrollIntoView()"
-                    class="px-8 py-4 glass rounded-full font-semibold hover:scale-105 transition-all hover-lift">
+
+                <button onclick="document.getElementById('demo-video').scrollIntoView({ behavior: 'smooth' })"
+                    class="group px-7 lg:px-8 py-3 lg:py-3.5 glass-card rounded-full font-bold text-base hover:scale-105 transition-all shadow-xl">
                     <span class="flex items-center justify-center space-x-2">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                            <path fill-rule="evenodd"
-                                d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <span>Watch Demo</span>
+                        <div
+                            class="w-6 h-6 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center group-hover:animate-pulse">
+                            <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                <path fill-rule="evenodd"
+                                    d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <span
+                            class="bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
+                            Watch Demo
+                        </span>
                     </span>
                 </button>
             </div>
 
-            <!-- Trust indicators -->
-            <div class="mt-16 flex flex-wrap justify-center gap-8 animate-slide-up" style="animation-delay: 0.4s;">
-                <div class="text-center">
-                    <div class="text-2xl font-bold gradient-text">500+</div>
-                    <div class="text-sm text-gray-600 dark:text-gray-400">Teams Trust Us</div>
+            <!-- Trust indicators with glass cards -->
+            <div class="mt-14 lg:mt-16 grid grid-cols-3 gap-4 animate-slide-up" style="animation-delay: 0.4s;">
+                <div class="glass-card shape-card-1 p-4 lg:p-5 hover:scale-105 transition-all">
+                    <div class="text-2xl lg:text-3xl font-bold gradient-text mb-1">500+</div>
+                    <div class="text-xs text-gray-600 dark:text-gray-400">Teams Trust Us</div>
                 </div>
-                <div class="text-center">
-                    <div class="text-2xl font-bold gradient-text">10M+</div>
-                    <div class="text-sm text-gray-600 dark:text-gray-400">Incidents Resolved</div>
+                <div class="glass-card rounded-2xl p-4 lg:p-5 hover:scale-105 transition-all">
+                    <div class="text-2xl lg:text-3xl font-bold gradient-text mb-1">10M+</div>
+                    <div class="text-xs text-gray-600 dark:text-gray-400">Incidents Resolved</div>
                 </div>
-                <div class="text-center">
-                    <div class="text-2xl font-bold gradient-text">99.9%</div>
-                    <div class="text-sm text-gray-600 dark:text-gray-400">Uptime SLA</div>
+                <div class="glass-card shape-card-2 p-4 lg:p-5 hover:scale-105 transition-all">
+                    <div class="text-2xl lg:text-3xl font-bold gradient-text mb-1">99.9%</div>
+                    <div class="text-xs text-gray-600 dark:text-gray-400">Uptime SLA</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 px-6 relative">
-        <!-- Section background -->
-        <div class="absolute inset-0 dot-pattern opacity-5"></div>
+    <section id="features" class="py-20 lg:py-24 px-6 relative">
+        <div
+            class="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-50/30 to-transparent dark:via-indigo-950/10">
+        </div>
 
         <div class="max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <div class="text-center mb-12 lg:mb-16">
+                <h2 class="text-section font-black mb-3 lg:mb-4">
                     <span class="gradient-text">Intelligent Features</span>
                 </h2>
-                <p class="text-xl text-gray-600 dark:text-gray-400">Everything you need to manage incidents at scale</p>
+                <p class="text-base lg:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Everything you need to manage incidents at scale with AI-powered automation
+                </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Feature Card 1 -->
-                <div class="group relative overflow-hidden rounded-2xl glass hover-lift cursor-pointer">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
+                <!-- Feature Cards with varied shapes -->
+                <div class="group relative">
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-indigo-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-500">
                     </div>
-                    <div class="relative p-8">
+                    <div class="relative glass-card shape-card-3 p-6 lg:p-7 h-full hover-lift cursor-pointer">
                         <div
-                            class="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-2xl shadow-lg">
-                            🛡️
+                            class="w-12 h-12 lg:w-14 lg:h-14 mb-4 rounded-2xl bg-gradient-to-br from-cyan-500 to-indigo-500 flex items-center justify-center text-white shadow-2xl transform group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 lg:w-7 lg:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                            </svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Interrupt Firewall</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">Stop random DMs. AI classifies and routes
-                            requests, answering 50-70% autonomously.</p>
+                        <h3 class="text-lg lg:text-xl font-bold mb-2 lg:mb-3 gradient-text">Interrupt Firewall</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+                            Stop random DMs. AI classifies and routes requests, answering 50-70% autonomously.
+                        </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 text-xs rounded-full glass text-blue-400">Smart Classification</span>
-                            <span class="px-3 py-1 text-xs rounded-full glass text-purple-400">Auto-Response</span>
+                            <span class="px-2.5 py-1 text-xs rounded-full glass-card text-cyan-500 font-semibold">Smart
+                                Classification</span>
+                            <span
+                                class="px-2.5 py-1 text-xs rounded-full glass-card text-indigo-500 font-semibold">Auto-Response</span>
                         </div>
-                    </div>
-                    <div
-                        class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform">
                     </div>
                 </div>
 
-                <!-- Feature Card 2 -->
-                <div class="group relative overflow-hidden rounded-2xl glass hover-lift cursor-pointer">
+                <div class="group relative">
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-green-600/10 to-teal-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-500">
                     </div>
-                    <div class="relative p-8">
+                    <div class="relative glass-card rounded-2xl p-6 lg:p-7 h-full hover-lift cursor-pointer">
                         <div
-                            class="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center text-2xl shadow-lg">
-                            📡
+                            class="w-12 h-12 lg:w-14 lg:h-14 mb-4 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-white shadow-2xl transform group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 lg:w-7 lg:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+                            </svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Auto-Status Updates</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">Keep stakeholders informed with automated
-                            status broadcasts and timed updates.</p>
+                        <h3 class="text-lg lg:text-xl font-bold mb-2 lg:mb-3 gradient-text">Auto-Status Updates</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+                            Keep stakeholders informed with automated status broadcasts and timed updates.
+                        </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 text-xs rounded-full glass text-green-400">Real-time</span>
-                            <span class="px-3 py-1 text-xs rounded-full glass text-teal-400">ETA Tracking</span>
+                            <span
+                                class="px-2.5 py-1 text-xs rounded-full glass-card text-emerald-500 font-semibold">Real-time</span>
+                            <span class="px-2.5 py-1 text-xs rounded-full glass-card text-teal-500 font-semibold">ETA
+                                Tracking</span>
                         </div>
-                    </div>
-                    <div
-                        class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-teal-500 transform scale-x-0 group-hover:scale-x-100 transition-transform">
                     </div>
                 </div>
 
-                <!-- Feature Card 3 -->
-                <div class="group relative overflow-hidden rounded-2xl glass hover-lift cursor-pointer">
+                <div class="group relative">
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-red-600/10 to-orange-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="absolute -inset-1 bg-gradient-to-r from-rose-500 to-orange-600 shape-card-1 blur opacity-25 group-hover:opacity-40 transition duration-500">
                     </div>
-                    <div class="relative p-8">
+                    <div class="relative glass-card shape-card-1 p-6 lg:p-7 h-full hover-lift cursor-pointer">
                         <div
-                            class="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center text-2xl shadow-lg">
-                            ⚡
+                            class="w-12 h-12 lg:w-14 lg:h-14 mb-4 rounded-3xl bg-gradient-to-br from-rose-500 to-orange-500 flex items-center justify-center text-white shadow-2xl transform group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 lg:w-7 lg:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">War-Room Orchestrator</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">Instantly spin up incident channels with pinned
-                            timelines, graphs, and mitigation buttons.</p>
+                        <h3 class="text-lg lg:text-xl font-bold mb-2 lg:mb-3 gradient-text">War-Room Orchestrator</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+                            Instantly spin up incident channels with pinned timelines, graphs, and mitigation buttons.
+                        </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 text-xs rounded-full glass text-red-400">One-click Setup</span>
-                            <span class="px-3 py-1 text-xs rounded-full glass text-orange-400">Quick Actions</span>
+                            <span
+                                class="px-2.5 py-1 text-xs rounded-full glass-card text-rose-500 font-semibold">One-click
+                                Setup</span>
+                            <span
+                                class="px-2.5 py-1 text-xs rounded-full glass-card text-orange-500 font-semibold">Quick
+                                Actions</span>
                         </div>
-                    </div>
-                    <div
-                        class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform">
                     </div>
                 </div>
 
-                <!-- Feature Card 4 -->
-                <div class="group relative overflow-hidden rounded-2xl glass hover-lift cursor-pointer">
+                <div class="group relative">
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="absolute -inset-1 bg-gradient-to-r from-violet-500 to-indigo-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-500">
                     </div>
-                    <div class="relative p-8">
+                    <div class="relative glass-card rounded-3xl p-6 lg:p-7 h-full hover-lift cursor-pointer">
                         <div
-                            class="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center text-2xl shadow-lg">
-                            📚
+                            class="w-12 h-12 lg:w-14 lg:h-14 mb-4 shape-card-4 bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center text-white shadow-2xl transform group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 lg:w-7 lg:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Smart Runbooks</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">Auto-generate and maintain runbooks from your
-                            actual incident responses.</p>
+                        <h3 class="text-lg lg:text-xl font-bold mb-2 lg:mb-3 gradient-text">Smart Runbooks</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+                            Auto-generate and maintain runbooks from your actual incident responses.
+                        </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 text-xs rounded-full glass text-purple-400">Self-updating</span>
-                            <span class="px-3 py-1 text-xs rounded-full glass text-indigo-400">Battle-tested</span>
+                            <span
+                                class="px-2.5 py-1 text-xs rounded-full glass-card text-violet-500 font-semibold">Self-updating</span>
+                            <span
+                                class="px-2.5 py-1 text-xs rounded-full glass-card text-indigo-500 font-semibold">Battle-tested</span>
                         </div>
-                    </div>
-                    <div
-                        class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-indigo-500 transform scale-x-0 group-hover:scale-x-100 transition-transform">
                     </div>
                 </div>
 
-                <!-- Feature Card 5 -->
-                <div class="group relative overflow-hidden rounded-2xl glass hover-lift cursor-pointer">
+                <div class="group relative">
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-yellow-600/10 to-amber-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="absolute -inset-1 bg-gradient-to-r from-amber-500 to-yellow-600 shape-card-2 blur opacity-25 group-hover:opacity-40 transition duration-500">
                     </div>
-                    <div class="relative p-8">
+                    <div class="relative glass-card shape-card-2 p-6 lg:p-7 h-full hover-lift cursor-pointer">
                         <div
-                            class="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-yellow-500 to-amber-500 flex items-center justify-center text-2xl shadow-lg">
-                            🎓
+                            class="w-12 h-12 lg:w-14 lg:h-14 mb-4 rounded-lg bg-gradient-to-br from-amber-500 to-yellow-500 flex items-center justify-center text-white shadow-2xl transform group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 lg:w-7 lg:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            </svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Code Explainer</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">Answer "what does this do?" with code
-                            summaries, call graphs, and test links.</p>
+                        <h3 class="text-lg lg:text-xl font-bold mb-2 lg:mb-3 gradient-text">Code Explainer</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+                            Answer "what does this do?" with code summaries, call graphs, and test links.
+                        </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 text-xs rounded-full glass text-yellow-400">Tree-sitter</span>
-                            <span class="px-3 py-1 text-xs rounded-full glass text-amber-400">PR History</span>
+                            <span
+                                class="px-2.5 py-1 text-xs rounded-full glass-card text-amber-500 font-semibold">Tree-sitter</span>
+                            <span class="px-2.5 py-1 text-xs rounded-full glass-card text-yellow-500 font-semibold">PR
+                                History</span>
                         </div>
-                    </div>
-                    <div
-                        class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 to-amber-500 transform scale-x-0 group-hover:scale-x-100 transition-transform">
                     </div>
                 </div>
 
-                <!-- Feature Card 6 -->
-                <div class="group relative overflow-hidden rounded-2xl glass hover-lift cursor-pointer">
+                <div class="group relative">
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-cyan-600/10 to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="absolute -inset-1 bg-gradient-to-r from-sky-500 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-500">
                     </div>
-                    <div class="relative p-8">
+                    <div class="relative glass-card rounded-2xl p-6 lg:p-7 h-full hover-lift cursor-pointer">
                         <div
-                            class="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-2xl shadow-lg">
-                            🎯
+                            class="w-12 h-12 lg:w-14 lg:h-14 mb-4 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-500 flex items-center justify-center text-white shadow-2xl transform group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 lg:w-7 lg:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Focus Mode</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">Protect deep work. AI deflects interruptions
-                            when engineers are in the zone.</p>
+                        <h3 class="text-lg lg:text-xl font-bold mb-2 lg:mb-3 gradient-text">Focus Mode</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+                            Protect deep work. AI deflects interruptions when engineers are in the zone.
+                        </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 text-xs rounded-full glass text-cyan-400">Smart Queue</span>
-                            <span class="px-3 py-1 text-xs rounded-full glass text-blue-400">Priority Routing</span>
+                            <span class="px-2.5 py-1 text-xs rounded-full glass-card text-sky-500 font-semibold">Smart
+                                Queue</span>
+                            <span
+                                class="px-2.5 py-1 text-xs rounded-full glass-card text-blue-500 font-semibold">Priority
+                                Routing</span>
                         </div>
-                    </div>
-                    <div
-                        class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform">
                     </div>
                 </div>
             </div>
@@ -518,107 +848,104 @@
     </section>
 
     <!-- How It Works Section -->
-    <section id="how-it-works" class="py-20 px-6 relative overflow-hidden">
-        <!-- Animated background wave -->
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute inset-0 hero-gradient transform skew-y-12"></div>
+    <section id="how-it-works" class="py-20 lg:py-24 px-6 relative overflow-hidden">
+        <!-- Animated wave background -->
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 hero-gradient opacity-5 transform skew-y-12"></div>
         </div>
 
         <div class="max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <div class="text-center mb-12 lg:mb-16">
+                <h2 class="text-section font-black mb-3 lg:mb-4">
                     How <span class="gradient-text">Lumniverse</span> Works
                 </h2>
-                <p class="text-xl text-gray-600 dark:text-gray-400">Intelligent automation at every step</p>
+                <p class="text-base lg:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Intelligent automation at every step of incident response
+                </p>
             </div>
 
-            <!-- Process Steps -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Step 1 -->
+            <!-- Process Steps with connecting lines -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-14 lg:mb-16">
                 <div class="relative">
-                    <div class="glass rounded-2xl p-6 hover-lift">
+                    <div class="glass-card shape-card-3 p-6 hover-lift h-full">
                         <div
-                            class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white flex items-center justify-center font-bold text-xl mb-4">
+                            class="w-12 h-12 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-600 text-white flex items-center justify-center font-bold text-lg mb-4 shadow-2xl">
                             1
                         </div>
-                        <h3 class="text-xl font-bold mb-3 text-purple-500">Intelligent Intake</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm">Every request flows through our AI-powered
-                            triage system for instant classification.</p>
+                        <h3 class="text-lg font-bold mb-2 gradient-text">Intelligent Intake</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">
+                            Every request flows through our AI-powered triage system for instant classification.
+                        </p>
                     </div>
-                    <!-- Connector line -->
                     <div
-                        class="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-purple-500 to-transparent">
+                        class="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-indigo-500 to-cyan-500">
                     </div>
                 </div>
 
-                <!-- Step 2 -->
                 <div class="relative">
-                    <div class="glass rounded-2xl p-6 hover-lift">
+                    <div class="glass-card rounded-2xl p-6 hover-lift h-full">
                         <div
-                            class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-600 to-green-600 text-white flex items-center justify-center font-bold text-xl mb-4">
+                            class="w-12 h-12 rounded-xl bg-gradient-to-r from-cyan-600 to-emerald-600 text-white flex items-center justify-center font-bold text-lg mb-4 shadow-2xl">
                             2
                         </div>
-                        <h3 class="text-xl font-bold mb-3 text-green-500">Automated Resolution</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm">50-70% of issues resolved without human
-                            intervention using AI agents.</p>
+                        <h3 class="text-lg font-bold mb-2 gradient-text">Automated Resolution</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">
+                            50-70% of issues resolved without human intervention using AI agents.
+                        </p>
                     </div>
-                    <!-- Connector line -->
                     <div
-                        class="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-green-500 to-transparent">
+                        class="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-cyan-500 to-emerald-500">
                     </div>
                 </div>
 
-                <!-- Step 3 -->
                 <div class="relative">
-                    <div class="glass rounded-2xl p-6 hover-lift">
+                    <div class="glass-card shape-card-1 p-6 hover-lift h-full">
                         <div
-                            class="w-12 h-12 rounded-full bg-gradient-to-r from-green-600 to-orange-600 text-white flex items-center justify-center font-bold text-xl mb-4">
+                            class="w-12 h-12 rounded-xl bg-gradient-to-r from-emerald-600 to-orange-600 text-white flex items-center justify-center font-bold text-lg mb-4 shadow-2xl">
                             3
                         </div>
-                        <h3 class="text-xl font-bold mb-3 text-orange-500">Smart Escalation</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm">Complex issues are enriched with context and
-                            routed to the right expert.</p>
+                        <h3 class="text-lg font-bold mb-2 gradient-text">Smart Escalation</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">
+                            Complex issues are enriched with context and routed to the right expert.
+                        </p>
                     </div>
-                    <!-- Connector line -->
                     <div
-                        class="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-orange-500 to-transparent">
+                        class="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-emerald-500 to-orange-500">
                     </div>
                 </div>
 
-                <!-- Step 4 -->
                 <div class="relative">
-                    <div class="glass rounded-2xl p-6 hover-lift">
+                    <div class="glass-card shape-card-2 p-6 hover-lift h-full">
                         <div
-                            class="w-12 h-12 rounded-full bg-gradient-to-r from-orange-600 to-red-600 text-white flex items-center justify-center font-bold text-xl mb-4">
+                            class="w-12 h-12 rounded-xl bg-gradient-to-r from-orange-600 to-rose-600 text-white flex items-center justify-center font-bold text-lg mb-4 shadow-2xl">
                             4
                         </div>
-                        <h3 class="text-xl font-bold mb-3 text-red-500">Continuous Learning</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm">Every incident improves the system with
-                            auto-updating runbooks.</p>
+                        <h3 class="text-lg font-bold mb-2 gradient-text">Continuous Learning</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">
+                            Every incident improves the system with auto-updating runbooks.
+                        </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Visual Flow Diagram -->
-            <div class="mt-16 glass rounded-3xl p-8 relative overflow-hidden">
-                <div class="absolute inset-0 opacity-5">
-                    <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600"></div>
-                </div>
+            <!-- Stats showcase -->
+            <div class="glass-card rounded-3xl p-8 lg:p-10 relative overflow-hidden">
+                <div class="absolute inset-0 hero-gradient opacity-5"></div>
                 <div class="relative grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="text-center">
-                        <div class="text-4xl mb-2">🔄</div>
-                        <div class="text-3xl font-bold gradient-text">24/7</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-400">Continuous Operation</div>
+                    <div class="text-center group">
+                        <div class="text-4xl lg:text-5xl mb-2 animate-bounce-slow">🔄</div>
+                        <div class="text-3xl lg:text-4xl font-bold gradient-text mb-1">24/7</div>
+                        <div class="text-gray-600 dark:text-gray-400 text-sm">Continuous Operation</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-4xl mb-2">⚡</div>
-                        <div class="text-3xl font-bold gradient-text">&lt;30s</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-400">Average Response Time</div>
+                    <div class="text-center group">
+                        <div class="text-4xl lg:text-5xl mb-2 animate-pulse">⚡</div>
+                        <div class="text-3xl lg:text-4xl font-bold gradient-text mb-1">&lt;30s</div>
+                        <div class="text-gray-600 dark:text-gray-400 text-sm">Average Response Time</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-4xl mb-2">🎯</div>
-                        <div class="text-3xl font-bold gradient-text">95%</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-400">Accuracy Rate</div>
+                    <div class="text-center group">
+                        <div class="text-4xl lg:text-5xl mb-2 animate-spin-slow">🎯</div>
+                        <div class="text-3xl lg:text-4xl font-bold gradient-text mb-1">95%</div>
+                        <div class="text-gray-600 dark:text-gray-400 text-sm">Accuracy Rate</div>
                     </div>
                 </div>
             </div>
@@ -626,110 +953,185 @@
     </section>
 
     <!-- Integrations Section -->
-    <section id="integrations" class="py-20 px-6 relative">
+    <section id="integrations" class="py-20 lg:py-24 px-6 relative">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <div class="text-center mb-12 lg:mb-16">
+                <h2 class="text-section font-black mb-3 lg:mb-4">
                     Seamless <span class="gradient-text">Integrations</span>
                 </h2>
-                <p class="text-xl text-gray-600 dark:text-gray-400">Works with your existing stack</p>
+                <p class="text-base lg:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Works perfectly with your existing DevOps stack
+                </p>
             </div>
 
-            <!-- Integration Cards Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-12">
+            <!-- Integration cards with proper icons -->
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 lg:gap-5 mb-12">
                 <div
-                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
-                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">💬</div>
-                    <span class="text-sm font-medium">Slack</span>
+                    class="glass-card rounded-2xl p-5 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <svg class="w-10 h-10 mb-2 text-indigo-600 dark:text-indigo-400 group-hover:scale-125 transition-transform"
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M14.82 4.26a10.14 10.14 0 00-.53 1.1 14.66 14.66 0 00-4.58 0 10.14 10.14 0 00-.53-1.1 16 16 0 00-4.13 1.3 17.33 17.33 0 00-3 11.59 16.6 16.6 0 005.07 2.59A12.89 12.89 0 008.23 18a9.65 9.65 0 01-1.71-.83 3.39 3.39 0 00.42-.33 11.66 11.66 0 0010.12 0q.21.18.42.33a10.84 10.84 0 01-1.71.84 12.41 12.41 0 001.08 1.78 16.44 16.44 0 005.06-2.59 17.22 17.22 0 00-3-11.59 16.09 16.09 0 00-4.09-1.35zM8.68 14.81a1.94 1.94 0 01-1.8-2 1.93 1.93 0 011.8-2 1.93 1.93 0 011.8 2 1.93 1.93 0 01-1.8 2zm6.64 0a1.94 1.94 0 01-1.8-2 1.93 1.93 0 011.8-2 1.92 1.92 0 011.8 2 1.92 1.92 0 01-1.8 2z" />
+                    </svg>
+                    <span class="font-semibold text-sm">Slack</span>
                 </div>
+
                 <div
-                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
-                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">🎯</div>
-                    <span class="text-sm font-medium">Kubernetes</span>
+                    class="glass-card shape-card-1 p-5 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <svg class="w-10 h-10 mb-2 text-blue-600 dark:text-blue-400 group-hover:scale-125 transition-transform"
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                    </svg>
+                    <span class="font-semibold text-sm">Kubernetes</span>
                 </div>
+
                 <div
-                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
-                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">📊</div>
-                    <span class="text-sm font-medium">Prometheus</span>
+                    class="glass-card rounded-2xl p-5 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <svg class="w-10 h-10 mb-2 text-orange-600 dark:text-orange-400 group-hover:scale-125 transition-transform"
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.19 0 2.34-.21 3.41-.6.3-.11.49-.4.49-.72v-3.5c0-.43-.35-.78-.78-.78-.17 0-.33.06-.46.14-.7.37-1.5.59-2.36.59-2.74 0-4.96-2.22-4.96-4.96s2.22-4.96 4.96-4.96 4.96 2.22 4.96 4.96c0 .28.03.56.07.83.05.27-.1.53-.36.61l-1.09.35c-.3.1-.63-.08-.73-.39-.17-.52-.44-.99-.79-1.4-1.06-1.23-2.92-1.37-4.15-.31-1.23 1.06-1.37 2.92-.31 4.15 1.06 1.23 2.92 1.37 4.15.31.41-.35.73-.79.95-1.28.11-.25.38-.39.65-.32l2.99.96c.21.07.37.24.41.46.15.81.23 1.64.23 2.5 0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z" />
+                    </svg>
+                    <span class="font-semibold text-sm">Prometheus</span>
                 </div>
+
                 <div
-                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
-                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">🐙</div>
-                    <span class="text-sm font-medium">GitHub</span>
+                    class="glass-card shape-card-2 p-5 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <svg class="w-10 h-10 mb-2 text-gray-900 dark:text-gray-100 group-hover:scale-125 transition-transform"
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                    </svg>
+                    <span class="font-semibold text-sm">GitHub</span>
                 </div>
+
                 <div
-                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
-                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">🚨</div>
-                    <span class="text-sm font-medium">Sentry</span>
+                    class="glass-card rounded-2xl p-5 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <svg class="w-10 h-10 mb-2 text-purple-600 dark:text-purple-400 group-hover:scale-125 transition-transform"
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M2.7 2a.7.7 0 00-.7.7v18.6a.7.7 0 00.7.7h6.1v-5c.2.3.5.5.8.8 1.1 1 2.6 1.6 4.4 1.6s3.3-.6 4.4-1.6c1.1-1.1 1.6-2.6 1.6-4.4V2.7a.7.7 0 00-.7-.7H13v10.6c0 .9-.2 1.6-.6 2-.4.3-.9.5-1.6.5s-1.2-.2-1.6-.6c-.3-.4-.5-1-.5-1.9V2.7a.7.7 0 00-.7-.7H2.7z" />
+                    </svg>
+                    <span class="font-semibold text-sm">Sentry</span>
                 </div>
+
                 <div
-                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
-                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">⚡</div>
-                    <span class="text-sm font-medium">Kafka</span>
+                    class="glass-card shape-card-3 p-5 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <svg class="w-10 h-10 mb-2 text-green-600 dark:text-green-400 group-hover:scale-125 transition-transform"
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M1.2 0l10.9 24L23 0h-8.2l-2.7 6.3L9.4 0z" />
+                    </svg>
+                    <span class="font-semibold text-sm">Kafka</span>
                 </div>
+
                 <div
-                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
-                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">🔄</div>
-                    <span class="text-sm font-medium">ArgoCD</span>
+                    class="glass-card rounded-2xl p-5 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <svg class="w-10 h-10 mb-2 text-cyan-600 dark:text-cyan-400 group-hover:scale-125 transition-transform"
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M11.96 0L0 6.02v12.36L11.96 24l11.96-5.62V6.02L11.96 0zm7.14 17.18l-7.14 3.35-7.14-3.35V7.24l7.14-3.35 7.14 3.35v9.94z" />
+                    </svg>
+                    <span class="font-semibold text-sm">ArgoCD</span>
                 </div>
+
                 <div
-                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
-                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">🗂️</div>
-                    <span class="text-sm font-medium">Neo4j</span>
+                    class="glass-card shape-card-1 p-5 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <svg class="w-10 h-10 mb-2 text-indigo-600 dark:text-indigo-400 group-hover:scale-125 transition-transform"
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M22.28 8.01c-.41-.41-1.01-.67-1.62-.72-.34-.03-.68 0-1.02.1-.17.05-.34.12-.5.2l-.02-.05c-.48-1.26-1.36-2.29-2.47-2.98-.31-.19-.64-.35-.98-.48.31-.85.44-1.77.33-2.7-.08-.69-.31-1.35-.67-1.94-.12-.2-.26-.39-.41-.57-.63-.76-1.52-1.27-2.48-1.45-.95-.18-1.95 0-2.85.43-.77.37-1.42.95-1.88 1.67-.08.12-.15.24-.21.37-.48-.33-1.04-.57-1.63-.68-.8-.15-1.63-.02-2.36.36-.73.38-1.32 1-1.65 1.76-.24.55-.36 1.15-.35 1.75 0 .2.02.4.05.59-1.56.18-2.84 1.29-3.27 2.73-.2.66-.23 1.37-.06 2.04.16.67.5 1.28.98 1.77.37.38.82.68 1.31.88-.17.89-.16 1.82.06 2.71.29 1.18.92 2.23 1.82 3.02.58.51 1.26.9 1.99 1.13.73.23 1.5.3 2.26.21.58-.07 1.14-.23 1.67-.48.16.45.38.88.66 1.26.65.91 1.59 1.56 2.65 1.85.7.19 1.43.22 2.14.08.71-.14 1.38-.44 1.95-.89.45-.35.82-.78 1.09-1.28.09-.16.16-.33.22-.5.89.31 1.86.35 2.78.08 1.05-.31 1.96-.97 2.59-1.86.36-.51.62-1.08.75-1.69.09-.42.13-.86.11-1.29 1.17-.42 2.1-1.34 2.52-2.48.24-.65.32-1.35.22-2.04-.1-.69-.37-1.34-.79-1.89zm-11.96 6.26l-5.64-5.64 1.4-1.4 4.24 4.23 7.06-7.05 1.4 1.41-8.46 8.45z" />
+                    </svg>
+                    <span class="font-semibold text-sm">Neo4j</span>
                 </div>
+
                 <div
-                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
-                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">📈</div>
-                    <span class="text-sm font-medium">Grafana</span>
+                    class="glass-card shape-card-2 p-5 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <svg class="w-10 h-10 mb-2 text-orange-600 dark:text-orange-400 group-hover:scale-125 transition-transform"
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M21.901 6.443c-.013-.243-.065-.472-.154-.683a1.891 1.891 0 00-.414-.581 2.029 2.029 0 00-.615-.408 2.19 2.19 0 00-.748-.152c-.132 0-.263.013-.391.038-.073-.436-.242-.842-.49-1.186a2.785 2.785 0 00-.914-.834 2.962 2.962 0 00-1.209-.384 3.069 3.069 0 00-1.262.137c-.395.143-.75.369-1.041.66a2.755 2.755 0 00-.66 1.041 3.064 3.064 0 00-.137 1.261c.05.424.194.827.384 1.209.19.381.455.715.833.914.068.036.138.067.209.095-.063.104-.119.212-.168.324a2.048 2.048 0 00-.168.771c0 .132.012.263.037.391a1.891 1.891 0 00-.682.154 2.032 2.032 0 00-.582.414 1.88 1.88 0 00-.407.615c-.102.235-.153.492-.153.749 0 .131.013.262.039.391a2.85 2.85 0 00-1.186.49 2.79 2.79 0 00-.834.914 2.959 2.959 0 00-.384 1.209 3.074 3.074 0 00.136 1.262c.144.395.37.75.661 1.041.291.291.646.517 1.041.66.395.144.819.2 1.262.137a2.959 2.959 0 001.209-.384 2.785 2.785 0 00.914-.834c.248-.344.417-.75.49-1.186.128.026.259.039.391.039.256 0 .513-.051.748-.153.235-.102.447-.246.615-.407.169-.161.304-.356.414-.582a1.89 1.89 0 00.154-.682c.129.025.26.038.391.038.257 0 .513-.051.749-.153a1.88 1.88 0 00.615-.407c.162-.169.305-.356.414-.582.109-.226.165-.469.165-.72 0-.144-.019-.288-.054-.428.344-.247.616-.579.79-.961.174-.382.249-.809.211-1.232z" />
+                    </svg>
+                    <span class="font-semibold text-sm">Grafana</span>
                 </div>
+
                 <div
-                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
-                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">🔍</div>
-                    <span class="text-sm font-medium">Elastic</span>
+                    class="glass-card rounded-2xl p-5 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <svg class="w-10 h-10 mb-2 text-yellow-600 dark:text-yellow-400 group-hover:scale-125 transition-transform"
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M13.068.63a.536.536 0 00-.401-.196h-.001a.537.537 0 00-.416.183l-5.902 6.631-3.213-2.474a.536.536 0 00-.773.098l-1.999 3.011a.535.535 0 00.032.64l3.921 4.213-2.962 5.289a.536.536 0 00.193.718.54.54 0 00.235.054c.097 0 .194-.026.28-.08l6.282-3.916 1.162 3.326c.085.243.33.385.58.333l2.554-.531a.533.533 0 00.374-.705L11.971 8.84l7.265-6.928a.536.536 0 00.179-.415.532.532 0 00-.194-.409L13.068.63z" />
+                    </svg>
+                    <span class="font-semibold text-sm">Elastic</span>
                 </div>
+
                 <div
-                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
-                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">📱</div>
-                    <span class="text-sm font-medium">PagerDuty</span>
+                    class="glass-card shape-card-3 p-5 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <svg class="w-10 h-10 mb-2 text-green-600 dark:text-green-400 group-hover:scale-125 transition-transform"
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M3.6 3L12 10.5 20.4 3C18.9 1.2 16.1 0 13 0h-.1C8.2 0 4.1 2.7 2.3 6.6L3.6 3zm8.4 10.2L.3 3.3C.1 3.9 0 4.5 0 5.1v.1C0 10 2.9 14.2 7 16.2l5-3zm0 1.6l-4.5 2.8C9.1 18.5 11 19 13 19s3.9-.5 5.5-1.4L12 13.8zm0 0l5 3c3.1-2 5.2-5.5 5.2-9.5 0-.3 0-.5-.1-.8L12 13.8z" />
+                    </svg>
+                    <span class="font-semibold text-sm">PagerDuty</span>
                 </div>
+
                 <div
-                    class="glass rounded-xl p-6 flex flex-col items-center justify-center hover-lift group cursor-pointer">
-                    <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">➕</div>
-                    <span class="text-sm font-medium">100+ More</span>
+                    class="glass-card rounded-2xl p-5 flex flex-col items-center justify-center hover-lift group cursor-pointer">
+                    <div class="text-3xl mb-2 transform group-hover:scale-125 transition-transform">
+                        ➕
+                    </div>
+                    <span class="font-semibold text-sm">100+ More</span>
                 </div>
             </div>
 
-            <!-- API Showcase -->
-            <div class="glass rounded-3xl p-8 overflow-hidden">
-                <div class="grid md:grid-cols-2 gap-8 items-center">
+            <!-- API Showcase with animated code -->
+            <div class="glass-card rounded-3xl p-8 lg:p-10 overflow-hidden">
+                <div class="grid md:grid-cols-2 gap-8 lg:gap-10 items-center">
                     <div>
-                        <h3 class="text-2xl font-bold mb-4">Powerful API</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">
-                            Integrate Lumniverse into your workflow with our comprehensive REST API and webhooks.
+                        <h3 class="text-2xl lg:text-3xl font-bold mb-4 lg:mb-5 gradient-text">Powerful API</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm lg:text-base">
+                            Integrate Lumniverse into your workflow with our comprehensive REST API and real-time
+                            webhooks.
                         </p>
                         <div class="space-y-3">
-                            <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-3 group">
                                 <div
-                                    class="w-8 h-8 rounded-lg bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center text-white">
-                                    ✓</div>
-                                <span>RESTful API with full CRUD operations</span>
+                                    class="w-8 h-8 rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                                    ✓
+                                </div>
+                                <span class="font-medium text-sm">RESTful API with full CRUD operations</span>
                             </div>
-                            <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-3 group">
                                 <div
-                                    class="w-8 h-8 rounded-lg bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center text-white">
-                                    ✓</div>
-                                <span>Real-time webhooks for instant updates</span>
+                                    class="w-8 h-8 rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                                    ✓
+                                </div>
+                                <span class="font-medium text-sm">Real-time webhooks for instant updates</span>
                             </div>
-                            <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-3 group">
                                 <div
-                                    class="w-8 h-8 rounded-lg bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center text-white">
-                                    ✓</div>
-                                <span>SDKs for Python, Node.js, Go, and more</span>
+                                    class="w-8 h-8 rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                                    ✓
+                                </div>
+                                <span class="font-medium text-sm">SDKs for Python, Node.js, Go, and more</span>
                             </div>
                         </div>
                     </div>
+
                     <div class="relative">
-                        <div class="bg-gray-900 rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                        <div
+                            class="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl blur opacity-20">
+                        </div>
+                        <div
+                            class="relative bg-gray-900 rounded-2xl p-5 font-mono text-xs lg:text-sm overflow-x-auto shadow-2xl">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex space-x-2">
+                                    <div class="w-2 h-2 lg:w-3 lg:h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-2 h-2 lg:w-3 lg:h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-2 h-2 lg:w-3 lg:h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <span class="text-gray-500 text-xs">api.lumniverse.com</span>
+                            </div>
                             <div class="text-gray-500 mb-2"># Quick Start</div>
                             <div class="text-green-400">curl -X POST https://api.lumniverse.com/v1/incidents \</div>
                             <div class="text-white ml-4">-H "Authorization: Bearer YOUR_API_KEY" \</div>
@@ -737,7 +1139,7 @@
                             <div class="text-white ml-4">-d '{"service": "checkout", "severity": "high"}'</div>
                         </div>
                         <div
-                            class="absolute -top-2 -right-2 px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-xs text-white">
+                            class="absolute -top-2 -right-2 px-3 py-1.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full text-xs text-white font-bold shadow-lg animate-pulse">
                             Live Code
                         </div>
                     </div>
@@ -747,88 +1149,122 @@
     </section>
 
     <!-- Metrics Section -->
-    <section id="metrics" class="py-20 px-6 relative">
+    <section id="metrics" class="py-20 lg:py-24 px-6 relative">
         <div class="absolute inset-0 hero-gradient opacity-5"></div>
+
         <div class="max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <div class="text-center mb-12 lg:mb-16">
+                <h2 class="text-section font-black mb-3 lg:mb-4">
                     Proven <span class="gradient-text">Results</span>
                 </h2>
-                <p class="text-xl text-gray-600 dark:text-gray-400">Real impact on your incident response</p>
+                <p class="text-base lg:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Real impact on your incident response metrics
+                </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass rounded-2xl p-8 text-center hover-lift relative overflow-hidden group">
+            <!-- Metric cards with animated counters -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
+                <div class="glass-card shape-card-3 p-7 text-center hover-lift relative overflow-hidden group">
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="absolute inset-0 bg-gradient-to-br from-indigo-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                     </div>
                     <div class="relative">
-                        <div class="text-5xl font-bold gradient-text mb-2" data-target="70" data-suffix="%">0%</div>
-                        <div class="text-lg font-semibold mb-2">Fewer Interruptions</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-400">Questions deflected automatically</div>
+                        <div class="text-4xl lg:text-5xl font-black gradient-text mb-2" data-target="70"
+                            data-suffix="%">0%</div>
+                        <div class="text-base lg:text-lg font-bold mb-1">Fewer Interruptions</div>
+                        <div class="text-gray-600 dark:text-gray-400 text-sm">Questions deflected automatically</div>
                     </div>
                 </div>
 
-                <div class="glass rounded-2xl p-8 text-center hover-lift relative overflow-hidden group">
+                <div class="glass-card rounded-2xl p-7 text-center hover-lift relative overflow-hidden group">
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-green-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="absolute inset-0 bg-gradient-to-br from-emerald-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                     </div>
                     <div class="relative">
-                        <div class="text-5xl font-bold gradient-text mb-2" data-target="3" data-suffix="x">0x</div>
-                        <div class="text-lg font-semibold mb-2">Faster MTTR</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-400">Mean time to resolution</div>
+                        <div class="text-4xl lg:text-5xl font-black gradient-text mb-2" data-target="3" data-suffix="x">
+                            0x</div>
+                        <div class="text-base lg:text-lg font-bold mb-1">Faster MTTR</div>
+                        <div class="text-gray-600 dark:text-gray-400 text-sm">Mean time to resolution</div>
                     </div>
                 </div>
 
-                <div class="glass rounded-2xl p-8 text-center hover-lift relative overflow-hidden group">
+                <div class="glass-card shape-card-1 p-7 text-center hover-lift relative overflow-hidden group">
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="absolute inset-0 bg-gradient-to-br from-cyan-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                     </div>
                     <div class="relative">
-                        <div class="text-5xl font-bold gradient-text mb-2" data-target="90" data-suffix="%">0%</div>
-                        <div class="text-lg font-semibold mb-2">Runbook Accuracy</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-400">First-try mitigation success</div>
+                        <div class="text-4xl lg:text-5xl font-black gradient-text mb-2" data-target="90"
+                            data-suffix="%">0%</div>
+                        <div class="text-base lg:text-lg font-bold mb-1">Runbook Accuracy</div>
+                        <div class="text-gray-600 dark:text-gray-400 text-sm">First-try mitigation success</div>
                     </div>
                 </div>
 
-                <div class="glass rounded-2xl p-8 text-center hover-lift relative overflow-hidden group">
+                <div class="glass-card shape-card-2 p-7 text-center hover-lift relative overflow-hidden group">
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-orange-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="absolute inset-0 bg-gradient-to-br from-orange-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                     </div>
                     <div class="relative">
-                        <div class="text-5xl font-bold gradient-text mb-2">24/7</div>
-                        <div class="text-lg font-semibold mb-2">Always On</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-400">Instant response, every time</div>
+                        <div class="text-4xl lg:text-5xl font-black gradient-text mb-2">24/7</div>
+                        <div class="text-base lg:text-lg font-bold mb-1">Always On</div>
+                        <div class="text-gray-600 dark:text-gray-400 text-sm">Instant response, every time</div>
                     </div>
                 </div>
             </div>
 
-            <!-- ROI Calculator -->
-            <div class="mt-16 glass rounded-3xl p-8">
-                <h3 class="text-2xl font-bold mb-6 text-center">Calculate Your ROI</h3>
-                <div class="grid md:grid-cols-3 gap-8">
+            <!-- ROI Calculator with glassmorphism -->
+            <div class="glass-card rounded-3xl p-8">
+                <h3 class="text-2xl lg:text-3xl font-bold mb-8 text-center gradient-text">Calculate Your ROI</h3>
+
+                <div class="grid md:grid-cols-3 gap-8 mb-8">
                     <div>
-                        <label class="block text-sm font-medium mb-2">Team Size</label>
-                        <input type="range" id="team-size" min="5" max="100" value="20" class="w-full">
-                        <div class="text-center mt-2 font-semibold"><span id="team-size-value">20</span> engineers</div>
+                        <label class="block text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">Team
+                            Size</label>
+                        <input type="range" id="team-size" min="5" max="100" value="20"
+                            class="w-full h-2 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg appearance-none cursor-pointer">
+                        <div class="text-center mt-3 text-xl font-bold">
+                            <span id="team-size-value" class="gradient-text">20</span>
+                            <span class="text-gray-600 dark:text-gray-400 text-base"> engineers</span>
+                        </div>
                     </div>
+
                     <div>
-                        <label class="block text-sm font-medium mb-2">Incidents/Month</label>
-                        <input type="range" id="incidents" min="10" max="500" value="50" class="w-full">
-                        <div class="text-center mt-2 font-semibold"><span id="incidents-value">50</span> incidents</div>
+                        <label
+                            class="block text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">Incidents/Month</label>
+                        <input type="range" id="incidents" min="10" max="500" value="50"
+                            class="w-full h-2 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg appearance-none cursor-pointer">
+                        <div class="text-center mt-3 text-xl font-bold">
+                            <span id="incidents-value" class="gradient-text">50</span>
+                            <span class="text-gray-600 dark:text-gray-400 text-base"> incidents</span>
+                        </div>
                     </div>
+
                     <div>
-                        <label class="block text-sm font-medium mb-2">Avg Resolution Time</label>
-                        <input type="range" id="resolution" min="30" max="240" value="60" class="w-full">
-                        <div class="text-center mt-2 font-semibold"><span id="resolution-value">60</span> minutes</div>
+                        <label class="block text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">Avg
+                            Resolution Time</label>
+                        <input type="range" id="resolution" min="30" max="240" value="60"
+                            class="w-full h-2 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg appearance-none cursor-pointer">
+                        <div class="text-center mt-3 text-xl font-bold">
+                            <span id="resolution-value" class="gradient-text">60</span>
+                            <span class="text-gray-600 dark:text-gray-400 text-base"> minutes</span>
+                        </div>
                     </div>
                 </div>
-                <div class="mt-8 p-6 bg-gradient-to-r from-purple-600/10 to-pink-600/10 rounded-xl">
-                    <div class="text-center">
-                        <div class="text-sm text-gray-600 dark:text-gray-400 mb-2">Estimated Annual Savings</div>
-                        <div class="text-4xl font-bold gradient-text">$<span id="savings">240,000</span></div>
-                        <div class="text-sm text-gray-600 dark:text-gray-400 mt-2">Plus <span
-                                class="font-semibold">2,400 hours</span> saved per year</div>
+
+                <div class="relative">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl blur opacity-30">
+                    </div>
+                    <div
+                        class="relative p-6 bg-gradient-to-r from-indigo-600/10 to-purple-600/10 rounded-2xl backdrop-blur-xl">
+                        <div class="text-center">
+                            <div class="text-gray-600 dark:text-gray-400 mb-2 text-sm">Estimated Annual Savings</div>
+                            <div class="text-4xl lg:text-5xl font-black gradient-text mb-2">$<span
+                                    id="savings">240,000</span></div>
+                            <div class="text-gray-600 dark:text-gray-400 text-sm">
+                                Plus <span class="font-bold gradient-text">2,400 hours</span> saved per year
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -836,29 +1272,43 @@
     </section>
 
     <!-- Demo Video Section -->
-    <section id="demo-video" class="py-20 px-6">
+    <section id="demo-video" class="py-20 lg:py-24 px-6">
         <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            <div class="text-center mb-10">
+                <h2 class="text-section font-black mb-3 lg:mb-4">
                     See It In <span class="gradient-text">Action</span>
                 </h2>
-                <p class="text-xl text-gray-600 dark:text-gray-400">Watch how Lumniverse transforms incident response
+                <p class="text-base lg:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Watch how Lumniverse transforms incident response in real-time
                 </p>
             </div>
-            <div class="glass rounded-3xl p-2 relative group">
+
+            <div class="relative group">
                 <div
-                    class="aspect-video bg-gradient-to-br from-purple-900/50 to-pink-900/50 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute inset-0 bg-black/50"></div>
-                    <button
-                        class="relative z-10 w-20 h-20 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-all hover:scale-110 glass">
-                        <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z" />
-                        </svg>
-                    </button>
-                    <div class="absolute bottom-4 left-4 right-4 glass rounded-lg p-3">
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm">Introduction to Lumniverse</span>
-                            <span class="text-sm">5:42</span>
+                    class="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl blur-lg opacity-30 group-hover:opacity-50 transition duration-500">
+                </div>
+                <div class="relative glass-card rounded-3xl p-2">
+                    <div
+                        class="aspect-video bg-gradient-to-br from-indigo-900/50 to-purple-900/50 rounded-2xl flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/40"></div>
+
+                        <button class="relative z-10 group/play">
+                            <div
+                                class="absolute -inset-4 bg-white/30 rounded-full blur-xl group-hover/play:blur-2xl transition-all">
+                            </div>
+                            <div
+                                class="relative w-16 h-16 lg:w-20 lg:h-20 bg-white/20 backdrop-blur-xl rounded-full flex items-center justify-center hover:bg-white/30 transition-all hover:scale-110 shadow-2xl">
+                                <svg class="w-8 h-8 ml-1 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                            </div>
+                        </button>
+
+                        <div class="absolute bottom-4 left-4 right-4 glass-card rounded-xl p-3">
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold text-sm">Introduction to Lumniverse</span>
+                                <span class="text-xs text-gray-400">5:42</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -867,94 +1317,110 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 px-6">
+    <section class="py-20 lg:py-24 px-6">
         <div class="max-w-4xl mx-auto">
-            <div class="glass rounded-3xl p-12 relative overflow-hidden">
-                <div class="absolute inset-0 hero-gradient opacity-10"></div>
-                <div class="relative z-10 text-center">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                        Ready to <span class="gradient-text">Transform</span> Your Incident Response?
-                    </h2>
-                    <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
-                        Join leading engineering teams using Lumniverse to eliminate chaos and accelerate resolution.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-                        <a href="https://app.lumniverse.com"
-                            class="group relative px-8 py-4 overflow-hidden rounded-full font-semibold text-white">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 transition-transform group-hover:scale-110">
-                            </div>
-                            <span class="relative">Start 14-Day Free Trial</span>
-                        </a>
-                        <button class="px-8 py-4 glass rounded-full font-semibold hover:scale-105 transition-all">
-                            Schedule Demo
-                        </button>
+            <div class="relative">
+                <div class="absolute -inset-1 hero-gradient rounded-3xl blur-xl opacity-30"></div>
+                <div class="relative glass-card rounded-3xl p-10 lg:p-14 overflow-hidden">
+                    <div class="absolute inset-0 hero-gradient opacity-10"></div>
+
+                    <div class="relative z-10 text-center">
+                        <h2 class="text-section font-black mb-5">
+                            Ready to <span class="gradient-text">Transform</span> Your Incident Response?
+                        </h2>
+                        <p class="text-base lg:text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+                            Join leading engineering teams using Lumniverse to eliminate chaos and accelerate
+                            resolution.
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+                            <a href="https://app.lumniverse.com" class="group relative">
+                                <div
+                                    class="absolute -inset-1 hero-gradient rounded-full blur-lg opacity-70 group-hover:opacity-100 transition duration-500">
+                                </div>
+                                <div
+                                    class="relative px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full font-bold text-white text-base transform group-hover:scale-105 transition-all shadow-2xl">
+                                    Start 14-Day Free Trial
+                                </div>
+                            </a>
+
+                            <button
+                                class="px-8 py-3 glass-card rounded-full font-bold text-base hover:scale-105 transition-all shadow-xl">
+                                Schedule Demo
+                            </button>
+                        </div>
+
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">
+                            ✓ No credit card required &nbsp;&nbsp; ✓ Setup in 5 minutes &nbsp;&nbsp; ✓ Cancel anytime
+                        </p>
                     </div>
-                    <p class="text-sm text-gray-600 dark:text-gray-400">
-                        ✓ No credit card required &nbsp;&nbsp; ✓ Setup in 5 minutes &nbsp;&nbsp; ✓ Cancel anytime
-                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 border-t border-gray-200 dark:border-gray-800">
+    <footer class="py-10 lg:py-14 px-6 border-t border-gray-200 dark:border-gray-800">
         <div class="max-w-7xl mx-auto">
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-10 h-10 hero-gradient rounded-xl"></div>
+                    <div class="flex items-center space-x-3 mb-4 group">
+                        <div class="w-10 h-10 hero-gradient rounded-xl shadow-lg group-hover:shadow-2xl transition-all">
+                        </div>
                         <span class="text-xl font-bold">Lumniverse</span>
                     </div>
                     <p class="text-gray-600 dark:text-gray-400 text-sm">
                         Intelligent incident response for modern engineering teams.
                     </p>
                 </div>
+
                 <div>
-                    <h4 class="font-semibold mb-4">Product</h4>
-                    <ul class="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
-                        <li><a href="#" class="hover:text-purple-500 transition">Features</a></li>
-                        <li><a href="#" class="hover:text-purple-500 transition">Integrations</a></li>
-                        <li><a href="#" class="hover:text-purple-500 transition">Pricing</a></li>
-                        <li><a href="#" class="hover:text-purple-500 transition">Roadmap</a></li>
+                    <h4 class="font-bold mb-4 gradient-text">Product</h4>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+                        <li><a href="#" class="hover-gradient transition text-sm">Features</a></li>
+                        <li><a href="#" class="hover-gradient transition text-sm">Integrations</a></li>
+                        <li><a href="#" class="hover-gradient transition text-sm">Pricing</a></li>
+                        <li><a href="#" class="hover-gradient transition text-sm">Roadmap</a></li>
                     </ul>
                 </div>
+
                 <div>
-                    <h4 class="font-semibold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
-                        <li><a href="#" class="hover:text-purple-500 transition">Documentation</a></li>
-                        <li><a href="#" class="hover:text-purple-500 transition">API Reference</a></li>
-                        <li><a href="#" class="hover:text-purple-500 transition">Blog</a></li>
-                        <li><a href="#" class="hover:text-purple-500 transition">Case Studies</a></li>
+                    <h4 class="font-bold mb-4 gradient-text">Resources</h4>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+                        <li><a href="#" class="hover-gradient transition text-sm">Documentation</a></li>
+                        <li><a href="#" class="hover-gradient transition text-sm">API Reference</a></li>
+                        <li><a href="#" class="hover-gradient transition text-sm">Blog</a></li>
+                        <li><a href="#" class="hover-gradient transition text-sm">Case Studies</a></li>
                     </ul>
                 </div>
+
                 <div>
-                    <h4 class="font-semibold mb-4">Company</h4>
-                    <ul class="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
-                        <li><a href="#" class="hover:text-purple-500 transition">About</a></li>
-                        <li><a href="#" class="hover:text-purple-500 transition">Careers</a></li>
-                        <li><a href="#" class="hover:text-purple-500 transition">Contact</a></li>
-                        <li><a href="#" class="hover:text-purple-500 transition">Security</a></li>
+                    <h4 class="font-bold mb-4 gradient-text">Company</h4>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+                        <li><a href="#" class="hover-gradient transition text-sm">About</a></li>
+                        <li><a href="#" class="hover-gradient transition text-sm">Careers</a></li>
+                        <li><a href="#" class="hover-gradient transition text-sm">Contact</a></li>
+                        <li><a href="#" class="hover-gradient transition text-sm">Security</a></li>
                     </ul>
                 </div>
             </div>
+
             <div
-                class="pt-8 border-t border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row justify-between items-center">
+                class="pt-6 border-t border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-4">
                 <p class="text-gray-600 dark:text-gray-400 text-sm">
                     © 2025 Lumniverse. All rights reserved.
                 </p>
-                <div class="flex space-x-6 mt-4 sm:mt-0">
-                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-purple-500 transition">Privacy</a>
-                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-purple-500 transition">Terms</a>
-                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-purple-500 transition">Cookies</a>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-600 dark:text-gray-400 hover-gradient transition text-sm">Privacy</a>
+                    <a href="#" class="text-gray-600 dark:text-gray-400 hover-gradient transition text-sm">Terms</a>
+                    <a href="#" class="text-gray-600 dark:text-gray-400 hover-gradient transition text-sm">Cookies</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Dark mode toggle
+        // Dark mode toggle with smooth transition
         const themeToggle = document.getElementById('theme-toggle');
         const html = document.documentElement;
 
@@ -963,9 +1429,12 @@
             localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
         });
 
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'light') {
+        // Load saved theme or default to dark
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
             html.classList.remove('dark');
+        } else {
+            html.classList.add('dark');
         }
 
         // Progress bar
@@ -974,18 +1443,18 @@
             document.getElementById('progress-bar').style.width = scrolled + '%';
         });
 
-        // Smooth scrolling
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // Animated counters
+        // Animated counters with Intersection Observer
         const animateCounter = (element) => {
             const target = parseInt(element.dataset.target);
             const suffix = element.dataset.suffix || '';
@@ -1002,7 +1471,6 @@
             }, 20);
         };
 
-        // Intersection Observer for counters
         const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !entry.target.dataset.animated) {
@@ -1027,9 +1495,8 @@
             const inc = parseInt(incidents.value);
             const res = parseInt(resolution.value);
 
-            // Simple ROI calculation
-            const hoursSaved = (inc * res * 0.7) / 60; // 70% reduction
-            const costPerHour = 100; // Average engineer hourly rate
+            const hoursSaved = (inc * res * 0.7) / 60;
+            const costPerHour = 100;
             const annualSavings = hoursSaved * costPerHour * 12;
 
             savings.textContent = annualSavings.toLocaleString();
@@ -1048,43 +1515,45 @@
             if (!container) return;
 
             const particle = document.createElement('div');
-            particle.className = 'absolute w-2 h-2 bg-purple-400 rounded-full opacity-30';
+            particle.className = 'absolute w-1 h-1 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full';
             particle.style.left = Math.random() * 100 + '%';
             particle.style.top = Math.random() * 100 + '%';
-            particle.style.animation = `float ${10 + Math.random() * 20}s ease-in-out infinite`;
+            particle.style.opacity = Math.random() * 0.5 + 0.2;
+            particle.style.animation = `float ${15 + Math.random() * 20}s ease-in-out infinite`;
             particle.style.animationDelay = Math.random() * 5 + 's';
-            container.appendChild(particle);
 
-            setTimeout(() => particle.remove(), 30000);
+            container.appendChild(particle);
+            setTimeout(() => particle.remove(), 35000);
         };
 
         // Create initial particles
-        for (let i = 0; i < 20; i++) {
-            setTimeout(createParticle, i * 200);
+        for (let i = 0; i < 30; i++) {
+            setTimeout(createParticle, i * 100);
         }
 
         // Mobile menu
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.createElement('div');
-        mobileMenu.className = 'fixed inset-0 bg-gray-950/95 dark:bg-gray-950/95 z-50 hidden';
+        mobileMenu.className = 'fixed inset-0 bg-gray-900/95 backdrop-blur-xl z-[55] hidden';
         mobileMenu.innerHTML = `
-            <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
-                <button class="absolute top-6 right-6">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-                <a href="#features" class="hover:text-purple-400 transition">Features</a>
-                <a href="#how-it-works" class="hover:text-purple-400 transition">How It Works</a>
-                <a href="#integrations" class="hover:text-purple-400 transition">Integrations</a>
-                <a href="#metrics" class="hover:text-purple-400 transition">Metrics</a>
-                <a href="https://app.lumniverse.com" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white">Launch App</a>
-            </div>
-        `;
+      <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl text-white">
+        <button class="absolute top-6 right-6 p-3 rounded-xl glass">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+        <a href="#features" class="hover-gradient transition">Features</a>
+        <a href="#how-it-works" class="hover-gradient transition">How It Works</a>
+        <a href="#integrations" class="hover-gradient transition">Integrations</a>
+        <a href="#metrics" class="hover-gradient transition">Metrics</a>
+        <a href="https://app.lumniverse.com" class="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full">Launch App</a>
+      </div>
+    `;
         document.body.appendChild(mobileMenu);
 
         mobileMenuBtn?.addEventListener('click', () => {
             mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('mobile-menu-enter');
         });
 
         mobileMenu.querySelector('button')?.addEventListener('click', () => {
@@ -1097,10 +1566,33 @@
             });
         });
 
-        // Add scroll animations
+        // Header scroll effect
+        const nav = document.querySelector('nav');
+        const updateNav = () => {
+            if (window.scrollY > 10) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        };
+
+        window.addEventListener('scroll', updateNav);
+        updateNav();
+
+        // Parallax effect on scroll
+        const parallaxElements = document.querySelectorAll('.blob-shape');
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            parallaxElements.forEach((el, index) => {
+                const speed = 0.5 + index * 0.1;
+                el.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Add entrance animations to sections
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            rootMargin: '0px 0px -100px 0px'
         };
 
         const fadeInObserver = new IntersectionObserver((entries) => {
@@ -1112,166 +1604,15 @@
             });
         }, observerOptions);
 
-        // Apply fade-in animation to all sections
         document.querySelectorAll('section').forEach((section, index) => {
             section.style.opacity = '0';
-            section.style.transform = 'translateY(30px)';
-            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'opacity 1s ease, transform 1s ease';
             section.style.transitionDelay = `${index * 0.1}s`;
             fadeInObserver.observe(section);
         });
 
-        // Typing animation for hero text
-        const typeWriter = (element, text, speed = 50) => {
-            let i = 0;
-            element.textContent = '';
-            const type = () => {
-                if (i < text.length) {
-                    element.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                }
-            };
-            type();
-        };
-
-        // Apply typewriter effect on load
-        window.addEventListener('load', () => {
-            const heroText = document.querySelector('.gradient-text');
-            if (heroText && heroText.textContent.includes('Automate')) {
-                const originalText = heroText.textContent;
-                setTimeout(() => {
-                    typeWriter(heroText, originalText, 60);
-                }, 500);
-            }
-        });
-
-        // Add toast notification system
-        const showToast = (message, type = 'info') => {
-            const toast = document.createElement('div');
-            toast.className = `fixed bottom-8 right-8 glass px-6 py-4 rounded-lg z-50 transform translate-y-full transition-transform`;
-
-            const colors = {
-                info: 'text-blue-400',
-                success: 'text-green-400',
-                error: 'text-red-400'
-            };
-
-            toast.innerHTML = `
-                <div class="flex items-center space-x-3">
-                    <span class="${colors[type]}">●</span>
-                    <span>${message}</span>
-                </div>
-            `;
-
-            document.body.appendChild(toast);
-
-            setTimeout(() => {
-                toast.style.transform = 'translateY(0)';
-            }, 100);
-
-            setTimeout(() => {
-                toast.style.transform = 'translateY(200%)';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        };
-
-        // Demo video click handler
-        document.querySelector('#demo-video button')?.addEventListener('click', () => {
-            showToast('Demo video coming soon! Contact us for a personalized demo.', 'info');
-        });
-
-        // Schedule demo button handler
-        document.querySelectorAll('button').forEach(btn => {
-            if (btn.textContent.includes('Schedule Demo')) {
-                btn.addEventListener('click', () => {
-                    showToast('Redirecting to scheduling page...', 'success');
-                    setTimeout(() => {
-                        window.open('https://calendly.com/lumniverse-demo', '_blank');
-                    }, 1500);
-                });
-            }
-        });
-
-        // Add keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            // ESC to close mobile menu
-            if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-            }
-
-            // Ctrl/Cmd + K to focus search (if you add search later)
-            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                e.preventDefault();
-                showToast('Search feature coming soon!', 'info');
-            }
-        });
-
-        // Performance optimization: Lazy load images
-        const lazyImages = document.querySelectorAll('img[data-src]');
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-
-        lazyImages.forEach(img => imageObserver.observe(img));
-
-        // Add confetti effect for CTA clicks
-        const createConfetti = (x, y) => {
-            const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c'];
-            for (let i = 0; i < 20; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'absolute w-2 h-2 rounded-full pointer-events-none';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.left = x + 'px';
-                confetti.style.top = y + 'px';
-                confetti.style.zIndex = '9999';
-
-                const angle = (Math.PI * 2 * i) / 20;
-                const velocity = 5 + Math.random() * 5;
-                const vx = Math.cos(angle) * velocity;
-                const vy = Math.sin(angle) * velocity - 10;
-
-                document.body.appendChild(confetti);
-
-                let posX = x;
-                let posY = y;
-                let velocityY = vy;
-
-                const animate = () => {
-                    posX += vx;
-                    posY += velocityY;
-                    velocityY += 0.5; // gravity
-
-                    confetti.style.left = posX + 'px';
-                    confetti.style.top = posY + 'px';
-                    confetti.style.opacity = Math.max(0, 1 - (posY - y) / 500);
-
-                    if (posY < window.innerHeight) {
-                        requestAnimationFrame(animate);
-                    } else {
-                        confetti.remove();
-                    }
-                };
-
-                requestAnimationFrame(animate);
-            }
-        };
-
-        // Add confetti to main CTA button
-        document.querySelector('a[href="https://app.lumniverse.com"]')?.addEventListener('click', (e) => {
-            const rect = e.target.getBoundingClientRect();
-            createConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2);
-        });
-
-        console.log('🚀 Lumniverse Landing Page Loaded Successfully!');
-        console.log('💡 Pro tip: Press Ctrl/Cmd + K to try search (coming soon)');
+        console.log('🚀 Lumniverse Landing Page Initialized - Dark Mode Default');
     </script>
 </body>
 
