@@ -259,6 +259,17 @@
             animation: gradient-shift 15s ease infinite;
         }
 
+        .logo-animated {
+            background-image: linear-gradient(90deg, #ef4444, #f43f5e, #ec4899, #8b5cf6, #6366f1);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: text-shimmer 4s linear infinite;
+            /* uses your existing @keyframes */
+            filter: brightness(1.1);
+        }
+
         /* Iridescent effect */
         .iridescent {
             background: linear-gradient(135deg,
@@ -511,7 +522,7 @@
                         </div>
                     </div>
                     <span
-                        class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
+                        class="text-xl sm:text-2xl font-bold bg-gradient-to-r logo-animated from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
                         Lumniverse
                     </span>
                 </div>
