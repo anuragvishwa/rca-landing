@@ -205,21 +205,26 @@
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
         }
 
-        .glass-dark {
-            background: rgba(17, 24, 39, 0.6);
+        /* Header glass (lighter transparency) */
+        /* Header glass (even more transparent) */
+        .glass-light {
+            background: rgba(255, 255, 255, 0.25);
+            /* was 0.40 */
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
         }
 
-        .glass-light {
-            background: rgba(255, 255, 255, 0.7);
+        .glass-dark {
+            background: rgba(17, 24, 39, 0.25);
+            /* was 0.40 */
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
         }
+
 
         /* Enhanced glass for cards */
         .glass-card {
@@ -435,15 +440,19 @@
         }
 
         /* Improved responsive typography */
+        /* Slightly smaller hero (first screen) */
         .text-hero {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            line-height: 1.2;
+            font-size: clamp(1.75rem, 5vw, 3rem);
+            /* was clamp(2rem, 6vw, 3.5rem) */
+            line-height: 1.15;
         }
 
         .text-hero-gradient {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            line-height: 1.1;
+            font-size: clamp(2.25rem, 7vw, 4rem);
+            /* was clamp(2.5rem, 8vw, 4.5rem) */
+            line-height: 1.08;
         }
+
 
         .text-section {
             font-size: clamp(1.75rem, 5vw, 2.5rem);
