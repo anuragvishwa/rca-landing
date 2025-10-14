@@ -28,6 +28,7 @@
                         'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
                         'text-shimmer': 'text-shimmer 3s linear infinite',
                         'rotate-gradient': 'rotate-gradient 10s linear infinite',
+                        'slide-in-right': 'slide-in-right 0.3s ease-out',
                     },
                 },
             },
@@ -200,6 +201,16 @@
             }
         }
 
+        @keyframes slide-in-right {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
         /* Refined glassmorphism */
         .glass {
             background: rgba(255, 255, 255, 0.05);
@@ -267,7 +278,6 @@
             background-clip: text;
             color: transparent;
             animation: text-shimmer 4s linear infinite;
-            /* uses your existing @keyframes */
             filter: brightness(1.1);
         }
 
@@ -342,10 +352,6 @@
         section[id] {
             scroll-margin-top: 100px;
         }
-
-        /* .dark .blob-shape {
-        opacity: 0.08;
-      } */
 
         /* Subtle hover effects */
         .hover-lift {
@@ -472,6 +478,45 @@
         .shape-card-6 {
             clip-path: polygon(0% 10%, 100% 0%, 100% 90%, 0% 100%);
         }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .blob-shape {
+                width: 200px !important;
+                height: 200px !important;
+                filter: blur(30px);
+            }
+
+            .shape-card-1,
+            .shape-card-2,
+            .shape-card-3 {
+                border-radius: 1rem;
+            }
+
+            .shape-card-4 {
+                border-radius: 1.5rem;
+            }
+        }
+
+        /* Mobile menu animation */
+        .mobile-menu-enter {
+            animation: slide-in-right 0.3s ease-out;
+        }
+
+        /* Touch-friendly sizing */
+        @media (max-width: 768px) {
+
+            button,
+            a {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
+        /* Prevent horizontal scroll */
+        body {
+            overflow-x: hidden;
+        }
     </style>
 </head>
 
@@ -483,17 +528,18 @@
 
     <!-- Navigation -->
     <nav id="navbar"
-        class="fixed z-50 w-full border-b border-transparent bg-transparent py-4 backdrop-blur-0 transition-all duration-300">
-        <div class="mx-auto max-w-7xl px-6">
+        class="fixed z-50 w-full border-b border-transparent bg-transparent py-3 backdrop-blur-0 transition-all duration-300 md:py-4">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6">
             <div class="flex items-center justify-between">
-                <div class="flex cursor-pointer items-center space-x-3">
-                    <div class="btn-primary flex h-10 w-10 items-center justify-center rounded-lg shadow-lg">
-                        <span class="text-lg font-bold text-white">L</span>
+                <div class="flex cursor-pointer items-center space-x-2 sm:space-x-3">
+                    <div
+                        class="btn-primary flex h-9 w-9 items-center justify-center rounded-lg shadow-lg sm:h-10 sm:w-10">
+                        <span class="text-base font-bold text-white sm:text-lg">L</span>
                     </div>
-                    <span class="text-xl font-bold text-gray-900 dark:text-white">Lumniverse</span>
+                    <span class="text-lg font-bold text-gray-900 dark:text-white sm:text-xl">Lumniverse</span>
                 </div>
 
-                <div class="hidden items-center space-x-8 md:flex">
+                <div class="hidden items-center space-x-4 md:flex lg:space-x-8">
                     <a href="#features"
                         class="text-sm font-medium text-gray-700 transition hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400">Features</a>
                     <a href="#how-it-works"
@@ -505,24 +551,25 @@
                         class="text-sm font-medium text-gray-700 transition hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400">Metrics</a>
 
                     <button id="theme-toggle"
-                        class="glass group rounded-lg p-2.5 transition-all hover:bg-gray-100 dark:hover:bg-gray-800">
-                        <svg class="hidden h-5 w-5 transition-transform group-hover:rotate-12 dark:block"
+                        class="glass group rounded-lg p-2 transition-all hover:bg-gray-100 dark:hover:bg-gray-800 sm:p-2.5">
+                        <svg class="hidden h-4 w-4 transition-transform group-hover:rotate-12 dark:block sm:h-5 sm:w-5"
                             fill="currentColor" viewBox="0 0 20 20">
                             <path
                                 d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z">
                             </path>
                         </svg>
-                        <svg class="block h-5 w-5 transition-transform group-hover:rotate-12 dark:hidden"
+                        <svg class="block h-4 w-4 transition-transform group-hover:rotate-12 dark:hidden sm:h-5 sm:w-5"
                             fill="currentColor" viewBox="0 0 20 20">
                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                         </svg>
                     </button>
 
                     <a href="https://app.lumniverse.com"
-                        class="btn-primary rounded-lg px-5 py-2.5 text-sm font-semibold text-white">Launch App</a>
+                        class="btn-primary rounded-lg px-4 py-2 text-sm font-semibold text-white lg:px-5 lg:py-2.5">Launch
+                        App</a>
                 </div>
 
-                <button id="mobile-menu-btn" class="glass rounded-lg p-2.5 md:hidden">
+                <button id="mobile-menu-btn" class="glass rounded-lg p-2 md:hidden" aria-label="Open menu">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16"></path>
@@ -532,43 +579,18 @@
         </div>
     </nav>
 
-    <script>
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 10) {
-                navbar.classList.add(
-                    'backdrop-blur-md',
-                    'bg-white/70',
-                    'dark:bg-gray-900/60',
-                    'border-gray-200',
-                    'dark:border-gray-800'
-                );
-                navbar.classList.remove('bg-transparent', 'border-transparent');
-            } else {
-                navbar.classList.add('bg-transparent', 'border-transparent');
-                navbar.classList.remove(
-                    'backdrop-blur-md',
-                    'bg-white/70',
-                    'dark:bg-gray-900/60',
-                    'border-gray-200',
-                    'dark:border-gray-800'
-                );
-            }
-        });
-    </script>
-
     <!-- Hero Section -->
-    <section class="relative flex min-h-screen items-center justify-center px-6 pt-20">
+    <section class="relative flex items-center justify-center px-4 pt-32 sm:px-6 lg:pt-24">
         <!-- Animated background elements -->
         <div class="absolute inset-0 overflow-hidden">
             <div
-                class="blob-shape animate-blob absolute -left-20 top-20 h-72 w-72 bg-indigo-600 opacity-20 mix-blend-multiply dark:mix-blend-screen lg:h-96 lg:w-96">
+                class="blob-shape animate-blob absolute -left-10 top-20 h-48 w-48 bg-indigo-600 opacity-20 mix-blend-multiply dark:mix-blend-screen sm:-left-20 sm:h-72 sm:w-72 lg:h-96 lg:w-96">
             </div>
             <div
-                class="blob-shape animate-blob animation-delay-2000 absolute -right-20 top-60 h-72 w-72 bg-purple-600 opacity-20 mix-blend-multiply dark:mix-blend-screen lg:h-96 lg:w-96">
+                class="blob-shape animate-blob animation-delay-2000 absolute -right-10 top-60 h-48 w-48 bg-purple-600 opacity-20 mix-blend-multiply dark:mix-blend-screen sm:-right-20 sm:h-72 sm:w-72 lg:h-96 lg:w-96">
             </div>
             <div
-                class="blob-shape animate-blob animation-delay-4000 absolute -bottom-20 left-1/2 h-72 w-72 bg-cyan-600 opacity-20 mix-blend-multiply dark:mix-blend-screen lg:h-96 lg:w-96">
+                class="blob-shape animate-blob animation-delay-4000 absolute -bottom-10 left-1/2 h-48 w-48 bg-cyan-600 opacity-20 mix-blend-multiply dark:mix-blend-screen sm:-bottom-20 sm:h-72 sm:w-72 lg:h-96 lg:w-96">
             </div>
         </div>
 
@@ -577,20 +599,20 @@
 
         <div class="relative z-10 mx-auto max-w-6xl text-center">
             <!-- Badge with glow -->
-            <div class="animate-slide-down mb-6 inline-block lg:mb-8">
+            <div class="animate-slide-down mb-4 inline-block sm:mb-6 lg:mb-8">
                 <div class="group relative">
                     <div
                         class="absolute -inset-1 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 opacity-40 blur transition duration-500 group-hover:opacity-60">
                     </div>
                     <div
-                        class="glass-card relative inline-flex items-center space-x-2 rounded-full px-4 py-2 lg:space-x-3 lg:px-5 lg:py-2.5">
+                        class="glass-card relative inline-flex items-center space-x-2 rounded-full px-3 py-1.5 text-xs sm:px-4 sm:py-2 lg:space-x-3 lg:px-5 lg:py-2.5 lg:text-sm">
                         <span class="relative flex h-2 w-2 lg:h-2.5 lg:w-2.5">
                             <span
                                 class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
                             <span
                                 class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500 lg:h-2.5 lg:w-2.5"></span>
                         </span>
-                        <span class="gradient-text text-xs font-semibold lg:text-sm">
+                        <span class="gradient-text font-semibold">
                             AI-Powered Incident Response
                         </span>
                     </div>
@@ -598,17 +620,19 @@
             </div>
 
             <!-- Main headline with stagger animation -->
-            <h1 class="mb-6 font-black leading-tight lg:mb-8">
-                <span class="animate-slide-up mb-3 block text-5xl">Stop the Chaos.</span>
-                <span class="gradient-text animate-slide-up block text-6xl" style="animation-delay: 0.1s">
+            <h1 class="mb-4 font-black leading-tight sm:mb-6 lg:mb-8">
+                <span class="animate-slide-up mb-2 block text-3xl sm:mb-3 sm:text-4xl md:text-5xl">Stop the
+                    Chaos.</span>
+                <span class="gradient-text animate-slide-up block text-4xl sm:text-5xl md:text-6xl"
+                    style="animation-delay: 0.1s">
                     Automate the Response.
                 </span>
             </h1>
 
             <!-- Description with glass background -->
-            <div class="animate-slide-up mx-auto mb-8 max-w-3xl lg:mb-10" style="animation-delay: 0.2s">
-                <div class="glass-card rounded-2xl p-5 backdrop-blur-xl lg:p-6">
-                    <p class="text-base text-gray-700 dark:text-gray-300 lg:text-lg">
+            <div class="animate-slide-up mx-auto mb-6 max-w-3xl sm:mb-8 lg:mb-10" style="animation-delay: 0.2s">
+                <div class="glass-card rounded-xl p-4 backdrop-blur-xl sm:rounded-2xl sm:p-5 lg:p-6">
+                    <p class="text-sm text-gray-700 dark:text-gray-300 sm:text-base lg:text-lg">
                         Lumniverse transforms incident management with AI-powered triage,
                         automated runbooks, and intelligent routing.
                         <span class="font-bold text-indigo-600 dark:text-indigo-400">Reduce interruptions by 70%</span>
@@ -619,31 +643,32 @@
             </div>
 
             <!-- CTA Buttons with enhanced effects -->
-            <div class="animate-slide-up flex flex-col justify-center gap-4 sm:flex-row lg:gap-5"
+            <div class="animate-slide-up flex flex-row justify-center gap-3 sm:gap-4 lg:gap-5"
                 style="animation-delay: 0.3s">
                 <a href="https://app.lumniverse.com" class="group relative inline-block">
                     <div
                         class="absolute -inset-0.5 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 opacity-30 blur-md transition duration-500 group-hover:opacity-60">
                     </div>
                     <div
-                        class="relative rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 px-7 py-3 text-base font-semibold text-white shadow-md transition-all duration-300 group-hover:scale-[1.03] lg:px-8 lg:py-3.5">
+                        class="relative rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all duration-300 group-hover:scale-[1.03] sm:px-7 sm:py-3 sm:text-base lg:px-8 lg:py-3.5">
                         <span class="flex items-center justify-center space-x-2">
                             <span>Start Free Trial</span>
                             <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6">
+                                </path>
                             </svg>
                         </span>
                     </div>
                 </a>
 
                 <button onclick="document.getElementById('demo-video').scrollIntoView({ behavior: 'smooth' })"
-                    class="glass-card group rounded-full px-7 py-3 text-base font-bold shadow-xl transition-all hover:scale-105 lg:px-8 lg:py-3.5">
+                    class="glass-card group rounded-full px-6 py-2.5 text-sm font-bold shadow-xl transition-all hover:scale-105 sm:px-7 sm:py-3 sm:text-base lg:px-8 lg:py-3.5">
                     <span class="flex items-center justify-center space-x-2">
                         <div
-                            class="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 group-hover:animate-pulse">
-                            <svg class="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            class="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 group-hover:animate-pulse sm:h-6 sm:w-6">
+                            <svg class="h-2.5 w-2.5 text-white sm:h-3 sm:w-3" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                                 <path fill-rule="evenodd"
                                     d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
@@ -659,28 +684,29 @@
             </div>
 
             <!-- Trust indicators with glass cards -->
-            <div class="animate-slide-up mt-14 grid grid-cols-3 gap-4 lg:mt-16" style="animation-delay: 0.4s">
-                <div class="glass-card shape-card-1 p-4 transition-all hover:scale-105 lg:p-5">
-                    <div class="gradient-text mb-1 text-2xl font-bold lg:text-3xl">
+            <div class="animate-slide-up mt-10 grid grid-cols-3 gap-3 sm:mt-14 sm:gap-4 lg:mt-16"
+                style="animation-delay: 0.4s">
+                <div class="glass-card shape-card-1 p-3 transition-all hover:scale-105 sm:p-4 lg:p-5">
+                    <div class="gradient-text mb-1 text-xl font-bold sm:text-2xl lg:text-3xl">
                         500+
                     </div>
-                    <div class="text-xs text-gray-600 dark:text-gray-400">
+                    <div class="text-[10px] text-gray-600 dark:text-gray-400 sm:text-xs">
                         Teams Trust Us
                     </div>
                 </div>
-                <div class="glass-card rounded-2xl p-4 transition-all hover:scale-105 lg:p-5">
-                    <div class="gradient-text mb-1 text-2xl font-bold lg:text-3xl">
+                <div class="glass-card rounded-xl p-3 transition-all hover:scale-105 sm:rounded-2xl sm:p-4 lg:p-5">
+                    <div class="gradient-text mb-1 text-xl font-bold sm:text-2xl lg:text-3xl">
                         10M+
                     </div>
-                    <div class="text-xs text-gray-600 dark:text-gray-400">
+                    <div class="text-[10px] text-gray-600 dark:text-gray-400 sm:text-xs">
                         Incidents Resolved
                     </div>
                 </div>
-                <div class="glass-card shape-card-2 p-4 transition-all hover:scale-105 lg:p-5">
-                    <div class="gradient-text mb-1 text-2xl font-bold lg:text-3xl">
+                <div class="glass-card shape-card-2 p-3 transition-all hover:scale-105 sm:p-4 lg:p-5">
+                    <div class="gradient-text mb-1 text-xl font-bold sm:text-2xl lg:text-3xl">
                         99.9%
                     </div>
-                    <div class="text-xs text-gray-600 dark:text-gray-400">
+                    <div class="text-[10px] text-gray-600 dark:text-gray-400 sm:text-xs">
                         Uptime SLA
                     </div>
                 </div>
@@ -689,24 +715,24 @@
     </section>
 
     <!-- Demo Video Section -->
-    <section id="demo-video" class="px-6 py-20">
+    <section id="demo-video" class="px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
         <div class="mx-auto max-w-4xl">
-            <div class="mb-10 text-center">
-                <h2 class="text-section mb-3 font-black lg:mb-4">
+            <div class="mb-8 text-center sm:mb-10">
+                <h2 class="text-section mb-2 font-black sm:mb-3 lg:mb-4">
                     See It In <span class="gradient-text">Action</span>
                 </h2>
-                <p class="mx-auto max-w-2xl text-base text-gray-600 dark:text-gray-400 lg:text-lg">
+                <p class="mx-auto max-w-2xl text-sm text-gray-600 dark:text-gray-400 sm:text-base lg:text-lg">
                     Watch how Lumniverse transforms incident response in real-time
                 </p>
             </div>
 
             <div class="group relative">
                 <div
-                    class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-indigo-600 to-purple-600 opacity-30 blur-lg transition duration-500 group-hover:opacity-50">
+                    class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 opacity-30 blur-lg transition duration-500 group-hover:opacity-50 sm:rounded-3xl">
                 </div>
-                <div class="glass-card relative rounded-3xl p-2">
+                <div class="glass-card relative rounded-2xl p-1.5 sm:rounded-3xl sm:p-2">
                     <div
-                        class="relative flex aspect-video items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-900/50 to-purple-900/50">
+                        class="relative flex aspect-video items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-indigo-900/50 to-purple-900/50 sm:rounded-2xl">
                         <div class="absolute inset-0 bg-black/40"></div>
 
                         <button class="group/play relative z-10">
@@ -714,17 +740,19 @@
                                 class="absolute -inset-4 rounded-full bg-white/30 blur-xl transition-all group-hover/play:blur-2xl">
                             </div>
                             <div
-                                class="relative flex h-16 w-16 items-center justify-center rounded-full bg-white/20 shadow-2xl backdrop-blur-xl transition-all hover:scale-110 hover:bg-white/30 lg:h-20 lg:w-20">
-                                <svg class="ml-1 h-8 w-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                class="relative flex h-14 w-14 items-center justify-center rounded-full bg-white/20 shadow-2xl backdrop-blur-xl transition-all hover:scale-110 hover:bg-white/30 sm:h-16 sm:w-16 lg:h-20 lg:w-20">
+                                <svg class="ml-1 h-7 w-7 text-white sm:h-8 sm:w-8" fill="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path d="M8 5v14l11-7z" />
                                 </svg>
                             </div>
                         </button>
 
-                        <div class="glass-card absolute bottom-4 left-4 right-4 rounded-xl p-3">
+                        <div
+                            class="glass-card absolute bottom-3 left-3 right-3 rounded-lg p-2 sm:bottom-4 sm:left-4 sm:right-4 sm:rounded-xl sm:p-3">
                             <div class="flex items-center justify-between">
-                                <span class="text-sm font-semibold">Introduction to Lumniverse</span>
-                                <span class="text-xs text-gray-400">5:42</span>
+                                <span class="text-xs font-semibold sm:text-sm">Introduction to Lumniverse</span>
+                                <span class="text-[10px] text-gray-400 sm:text-xs">5:42</span>
                             </div>
                         </div>
                     </div>
@@ -734,170 +762,170 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="relative px-6 py-20">
+    <section id="features" class="relative px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
         <div
             class="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-50/30 to-transparent dark:via-indigo-950/10">
         </div>
 
         <div class="relative z-10 mx-auto max-w-7xl">
-            <div class="mb-12 text-center lg:mb-16">
-                <h2 class="text-section mb-3 font-black lg:mb-4">
+            <div class="mb-10 text-center sm:mb-12 lg:mb-16">
+                <h2 class="text-section mb-2 font-black sm:mb-3 lg:mb-4">
                     <span class="gradient-text">Intelligent Features</span>
                 </h2>
-                <p class="mx-auto max-w-2xl text-base text-gray-600 dark:text-gray-400 lg:text-lg">
+                <p class="mx-auto max-w-2xl text-sm text-gray-600 dark:text-gray-400 sm:text-base lg:text-lg">
                     Everything you need to manage incidents at scale with AI-powered
                     automation
                 </p>
             </div>
 
-            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div class="grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
                 <!-- Feature Card 1 -->
-                <div class="glass-card hover-lift shape-card-3 group p-8">
+                <div class="glass-card hover-lift shape-card-3 group p-6 sm:p-7 lg:p-8">
                     <div
-                        class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-600 text-white shadow-lg">
-                        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-600 text-white shadow-lg sm:mb-5 sm:h-14 sm:w-14">
+                        <svg class="h-6 w-6 sm:h-7 sm:w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                         </svg>
                     </div>
-                    <h3 class="mb-3 text-xl font-bold text-gray-900 dark:text-white">
+                    <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white sm:mb-3 sm:text-xl">
                         Interrupt Firewall
                     </h3>
-                    <p class="mb-4 text-gray-600 dark:text-gray-400">
+                    <p class="mb-3 text-sm text-gray-600 dark:text-gray-400 sm:mb-4">
                         Stop random DMs. AI classifies and routes requests, answering
                         50-70% autonomously.
                     </p>
                     <div class="flex flex-wrap gap-2">
                         <span
-                            class="rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400">Smart
+                            class="rounded-full bg-indigo-100 px-2.5 py-1 text-xs font-semibold text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400 sm:px-3">Smart
                             Classification</span>
                         <span
-                            class="rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400">Auto-Response</span>
+                            class="rounded-full bg-indigo-100 px-2.5 py-1 text-xs font-semibold text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400 sm:px-3">Auto-Response</span>
                     </div>
                 </div>
 
                 <!-- Feature Card 2 -->
-                <div class="glass-card hover-lift group rounded-2xl p-8">
+                <div class="glass-card hover-lift group rounded-xl p-6 sm:rounded-2xl sm:p-7 lg:p-8">
                     <div
-                        class="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg">
-                        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg sm:mb-5 sm:h-14 sm:w-14">
+                        <svg class="h-6 w-6 sm:h-7 sm:w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
                         </svg>
                     </div>
-                    <h3 class="mb-3 text-xl font-bold text-gray-900 dark:text-white">
+                    <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white sm:mb-3 sm:text-xl">
                         Auto-Status Updates
                     </h3>
-                    <p class="mb-4 text-gray-600 dark:text-gray-400">
+                    <p class="mb-3 text-sm text-gray-600 dark:text-gray-400 sm:mb-4">
                         Keep stakeholders informed with automated status broadcasts and
                         timed updates.
                     </p>
                     <div class="flex flex-wrap gap-2">
                         <span
-                            class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Real-time</span>
+                            class="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 sm:px-3">Real-time</span>
                         <span
-                            class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">ETA
+                            class="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 sm:px-3">ETA
                             Tracking</span>
                     </div>
                 </div>
 
                 <!-- Feature Card 3 -->
-                <div class="glass-card hover-lift shape-card-1 group p-8">
+                <div class="glass-card hover-lift shape-card-1 group p-6 sm:p-7 lg:p-8">
                     <div
-                        class="mb-5 flex h-14 w-14 items-center justify-center rounded-3xl bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg">
-                        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="mb-4 flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg sm:mb-5 sm:h-14 sm:w-14">
+                        <svg class="h-6 w-6 sm:h-7 sm:w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                     </div>
-                    <h3 class="mb-3 text-xl font-bold text-gray-900 dark:text-white">
+                    <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white sm:mb-3 sm:text-xl">
                         War-Room Orchestrator
                     </h3>
-                    <p class="mb-4 text-gray-600 dark:text-gray-400">
+                    <p class="mb-3 text-sm text-gray-600 dark:text-gray-400 sm:mb-4">
                         Instantly spin up incident channels with pinned timelines, graphs,
                         and mitigation buttons.
                     </p>
                     <div class="flex flex-wrap gap-2">
                         <span
-                            class="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700 dark:bg-orange-900/30 dark:text-orange-400">One-click
+                            class="rounded-full bg-orange-100 px-2.5 py-1 text-xs font-semibold text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 sm:px-3">One-click
                             Setup</span>
                         <span
-                            class="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700 dark:bg-orange-900/30 dark:text-orange-400">Quick
+                            class="rounded-full bg-orange-100 px-2.5 py-1 text-xs font-semibold text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 sm:px-3">Quick
                             Actions</span>
                     </div>
                 </div>
 
                 <!-- Feature Card 4 -->
-                <div class="glass-card hover-lift group rounded-3xl p-8">
+                <div class="glass-card hover-lift group rounded-2xl p-6 sm:rounded-3xl sm:p-7 lg:p-8">
                     <div
-                        class="shape-card-4 mb-5 flex h-14 w-14 items-center justify-center bg-gradient-to-br from-purple-500 to-purple-600 text-white shadow-lg">
-                        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="shape-card-4 mb-4 flex h-12 w-12 items-center justify-center bg-gradient-to-br from-purple-500 to-purple-600 text-white shadow-lg sm:mb-5 sm:h-14 sm:w-14">
+                        <svg class="h-6 w-6 sm:h-7 sm:w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
                     </div>
-                    <h3 class="mb-3 text-xl font-bold text-gray-900 dark:text-white">
+                    <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white sm:mb-3 sm:text-xl">
                         Smart Runbooks
                     </h3>
-                    <p class="mb-4 text-gray-600 dark:text-gray-400">
+                    <p class="mb-3 text-sm text-gray-600 dark:text-gray-400 sm:mb-4">
                         Auto-generate and maintain runbooks from your actual incident
                         responses.
                     </p>
                     <div class="flex flex-wrap gap-2">
                         <span
-                            class="rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">Self-updating</span>
+                            class="rounded-full bg-purple-100 px-2.5 py-1 text-xs font-semibold text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 sm:px-3">Self-updating</span>
                         <span
-                            class="rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">Battle-tested</span>
+                            class="rounded-full bg-purple-100 px-2.5 py-1 text-xs font-semibold text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 sm:px-3">Battle-tested</span>
                     </div>
                 </div>
 
                 <!-- Feature Card 5 -->
-                <div class="glass-card hover-lift shape-card-2 group p-8">
+                <div class="glass-card hover-lift shape-card-2 group p-6 sm:p-7 lg:p-8">
                     <div
-                        class="mb-5 flex h-14 w-14 items-center justify-center rounded-lg bg-gradient-to-br from-amber-500 to-amber-600 text-white shadow-lg">
-                        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-amber-500 to-amber-600 text-white shadow-lg sm:mb-5 sm:h-14 sm:w-14">
+                        <svg class="h-6 w-6 sm:h-7 sm:w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                         </svg>
                     </div>
-                    <h3 class="mb-3 text-xl font-bold text-gray-900 dark:text-white">
+                    <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white sm:mb-3 sm:text-xl">
                         Code Explainer
                     </h3>
-                    <p class="mb-4 text-gray-600 dark:text-gray-400">
+                    <p class="mb-3 text-sm text-gray-600 dark:text-gray-400 sm:mb-4">
                         Answer "what does this do?" with code summaries, call graphs, and
                         test links.
                     </p>
                     <div class="flex flex-wrap gap-2">
                         <span
-                            class="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">Tree-sitter</span>
+                            class="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 sm:px-3">Tree-sitter</span>
                         <span
-                            class="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">PR
+                            class="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 sm:px-3">PR
                             History</span>
                     </div>
                 </div>
 
                 <!-- Feature Card 6 -->
-                <div class="glass-card hover-lift group rounded-2xl p-8">
+                <div class="glass-card hover-lift group rounded-xl p-6 sm:rounded-2xl sm:p-7 lg:p-8">
                     <div
-                        class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 to-cyan-600 text-white shadow-lg">
-                        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 to-cyan-600 text-white shadow-lg sm:mb-5 sm:h-14 sm:w-14">
+                        <svg class="h-6 w-6 sm:h-7 sm:w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h3 class="mb-3 text-xl font-bold text-gray-900 dark:text-white">
+                    <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white sm:mb-3 sm:text-xl">
                         Focus Mode
                     </h3>
-                    <p class="mb-4 text-gray-600 dark:text-gray-400">
+                    <p class="mb-3 text-sm text-gray-600 dark:text-gray-400 sm:mb-4">
                         Protect deep work. AI deflects interruptions when engineers are in
                         the zone.
                     </p>
                     <div class="flex flex-wrap gap-2">
                         <span
-                            class="rounded-full bg-cyan-100 px-3 py-1 text-xs font-semibold text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400">Smart
+                            class="rounded-full bg-cyan-100 px-2.5 py-1 text-xs font-semibold text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400 sm:px-3">Smart
                             Queue</span>
                         <span
-                            class="rounded-full bg-cyan-100 px-3 py-1 text-xs font-semibold text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400">Priority
+                            class="rounded-full bg-cyan-100 px-2.5 py-1 text-xs font-semibold text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400 sm:px-3">Priority
                             Routing</span>
                     </div>
                 </div>
@@ -906,34 +934,34 @@
     </section>
 
     <!-- How It Works Section -->
-    <section id="how-it-works" class="relative overflow-hidden px-6 py-20">
+    <section id="how-it-works" class="relative overflow-hidden px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
         <!-- Animated wave background -->
         <div class="absolute inset-0">
             <div class="hero-gradient absolute inset-0 skew-y-12 transform opacity-5"></div>
         </div>
 
         <div class="relative z-10 mx-auto max-w-7xl">
-            <div class="mb-12 text-center lg:mb-16">
-                <h2 class="text-section mb-3 font-black lg:mb-4">
+            <div class="mb-10 text-center sm:mb-12 lg:mb-16">
+                <h2 class="text-section mb-2 font-black sm:mb-3 lg:mb-4">
                     How <span class="gradient-text">Lumniverse</span> Works
                 </h2>
-                <p class="mx-auto max-w-2xl text-base text-gray-600 dark:text-gray-400 lg:text-lg">
+                <p class="mx-auto max-w-2xl text-sm text-gray-600 dark:text-gray-400 sm:text-base lg:text-lg">
                     Intelligent automation at every step of incident response
                 </p>
             </div>
 
             <!-- Process Steps with connecting lines -->
-            <div class="mb-14 grid gap-6 md:grid-cols-2 lg:mb-16 lg:grid-cols-4">
+            <div class="mb-12 grid gap-4 sm:mb-14 sm:gap-5 md:grid-cols-2 lg:mb-16 lg:grid-cols-4 lg:gap-6">
                 <div class="relative">
-                    <div class="glass-card shape-card-3 hover-lift h-full p-6">
+                    <div class="glass-card shape-card-3 hover-lift h-full p-5 sm:p-6">
                         <div
-                            class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-600 text-lg font-bold text-white shadow-2xl">
+                            class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-600 text-base font-bold text-white shadow-2xl sm:mb-4 sm:h-12 sm:w-12 sm:text-lg">
                             1
                         </div>
-                        <h3 class="gradient-text mb-2 text-lg font-bold">
+                        <h3 class="gradient-text mb-2 text-base font-bold sm:text-lg">
                             Intelligent Intake
                         </h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                        <p class="text-xs text-gray-600 dark:text-gray-400 sm:text-sm">
                             Every request flows through our AI-powered triage system for
                             instant classification.
                         </p>
@@ -944,15 +972,15 @@
                 </div>
 
                 <div class="relative">
-                    <div class="glass-card hover-lift h-full rounded-2xl p-6">
+                    <div class="glass-card hover-lift h-full rounded-xl p-5 sm:rounded-2xl sm:p-6">
                         <div
-                            class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-cyan-600 to-emerald-600 text-lg font-bold text-white shadow-2xl">
+                            class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-cyan-600 to-emerald-600 text-base font-bold text-white shadow-2xl sm:mb-4 sm:h-12 sm:w-12 sm:text-lg">
                             2
                         </div>
-                        <h3 class="gradient-text mb-2 text-lg font-bold">
+                        <h3 class="gradient-text mb-2 text-base font-bold sm:text-lg">
                             Automated Resolution
                         </h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                        <p class="text-xs text-gray-600 dark:text-gray-400 sm:text-sm">
                             50-70% of issues resolved without human intervention using AI
                             agents.
                         </p>
@@ -963,15 +991,15 @@
                 </div>
 
                 <div class="relative">
-                    <div class="glass-card shape-card-1 hover-lift h-full p-6">
+                    <div class="glass-card shape-card-1 hover-lift h-full p-5 sm:p-6">
                         <div
-                            class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-emerald-600 to-orange-600 text-lg font-bold text-white shadow-2xl">
+                            class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-emerald-600 to-orange-600 text-base font-bold text-white shadow-2xl sm:mb-4 sm:h-12 sm:w-12 sm:text-lg">
                             3
                         </div>
-                        <h3 class="gradient-text mb-2 text-lg font-bold">
+                        <h3 class="gradient-text mb-2 text-base font-bold sm:text-lg">
                             Smart Escalation
                         </h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                        <p class="text-xs text-gray-600 dark:text-gray-400 sm:text-sm">
                             Complex issues are enriched with context and routed to the right
                             expert.
                         </p>
@@ -982,15 +1010,15 @@
                 </div>
 
                 <div class="relative">
-                    <div class="glass-card shape-card-2 hover-lift h-full p-6">
+                    <div class="glass-card shape-card-2 hover-lift h-full p-5 sm:p-6">
                         <div
-                            class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-orange-600 to-rose-600 text-lg font-bold text-white shadow-2xl">
+                            class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-orange-600 to-rose-600 text-base font-bold text-white shadow-2xl sm:mb-4 sm:h-12 sm:w-12 sm:text-lg">
                             4
                         </div>
-                        <h3 class="gradient-text mb-2 text-lg font-bold">
+                        <h3 class="gradient-text mb-2 text-base font-bold sm:text-lg">
                             Continuous Learning
                         </h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                        <p class="text-xs text-gray-600 dark:text-gray-400 sm:text-sm">
                             Every incident improves the system with auto-updating runbooks.
                         </p>
                     </div>
@@ -998,35 +1026,39 @@
             </div>
 
             <!-- Stats showcase -->
-            <div class="glass-card relative overflow-hidden rounded-3xl p-8 lg:p-10">
+            <div class="glass-card relative overflow-hidden rounded-2xl p-6 sm:rounded-3xl sm:p-8 lg:p-10">
                 <div class="hero-gradient absolute inset-0 opacity-5"></div>
-                <div class="relative grid grid-cols-1 gap-8 md:grid-cols-3">
+                <div class="relative grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
                     <div class="group text-center">
-                        <div class="animate-bounce-slow mb-2 text-4xl lg:text-5xl">
+                        <div class="animate-bounce-slow mb-2 text-3xl sm:text-4xl lg:text-5xl">
                             🔄
                         </div>
-                        <div class="gradient-text mb-1 text-3xl font-bold lg:text-4xl">
+                        <div class="gradient-text mb-1 text-2xl font-bold sm:text-3xl lg:text-4xl">
                             24/7
                         </div>
-                        <div class="text-sm text-gray-600 dark:text-gray-400">
+                        <div class="text-xs text-gray-600 dark:text-gray-400 sm:text-sm">
                             Continuous Operation
                         </div>
                     </div>
                     <div class="group text-center">
-                        <div class="mb-2 animate-pulse text-4xl lg:text-5xl">⚡</div>
-                        <div class="gradient-text mb-1 text-3xl font-bold lg:text-4xl">
+                        <div class="mb-2 animate-pulse text-3xl sm:text-4xl lg:text-5xl">
+                            ⚡
+                        </div>
+                        <div class="gradient-text mb-1 text-2xl font-bold sm:text-3xl lg:text-4xl">
                             &lt;30s
                         </div>
-                        <div class="text-sm text-gray-600 dark:text-gray-400">
+                        <div class="text-xs text-gray-600 dark:text-gray-400 sm:text-sm">
                             Average Response Time
                         </div>
                     </div>
                     <div class="group text-center">
-                        <div class="mb-2 animate-spin-slow text-4xl lg:text-5xl">🎯</div>
-                        <div class="gradient-text mb-1 text-3xl font-bold lg:text-4xl">
+                        <div class="mb-2 animate-spin-slow text-3xl sm:text-4xl lg:text-5xl">
+                            🎯
+                        </div>
+                        <div class="gradient-text mb-1 text-2xl font-bold sm:text-3xl lg:text-4xl">
                             95%
                         </div>
-                        <div class="text-sm text-gray-600 dark:text-gray-400">
+                        <div class="text-xs text-gray-600 dark:text-gray-400 sm:text-sm">
                             Accuracy Rate
                         </div>
                     </div>
@@ -1439,11 +1471,12 @@
             </div>
         </div>
     </section>
+
     <!-- Footer -->
-    <footer class="border-t border-gray-200 px-6 py-10 dark:border-gray-800 lg:py-14">
+    <footer class="border-t border-gray-200 px-4 py-8 dark:border-gray-800 sm:px-6 sm:py-10 lg:py-14">
         <div class="mx-auto max-w-7xl">
-            <div class="mb-8 grid gap-8 md:grid-cols-4">
-                <div>
+            <div class="mb-8 grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
+                <div class="col-span-2 md:col-span-1">
                     <div class="group mb-4 flex items-center space-x-3">
                         <div class="hero-gradient h-10 w-10 rounded-xl shadow-lg transition-all group-hover:shadow-2xl">
                         </div>
@@ -1510,11 +1543,11 @@
             </div>
 
             <div
-                class="flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-6 dark:border-gray-800 sm:flex-row">
+                class="flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-6 text-center dark:border-gray-800 sm:flex-row sm:text-left">
                 <p class="text-sm text-gray-600 dark:text-gray-400">
                     © 2025 Lumniverse. All rights reserved.
                 </p>
-                <div class="flex space-x-6">
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-0 sm:space-x-6">
                     <a href="#" class="hover-gradient text-sm text-gray-600 transition dark:text-gray-400">Privacy</a>
                     <a href="#" class="hover-gradient text-sm text-gray-600 transition dark:text-gray-400">Terms</a>
                     <a href="#" class="hover-gradient text-sm text-gray-600 transition dark:text-gray-400">Cookies</a>
