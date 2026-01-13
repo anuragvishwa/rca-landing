@@ -1,0 +1,5 @@
+# Large video files (use S3 instead)
+Lumni-trailer.mov
+
+# Next.js video app (separate project)
+video/

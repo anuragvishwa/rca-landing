@@ -778,6 +778,50 @@
         </div>
     </section>
 
+    <!-- ========================= VIDEO SECTION ========================= -->
+    <section id="video" class="py-20 relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary-600/10 blur-[150px] rounded-full pointer-events-none -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="magic-title">See Lumniverse in Action</span>
+                </h2>
+                <p class="text-lg text-slate-400">Watch how AI resolves production incidents in real-time</p>
+            </div>
+
+            <div class="relative rounded-2xl overflow-hidden border border-white/10 bg-slate-900/50 shadow-[0_0_60px_rgba(99,102,241,0.3)]">
+                <video
+                    id="demo-video"
+                    controls
+                    playsinline
+                    preload="auto"
+                    class="w-full aspect-video"
+                >
+                    <source src="https://lumniverse-cloud.s3.us-east-1.amazonaws.com/Lumni-trailer-with-audio.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Autoplay video (muted) when scrolled into view
+        const video = document.getElementById('demo-video');
+        video.muted = true;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+            });
+        }, { threshold: 0.5 });
+        observer.observe(video);
+    </script>
+
     <!-- ========================= FEATURE SHOWCASE (IMAGES) ========================= -->
     <section class="py-20 relative overflow-hidden" id="features">
         <!-- Background Blobs (Matching Hero) -->
