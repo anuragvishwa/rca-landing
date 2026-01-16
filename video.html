@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lumniverse - Video Demo</title>
+    <title>Lumniverse - Demo Video</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
     <script>
         tailwind.config = {
@@ -19,28 +17,17 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
                     },
                     colors: {
-                        background: '#030712',
-                        surface: '#111827',
-                        primary: { 400: '#818CF8', 500: '#6366F1', 600: '#4F46E5' },
-                        accent: '#38BDF8',
-                    },
-                    animation: {
-                        'title-shine': 'titleShine 3.5s linear infinite',
-                        'title-glow': 'titleGlow 4s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        titleShine: {
-                            '0%': { backgroundPosition: '0% 50%' },
-                            '100%': { backgroundPosition: '200% 50%' }
+                        background: '#09090b',
+                        surface: '#18181b',
+                        border: '#27272a',
+                        primary: {
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
                         },
-                        titleGlow: {
-                            '0%, 100%': { textShadow: '0 0 12px rgba(129,140,248,0.15), 0 0 28px rgba(56,189,248,0.10)' },
-                            '50%': { textShadow: '0 0 18px rgba(129,140,248,0.35), 0 0 48px rgba(99,102,241,0.25)' }
-                        },
-                    }
+                    },
                 }
             }
         }
@@ -48,24 +35,8 @@
 
     <style>
         body {
-            background-color: #030712;
-            color: #E2E8F0;
-            overflow-x: hidden;
-        }
-
-        .magic-title {
-            background: linear-gradient(
-                90deg,
-                #e2e8f0 0%,
-                #818cf8 25%,
-                #38bdf8 50%,
-                #818cf8 75%,
-                #e2e8f0 100%
-            );
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background-color: #09090b;
+            color: #fafafa;
         }
     </style>
 </head>
@@ -73,39 +44,30 @@
 <body class="font-sans antialiased min-h-screen flex flex-col">
 
     <!-- Header -->
-    <header class="py-6 px-6 border-b border-white/5">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="/" class="text-2xl font-bold text-white flex items-center gap-2">
-                <svg class="w-8 h-8 text-primary-500" fill="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+    <header class="py-6 px-6 border-b border-border">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2 text-white font-semibold text-lg">
+                <svg class="w-6 h-6 text-primary-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
                 Lumniverse
             </a>
-            <a href="/" class="text-sm text-slate-400 hover:text-white transition-colors">
-                &larr; Back to Home
+            <a href="/" class="text-sm text-zinc-400 hover:text-white transition-colors">
+                ← Back to Home
             </a>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="flex-1 flex items-center justify-center py-12 px-6 relative">
-        <!-- Background glow -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-primary-600/10 blur-[150px] rounded-full pointer-events-none -z-10"></div>
-
+    <main class="flex-1 flex items-center justify-center py-12 px-6">
         <div class="max-w-5xl w-full">
-            <div class="text-center mb-10">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">
-                    <span class="magic-title animate-title-shine animate-title-glow">See Lumniverse in Action</span>
-                </h1>
-                <p class="text-lg text-slate-400">Watch how AI resolves production incidents in real-time</p>
-            </div>
+            <h1 class="text-3xl font-semibold text-center mb-8">See Lumniverse in Action</h1>
 
-            <div class="relative rounded-2xl overflow-hidden border border-white/10 bg-slate-900/50 shadow-[0_0_60px_rgba(99,102,241,0.3)]">
+            <div class="rounded-xl overflow-hidden border border-border bg-surface">
                 <video
                     controls
                     playsinline
-                    preload="metadata"
+                    preload="auto"
                     autoplay
                     class="w-full aspect-video"
                 >
@@ -115,8 +77,7 @@
             </div>
 
             <div class="mt-8 text-center">
-                <a href="https://cal.com/anuragvishwa/30min" target="_blank"
-                    class="inline-block px-8 py-4 bg-primary-600 hover:bg-primary-500 text-white font-medium rounded-xl shadow-[0_0_30px_rgba(99,102,241,0.5)] hover:shadow-[0_0_40px_rgba(99,102,241,0.7)] transition-all hover:scale-105">
+                <a href="https://cal.com/anuragvishwa/30min" target="_blank" class="inline-block px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white font-medium rounded-lg transition-colors">
                     Book a Demo
                 </a>
             </div>
@@ -124,9 +85,9 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-6 px-6 border-t border-white/5">
-        <div class="max-w-7xl mx-auto text-center text-sm text-slate-500">
-            &copy; 2026 Lumniverse. All rights reserved.
+    <footer class="py-6 px-6 border-t border-border">
+        <div class="max-w-6xl mx-auto text-center text-sm text-zinc-500">
+            © 2026 Lumniverse
         </div>
     </footer>
 

@@ -4,14 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lumniverse - Incident Response</title>
+    <title>Lumniverse - Fix Production Incidents Faster</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
     <script>
         tailwind.config = {
@@ -22,66 +20,15 @@
                         mono: ['JetBrains Mono', 'monospace'],
                     },
                     colors: {
-                        background: '#030712',
-                        surface: '#111827',
-                        primary: { 400: '#818CF8', 500: '#6366F1', 600: '#4F46E5' },
-                        accent: '#38BDF8',
-                        success: '#10B981',
-                        danger: '#EF4444',
+                        background: '#09090b',
+                        surface: '#18181b',
+                        border: '#27272a',
+                        primary: {
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                        },
                     },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                        'float': 'float 6s ease-in-out infinite',
-                        'float-delayed': 'float 6s ease-in-out 3s infinite',
-                        'pulse-fast': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'glow': 'glow 3s infinite',
-                        'title-shine': 'titleShine 3.5s linear infinite',
-                        'title-glow': 'titleGlow 4s ease-in-out infinite',
-                        'subtitle-shine': 'subtitleShine 2.8s linear infinite',
-                        'subtitle-flicker': 'subtitleFlicker 6s ease-in-out infinite',
-                        'sparkle-drift': 'sparkleDrift 6s ease-in-out infinite',
-                        'scan': 'scan 4s linear infinite',
-                    },
-                    keyframes: {
-                        scan: {
-                            '0%': { top: '-10%', opacity: '0' },
-                            '10%': { opacity: '1' },
-                            '90%': { opacity: '1' },
-                            '100%': { top: '110%', opacity: '0' }
-                        },
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' }
-                        },
-                        glow: {
-                            '0%, 100%': { filter: 'drop-shadow(0 0 5px rgba(99, 102, 241, 0.5))' },
-                            '50%': { filter: 'drop-shadow(0 0 20px rgba(99, 102, 241, 0.8))' }
-                        },
-                        titleShine: {
-                            '0%': { backgroundPosition: '0% 50%' },
-                            '100%': { backgroundPosition: '200% 50%' }
-                        },
-                        titleGlow: {
-                            '0%, 100%': { textShadow: '0 0 12px rgba(129,140,248,0.15), 0 0 28px rgba(56,189,248,0.10)' },
-                            '50%': { textShadow: '0 0 18px rgba(129,140,248,0.35), 0 0 48px rgba(99,102,241,0.25)' }
-                        },
-                        subtitleShine: {
-                            '0%': { backgroundPosition: '0% 50%' },
-                            '100%': { backgroundPosition: '180% 50%' }
-                        },
-                        subtitleFlicker: {
-                            '0%, 100%': { filter: 'drop-shadow(0 0 8px rgba(99,102,241,0.35))', opacity: 1 },
-                            '50%': { filter: 'drop-shadow(0 0 18px rgba(56,189,248,0.55))', opacity: 0.95 }
-                        },
-                        sparkleDrift: {
-                            '0%, 100%': { transform: 'translateY(0) translateX(0) scale(1)', opacity: 0.7 },
-                            '50%': { transform: 'translateY(-10px) translateX(8px) scale(1.15)', opacity: 1 }
-                        }
-                    }
                 }
             }
         }
@@ -89,708 +36,196 @@
 
     <style>
         body {
-            background-color: #030712;
-            color: #E2E8F0;
-            overflow-x: hidden;
+            background-color: #09090b;
+            color: #fafafa;
         }
 
-        .hero-background {
-            background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 60%);
-        }
-
-        .connector-path {
-            fill: none;
-            stroke: #1F2937;
-            stroke-width: 2;
-            opacity: 0.4;
-        }
-
-        .connector-beam {
-            fill: none;
-            stroke: #6366F1;
-            stroke-width: 3;
-            stroke-dasharray: 10 100;
-            stroke-linecap: round;
-            animation: beamFlow 1s linear infinite;
-            filter: drop-shadow(0 0 5px #818CF8);
-        }
-
-        @keyframes beamFlow {
-            from {
-                stroke-dashoffset: 110;
-            }
-
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-
-        .terminal-scroll::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .terminal-scroll::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .terminal-scroll::-webkit-scrollbar-thumb {
-            background: #374151;
-            border-radius: 3px;
-        }
-
+        /* Terminal styles */
         .terminal-text {
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
-        }
-
-        .graph-fade {
-            mask-image: linear-gradient(to bottom, black 0%, black 82%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 82%, transparent 100%);
+            text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
         }
 
         .terminal-line {
             opacity: 0;
-            transform: translateY(4px);
-            transition: opacity .35s ease, transform .35s ease;
-            will-change: opacity, transform;
+            animation: fadeIn 0.3s ease forwards;
         }
 
-        .terminal-line.show {
-            opacity: 1;
-            transform: translateY(0);
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
 
         .cursor {
             display: inline-block;
             width: 8px;
-            height: 1em;
+            height: 16px;
+            background: #6366f1;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
             margin-left: 2px;
-            background: currentColor;
-            opacity: .8;
-            animation: blink 1s steps(2, start) infinite;
-            vertical-align: -2px;
-            border-radius: 1px;
         }
 
         @keyframes blink {
-            to {
-                opacity: 0;
-            }
+            50% { opacity: 0; }
         }
 
-        #terminal-output {
-            min-height: 0;
-            max-height: 100%;
-            overflow-y: auto;
-            padding-bottom: 3rem;
-            scroll-padding-bottom: 3rem;
-        }
-
-        @keyframes vanishOut {
-            0% {
-                opacity: 1;
-                filter: blur(0px);
-                transform: translateY(0) scale(1);
-            }
-
-            60% {
-                opacity: .65;
-                filter: blur(1.5px);
-                transform: translateY(-2px) scale(0.995);
-            }
-
-            100% {
-                opacity: 0;
-                filter: blur(8px);
-                transform: translateY(-10px) scale(0.98);
-            }
-        }
-
-        /* ===== MAGIC TITLE (line 1) ===== */
-        .magic-title {
-            position: relative;
-            display: inline-block;
-            background-image: linear-gradient(90deg,
-                    #ffffff 0%,
-                    #c7d2fe 20%,
-                    #93c5fd 50%,
-                    #c7d2fe 80%,
-                    #ffffff 100%);
-            background-size: 220% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .magic-title::after {
-            content: "";
-            position: absolute;
-            inset: -18% -10%;
-            background:
-                radial-gradient(45% 70% at 20% 0%, rgba(99, 102, 241, 0.38), transparent 62%),
-                radial-gradient(40% 60% at 85% 5%, rgba(56, 189, 248, 0.30), transparent 62%),
-                radial-gradient(50% 80% at 50% 120%, rgba(139, 92, 246, 0.25), transparent 65%);
-            filter: blur(22px);
-            z-index: -1;
-            opacity: .9;
-        }
-
-        /* Sparkles around title */
-        .sparkles {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .sparkle {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 1), rgba(129, 140, 248, 0.35), transparent 65%);
-            animation: sparkleDrift 6s ease-in-out infinite;
-        }
-
-        .sparkle.s1 {
-            top: -10%;
-            left: 8%;
-            animation-delay: 0s;
-        }
-
-        .sparkle.s2 {
-            top: 8%;
-            right: 6%;
-            animation-delay: 1.2s;
-        }
-
-        .sparkle.s3 {
-            bottom: -12%;
-            left: 38%;
-            animation-delay: 2.4s;
-        }
-
-        .sparkle.s4 {
-            bottom: 10%;
-            right: 34%;
-            animation-delay: 3.6s;
-        }
-
-        @keyframes sparkleDrift {
-
-            0%,
-            100% {
-                transform: translateY(0) translateX(0) scale(1);
-                opacity: .6;
-            }
-
-            50% {
-                transform: translateY(-12px) translateX(10px) scale(1.35);
-                opacity: 1;
-            }
-        }
-
-        /* ===== MAGIC SUBTITLE (line 2) ===== */
-        .magic-subtitle {
-            position: relative;
-            display: inline-block;
-            background-image: linear-gradient(90deg,
-                    #ffffff 0%,
-                    #a5b4fc 30%,
-                    #38bdf8 55%,
-                    #a5b4fc 75%,
-                    #ffffff 100%);
-            background-size: 180% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* animated neon underline sweep */
-        .magic-subtitle::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -10px;
-            width: 100%;
-            height: 3px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, transparent 0%, rgba(99, 102, 241, 0.9) 30%, rgba(56, 189, 248, 0.9) 60%, transparent 100%);
-            background-size: 200% 100%;
-            animation: subtitleShine 2.8s linear infinite;
-            filter: blur(0.2px);
-            opacity: .9;
-        }
-
-        /* subtle glow pulse for subtitle */
-        .magic-subtitle-glow {
-            animation: subtitleFlicker 6s ease-in-out infinite;
-        }
-
-        /* ===== MAGIC HIGHLIGHT in paragraph ===== */
-        .magic-kg {
-            position: relative;
-            background-image: linear-gradient(90deg, #fff, #a5b4fc, #38bdf8, #fff);
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: subtitleShine 3.2s linear infinite;
-        }
-
-        .magic-kg::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -2px;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(129, 140, 248, 0.9), transparent);
-            opacity: .7;
-        }
-
-        /* Section-2 connectors */
-        .kg-connector-path {
+        /* Connector paths */
+        .connector-path {
             fill: none;
-            stroke: #273244;
-            stroke-width: 2.2;
-            opacity: .55;
+            stroke: #27272a;
+            stroke-width: 2;
         }
 
-        .kg-connector-beam {
+        .connector-beam {
             fill: none;
-            stroke: #818CF8;
-            stroke-width: 3.2;
-            stroke-dasharray: 12 120;
-            stroke-linecap: round;
-            animation: beamFlow 1.4s linear infinite;
-            filter: drop-shadow(0 0 6px rgba(129, 140, 248, 0.9));
+            stroke: #6366f1;
+            stroke-width: 2;
+            stroke-dasharray: 8 8;
+            animation: dash 2s linear infinite;
         }
 
-        .blob-shape {
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            filter: blur(40px);
+        @keyframes dash {
+            to { stroke-dashoffset: -16; }
         }
 
-        .animation-delay-2000 {
-            animation-delay: 2s;
-        }
-
-        .animation-delay-4000 {
-            animation-delay: 4s;
-        }
-
-        /* Imported styles for Integrations Section */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .hover-lift {
-            transition: all 0.3s ease;
-        }
-
-        .hover-lift:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.2);
-        }
-
-        .shape-card-1 {
-            border-radius: 1.5rem 0.5rem 1.5rem 0.5rem;
-        }
-
-        .shape-card-2 {
-            border-radius: 0.5rem 1.5rem 0.5rem 1.5rem;
-        }
-
-        .shape-card-3 {
-            border-radius: 2rem 1rem 2rem 1rem;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        @keyframes timelineFlow {
-            0% {
-                background-position: 0% 0%;
-            }
-
-            100% {
-                background-position: 0% 200%;
-            }
-        }
-
-        @keyframes timelinePulse {
-            0% {
-                top: 0%;
-                opacity: 1;
-            }
-
-            90% {
-                opacity: 1;
-            }
-
-            100% {
-                top: 100%;
-                opacity: 0;
-            }
-        }
-
-        .timeline-line {
-            background: linear-gradient(180deg,
-                    transparent 0%,
-                    rgba(99, 102, 241, 0.8) 10%,
-                    rgba(139, 92, 246, 0.8) 30%,
-                    rgba(56, 189, 248, 0.8) 50%,
-                    rgba(16, 185, 129, 0.8) 70%,
-                    transparent 100%);
-            background-size: 100% 200%;
-            animation: timelineFlow 5s linear infinite;
-        }
-
-        .timeline-line::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 8px;
-            height: 8px;
-            background: #818CF8;
-            border-radius: 50%;
-            box-shadow: 0 0 12px 4px rgba(129, 140, 248, 0.8);
-            animation: timelinePulse 5s linear infinite;
-        }
-
-        @keyframes iconGlow {
-
-            0%,
-            15% {
-                box-shadow: 0 0 0 0 transparent;
-                border-color: rgba(255, 255, 255, 0.1);
-            }
-
-            20%,
-            35% {
-                box-shadow: 0 0 20px 4px rgba(129, 140, 248, 0.6);
-                border-color: rgba(129, 140, 248, 0.5);
-            }
-
-            40%,
-            100% {
-                box-shadow: 0 0 0 0 transparent;
-                border-color: rgba(255, 255, 255, 0.1);
-            }
-        }
-
-        .timeline-icon-1 {
-            animation: iconGlow 5s linear infinite;
-            animation-delay: 0s;
-        }
-
-        .timeline-icon-2 {
-            animation: iconGlow 5s linear infinite;
-            animation-delay: 1.25s;
-        }
-
-        .timeline-icon-3 {
-            animation: iconGlow 5s linear infinite;
-            animation-delay: 2.5s;
-        }
-
-        .timeline-icon-4 {
-            animation: iconGlow 5s linear infinite;
-            animation-delay: 3.75s;
-        }
-
-        @keyframes pulseGlow {
-
-            0%,
-            100% {
-                box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
-            }
-
-            50% {
-                box-shadow: 0 0 50px rgba(99, 102, 241, 0.8), 0 0 80px rgba(99, 102, 241, 0.4);
-            }
-        }
-
-        .animate-pulse-glow {
-            animation: pulseGlow 2s ease-in-out infinite;
+        /* Subtle gradient background */
+        .hero-gradient {
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent);
         }
     </style>
 </head>
 
-<body class="antialiased selection:bg-primary-500/30 selection:text-white">
-
-    <!-- Animated background elements (Fixed across all pages) -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div
-            class="blob-shape animate-blob absolute -left-10 top-20 h-48 w-48 bg-indigo-600 opacity-20 mix-blend-screen sm:-left-20 sm:h-72 sm:w-72 lg:h-96 lg:w-96">
-        </div>
-        <div
-            class="blob-shape animate-blob animation-delay-2000 absolute -right-10 top-60 h-48 w-48 bg-purple-600 opacity-20 mix-blend-screen sm:-right-20 sm:h-72 sm:w-72 lg:h-96 lg:w-96">
-        </div>
-        <div
-            class="blob-shape animate-blob animation-delay-4000 absolute -bottom-10 left-1/2 h-48 w-48 bg-cyan-600 opacity-20 mix-blend-screen sm:-bottom-20 sm:h-72 sm:w-72 lg:h-96 lg:w-96">
-        </div>
-    </div>
-    <div class="fixed inset-0 pointer-events-none -z-10" id="particles-container"></div>
+<body class="font-sans antialiased">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 top-0 border-b border-white/5 bg-background/80 backdrop-blur-lg">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 group">
-                <div
-                    class="relative w-8 h-8 flex items-center justify-center bg-primary-600 rounded-lg shadow-lg shadow-primary-500/20 group-hover:shadow-primary-500/40 transition-all">
-                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                </div>
-                <span class="text-xl font-bold text-white tracking-tight">Lumniverse</span>
+    <nav class="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-sm">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2 text-white font-semibold text-lg">
+                <svg class="w-6 h-6 text-primary-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                Lumniverse
             </a>
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
-                <a href="#features" class="hover:text-white transition-colors">Features</a>
-                <a href="#forensic-analysis" class="hover:text-white transition-colors">Forensic Graph Analysis</a>
-                <a href="#integrations" class="hover:text-white transition-colors">Integrations</a>
+
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#features" class="text-sm text-zinc-400 hover:text-white transition-colors">Features</a>
+                <a href="#video" class="text-sm text-zinc-400 hover:text-white transition-colors">Demo</a>
+                <a href="#integrations" class="text-sm text-zinc-400 hover:text-white transition-colors">Integrations</a>
             </div>
-            <!-- <div class="flex items-center gap-4">
-                <a href="https://app.lumniverse.com" target="_blank"
-                    class="text-sm font-medium bg-white text-black px-6 py-2.5 rounded-lg hover:bg-slate-200 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                    Get Started
-                </a>
-            </div> -->
+
+            <a href="https://cal.com/anuragvishwa/30min" target="_blank" class="text-sm font-medium px-4 py-2 bg-white text-zinc-900 rounded-lg hover:bg-zinc-200 transition-colors">
+                Book Demo
+            </a>
         </div>
     </nav>
 
-    <!-- ========================= HERO SECTION ========================= -->
-    <section class="relative pt-8 pb-8 overflow-hidden min-h-screen flex flex-col justify-center hero-background">
-        <div
-            class="absolute top-0 right-0 w-[800px] h-[800px] bg-primary-600/10 blur-[150px] rounded-full pointer-events-none -z-10">
-        </div>
-        <div
-            class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-600/5 blur-[120px] rounded-full pointer-events-none -z-10">
-        </div>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen pt-32 pb-20 hero-gradient">
+        <div class="max-w-6xl mx-auto px-6">
 
-        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
-            <div class="grid lg:grid-cols-2 gap-10 items-center">
-
-                <!-- LEFT COPY -->
-                <div class="text-left relative z-20">
-                    <div class="animate-fade-in-up opacity-0 mb-8" style="animation-delay: 0.1s;">
-                        <div
-                            class="inline-flex items-center px-3 py-1 rounded-full border border-primary-500/30 bg-primary-500/10 backdrop-blur-sm">
-                            <span class="relative flex h-2 w-2 mr-2">
-                                <span
-                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
-                            </span>
-                            <span class="text-xs font-medium text-primary-200">AI Engine Live</span>
-                        </div>
-                    </div>
-
-                    <!-- MAGIC Title + Subtitle -->
-                    <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6 animate-fade-in-up opacity-0 leading-[1.1]"
-                        style="animation-delay: 0.2s;">
-                        <span class="relative block magic-title animate-title-shine animate-title-glow">
-                            <span class="sparkles">
-                                <span class="sparkle s1"></span>
-                                <span class="sparkle s2"></span>
-                                <span class="sparkle s3"></span>
-                                <span class="sparkle s4"></span>
-                            </span>
-                            AI for Prod.
-                        </span>
-                        <span class="block mt-2 magic-subtitle animate-subtitle-shine magic-subtitle-glow">
-                        </span>
-                    </h1>
-
-                    <p class="text-lg text-slate-400 max-w-lg mb-6 animate-fade-in-up opacity-0 leading-relaxed"
-                        style="animation-delay: 0.3s;">
-                        Analyze and fix root causes in milliseconds, not hours.
-                    </p>
-
-                    <!-- Integrations strip -->
-                    <div class="flex flex-wrap gap-2 md:gap-3 animate-fade-in-up opacity-0 mb-8"
-                        style="animation-delay: 0.35s;">
-                        <div
-                            class="px-3 py-1.5 rounded-full border border-white/10 bg-surface/70 text-xs md:text-sm text-slate-200 flex items-center gap-2">
-                            <span
-                                class="w-2 h-2 rounded-full bg-red-400 shadow-[0_0_10px_rgba(248,113,113,0.8)]"></span>
-                            Kubernetes
-                        </div>
-                        <div
-                            class="px-3 py-1.5 rounded-full border border-white/10 bg-surface/70 text-xs md:text-sm text-slate-200 flex items-center gap-2">
-                            <span
-                                class="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.8)]"></span>
-                            Prometheus
-                        </div>
-                        <div
-                            class="px-3 py-1.5 rounded-full border border-white/10 bg-surface/70 text-xs md:text-sm text-slate-200 flex items-center gap-2">
-                            <span
-                                class="w-2 h-2 rounded-full bg-orange-300 shadow-[0_0_10px_rgba(253,186,116,0.8)]"></span>
-                            Grafana
-                        </div>
-                        <div
-                            class="px-3 py-1.5 rounded-full border border-white/10 bg-surface/70 text-xs md:text-sm text-slate-200 flex items-center gap-2">
-                            <span
-                                class="w-2 h-2 rounded-full bg-primary-400 shadow-[0_0_10px_rgba(129,140,248,0.8)]"></span>
-                            CI/CD
-                        </div>
-                        <div
-                            class="px-3 py-1.5 rounded-full border border-white/10 bg-surface/70 text-xs md:text-sm text-slate-200 flex items-center gap-2">
-                            <span
-                                class="w-2 h-2 rounded-full bg-sky-300 shadow-[0_0_10px_rgba(125,211,252,0.8)]"></span>
-                            GitHub
-                        </div>
-                    </div>
-
-                    <div class="flex flex-row items-center gap-4 animate-fade-in-up opacity-0"
-                        style="animation-delay: 0.4s;">
-                        <!-- <a href="https://app.lumniverse.com" target="_blank"
-                            class="px-8 py-4 bg-primary-600 hover:bg-primary-500 text-white font-medium rounded-xl shadow-[0_0_30px_rgba(99,102,241,0.5)] hover:shadow-[0_0_40px_rgba(99,102,241,0.7)] transition-all hover:scale-105 animate-pulse-glow">
-                            Start Trial
-                        </a> -->
-                        <a href="https://cal.com/anuragvishwa/30min" target="_blank"
-                            class="px-8 py-4 bg-surface border border-primary-500/30 hover:border-primary-500/60 text-white font-medium rounded-xl transition-all hover:bg-surface/80 shadow-[0_0_20px_rgba(99,102,241,0.2)] hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]">
-                            Book Demo
-                        </a>
-                    </div>
-                </div>
-
-                <!-- RIGHT TERMINAL + GRAPH -->
-                <div class="relative w-full flex items-center justify-center animate-fade-in-up opacity-0"
-                    style="animation-delay: 0.6s;">
-                    <div class="relative w-full max-w-[600px] h-[560px] md:h-[600px]
-                      bg-gradient-to-b from-slate-950/35 via-slate-950/30 to-slate-950/45
-                      backdrop-blur-2xl rounded-2xl
-                      shadow-[0_30px_120px_rgba(0,0,0,0.8)]
-                      overflow-hidden">
-
-                        <div
-                            class="absolute inset-0 pointer-events-none rounded-2xl shadow-[inset_0_0_0_1px_rgba(99,102,241,0.06)]">
-                        </div>
-
-                        <div class="bg-slate-900/35 px-4 py-3 flex items-center gap-2 terminal-text">
-                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            <div class="ml-auto text-[11px] text-slate-300/80 font-mono flex items-center">
-                                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></span>
-                                Lumniverse AI Agent — Live Topology
-                            </div>
-                        </div>
-
-                        <div class="relative h-full flex flex-col min-h-0">
-
-                            <div class="relative h-[58%] graph-fade shrink-0">
-                                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                    <div class="w-[320px] h-[320px] bg-primary-900/25 blur-[70px] rounded-full"></div>
-                                </div>
-
-                                <div class="absolute inset-0 z-0 pointer-events-none">
-                                    <svg class="w-full h-full" viewBox="0 0 600 500"
-                                        preserveAspectRatio="xMidYMid meet">
-                                        <path d="M100 100 C 200 100, 200 250, 300 250" class="connector-path" />
-                                        <path d="M100 100 C 200 100, 200 250, 300 250" class="connector-beam" />
-                                        <path d="M100 400 C 200 400, 200 250, 300 250" class="connector-path" />
-                                        <path d="M100 400 C 200 400, 200 250, 300 250" class="connector-beam"
-                                            style="animation-delay: 0.3s;" />
-                                        <path d="M500 100 C 400 100, 400 250, 300 250" class="connector-path" />
-                                        <path d="M500 100 C 400 100, 400 250, 300 250" class="connector-beam"
-                                            style="animation-delay: 0.6s;" />
-                                        <path d="M500 400 C 400 400, 400 250, 300 250" class="connector-path" />
-                                        <path d="M500 400 C 400 400, 400 250, 300 250" class="connector-beam"
-                                            style="animation-delay: 0.9s;" />
-                                    </svg>
-                                </div>
-
-                                <div
-                                    class="absolute top-[10%] left-[7%] w-14 h-14 bg-[#181717] border border-slate-700/60 rounded-xl flex items-center justify-center shadow-xl animate-float z-10">
-                                    <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
-                                        <path
-                                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                                    </svg>
-                                </div>
-
-                                <div
-                                    class="absolute bottom-[12%] left-[7%] w-14 h-14 bg-[#1d1226] border border-slate-700/60 rounded-xl flex items-center justify-center shadow-xl animate-float-delayed z-10">
-                                    <svg class="w-8 h-8 text-[#7B42BC]" viewBox="0 0 24 24" fill="currentColor">
-                                        <path
-                                            d="M1.44 0v7.575l6.561 3.79V3.787zm21.12 4.227l-6.561 3.791v7.574l6.56-3.787zM8.72 4.23v7.575l6.561 3.787V8.018zm0 8.405v7.575l6.561 3.787v-7.574z" />
-                                    </svg>
-                                </div>
-
-                                <div
-                                    class="absolute top-[10%] right-[7%] w-14 h-14 bg-[#1a1515] border border-slate-700/60 rounded-xl flex items-center justify-center shadow-xl animate-float z-10">
-                                    <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
-                                        <path
-                                            d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.522 2.521 2.527 2.527 0 0 1-2.522-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.522 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.522 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.522-2.522v-2.522h2.522zM15.165 17.688a2.527 2.527 0 0 1-2.522-2.522 2.527 2.527 0 0 1 2.522-2.522h6.312A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.522h-6.313z" />
-                                    </svg>
-                                </div>
-
-                                <div
-                                    class="absolute bottom-[12%] right-[7%] w-14 h-14 bg-[#1a141d] border border-slate-700/60 rounded-xl flex items-center justify-center shadow-xl animate-float-delayed z-10">
-                                    <svg class="w-8 h-8 text-[#FFF]" viewBox="0 0 24 24" fill="currentColor">
-                                        <path
-                                            d="M14.615 3.023a.866.866 0 0 1 1.012.287l.002.002.002.002s.006.006.007.007l6.933 9.832a.854.854 0 0 1-.042 1.065l-.002.003-.002.002-.003.003-.003.003-6.99 8.726a.866.866 0 0 1-1.262.092l-.002-.001-.002-.002-.002-.002a.855.855 0 0 1-.107-.108L6.72 14.778a1.188 1.188 0 0 0-1.302-.35l-.005.002-.005.001-.005.002a1.175 1.175 0 0 0-.486.345l-.002.002-.002.002-3.972 4.958a.865.865 0 0 1-1.41-.95l.001-.002.002-.002.002-.003L6.766 3.598a.854.854 0 0 1 1.25-.17l.002.002.002.002.002.001 7.442 8.157a1.188 1.188 0 0 0 1.36.292l.005-.002.004-.002.005-.002a1.176 1.176 0 0 0 .505-.37l.002-.002.002-.002-2.73-3.48zm.564 10.838l.002.002.002.002a2.88 2.88 0 0 1-1.22.917l-.012.004-.011.005-.012.003a2.91 2.91 0 0 1-3.182-.84l-.003-.003-.003-.003-6.153 7.68 6.242-7.792a1.15 1.15 0 0 0 .095.025z" />
-                                    </svg>
-                                </div>
-
-                                <div
-                                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 bg-slate-900/90 backdrop-blur-md rounded-full border border-primary-500/50 shadow-[0_0_60px_rgba(99,102,241,0.6)] z-20 flex items-center justify-center animate-glow">
-                                    <svg class="w-14 h-14 text-white animate-pulse-fast drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]"
-                                        fill="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                    </svg>
-                                </div>
-                            </div>
-
-                            <div class="relative flex-1 min-h-0">
-                                <div
-                                    class="absolute top-48 left-0 right-0 h-10 pointer-events-none bg-gradient-to-b from-slate-950/0 via-slate-950/30 to-slate-950/70 z-10">
-                                </div>
-                                <div
-                                    class="absolute inset-0 pointer-events-none bg-gradient-to-b from-slate-950/0 via-slate-950/15 to-slate-950/80">
-                                </div>
-
-                                <div id="terminal-output"
-                                    class="p-5 h-full font-mono text-sm text-slate-100/90 terminal-scroll terminal-text">
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
+            <!-- Badge -->
+            <div class="flex justify-center mb-8">
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-500/10 border border-primary-500/20 text-sm text-primary-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary-400"></span>
+                    Now in Beta
+                </span>
             </div>
-        </div>
 
-        <div
-            class="hidden text-slate-500 text-slate-300 text-white text-red-400 text-yellow-200 text-green-400 text-primary-400 text-accent font-bold">
+            <!-- Heading -->
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <h1 class="text-4xl md:text-6xl font-semibold tracking-tight mb-6">
+                    Fix production incidents<br>in minutes, not hours.
+                </h1>
+                <p class="text-lg text-zinc-400 max-w-xl mx-auto">
+                    AI-powered root cause analysis that maps your infrastructure and traces issues across services automatically.
+                </p>
+            </div>
+
+            <!-- CTA -->
+            <div class="flex items-center justify-center gap-4 mb-16">
+                <a href="https://cal.com/anuragvishwa/30min" target="_blank" class="px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white font-medium rounded-lg transition-colors">
+                    Book a Demo
+                </a>
+                <a href="#video" class="px-6 py-3 text-zinc-400 hover:text-white font-medium transition-colors">
+                    Watch Video →
+                </a>
+            </div>
+
+            <!-- Terminal Visualization -->
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-surface border border-border rounded-xl overflow-hidden shadow-2xl">
+                    <!-- Terminal Header -->
+                    <div class="bg-zinc-900 px-4 py-3 flex items-center gap-2 border-b border-border">
+                        <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                        <span class="ml-auto text-xs text-zinc-500 font-mono">lumniverse — topology</span>
+                    </div>
+
+                    <!-- Terminal Content -->
+                    <div class="relative">
+                        <!-- Topology Graph -->
+                        <div class="relative h-64 p-4">
+                            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet">
+                                <!-- Connectors -->
+                                <path d="M80 50 Q 150 50, 200 100" class="connector-path" />
+                                <path d="M80 50 Q 150 50, 200 100" class="connector-beam" />
+                                <path d="M80 150 Q 150 150, 200 100" class="connector-path" />
+                                <path d="M80 150 Q 150 150, 200 100" class="connector-beam" style="animation-delay: 0.5s" />
+                                <path d="M320 50 Q 250 50, 200 100" class="connector-path" />
+                                <path d="M320 50 Q 250 50, 200 100" class="connector-beam" style="animation-delay: 1s" />
+                                <path d="M320 150 Q 250 150, 200 100" class="connector-path" />
+                                <path d="M320 150 Q 250 150, 200 100" class="connector-beam" style="animation-delay: 1.5s" />
+                            </svg>
+
+                            <!-- Service Icons -->
+                            <div class="absolute top-6 left-8 w-12 h-12 bg-zinc-800 border border-border rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-zinc-400" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </div>
+
+                            <div class="absolute bottom-6 left-8 w-12 h-12 bg-zinc-800 border border-border rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-zinc-400" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.522 2.521 2.527 2.527 0 0 1-2.522-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.522 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.522 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.522-2.522v-2.522h2.522zM15.165 17.688a2.527 2.527 0 0 1-2.522-2.522 2.527 2.527 0 0 1 2.522-2.522h6.312A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.522h-6.313z"/>
+                                </svg>
+                            </div>
+
+                            <div class="absolute top-6 right-8 w-12 h-12 bg-zinc-800 border border-border rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-zinc-400" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.8956zm16.0993 3.8558L12.6 8.3829l2.02-1.1638a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/>
+                                </svg>
+                            </div>
+
+                            <div class="absolute bottom-6 right-8 w-12 h-12 bg-zinc-800 border border-border rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-zinc-400" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+                                </svg>
+                            </div>
+
+                            <!-- Center Node -->
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-primary-500/20 border-2 border-primary-500 rounded-full flex items-center justify-center">
+                                <svg class="w-8 h-8 text-primary-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Terminal Output -->
+                        <div class="border-t border-border p-4 font-mono text-sm h-32 overflow-hidden">
+                            <div id="terminal-output" class="terminal-text text-zinc-300"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- ========================= VIDEO SECTION ========================= -->
-    <section id="video" class="py-20 relative overflow-hidden">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary-600/10 blur-[150px] rounded-full pointer-events-none -z-10"></div>
+    <!-- Video Section -->
+    <section id="video" class="py-24 border-t border-border">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-2xl font-semibold text-center mb-12">See it in action</h2>
 
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                    <span class="magic-title">See Lumniverse in Action</span>
-                </h2>
-                <p class="text-lg text-slate-400">Watch how AI resolves production incidents in real-time</p>
-            </div>
-
-            <div class="relative rounded-2xl overflow-hidden border border-white/10 bg-slate-900/50 shadow-[0_0_60px_rgba(99,102,241,0.3)]">
+            <div class="rounded-xl overflow-hidden border border-border bg-surface">
                 <video
                     id="demo-video"
                     controls
@@ -805,12 +240,147 @@
         </div>
     </section>
 
+    <!-- Features Section -->
+    <section id="features" class="py-24 border-t border-border">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-2xl font-semibold text-center mb-4">How it works</h2>
+            <p class="text-zinc-400 text-center mb-16 max-w-xl mx-auto">
+                Lumniverse automatically understands your infrastructure and traces issues to their root cause.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="p-6 rounded-xl bg-surface border border-border">
+                    <div class="w-10 h-10 rounded-lg bg-primary-500/10 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">Auto-discovery</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        Automatically maps your infrastructure topology. No manual configuration required.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="p-6 rounded-xl bg-surface border border-border">
+                    <div class="w-10 h-10 rounded-lg bg-primary-500/10 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">Root cause analysis</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        Traces issues across services to find the actual source, not just symptoms.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="p-6 rounded-xl bg-surface border border-border">
+                    <div class="w-10 h-10 rounded-lg bg-primary-500/10 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">Instant resolution</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        AI suggests fixes with full context. Apply them directly from Slack.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integrations Section -->
+    <section id="integrations" class="py-24 border-t border-border">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-2xl font-semibold text-center mb-4">Works with your stack</h2>
+            <p class="text-zinc-400 text-center mb-12">
+                Connects to the tools you already use.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-12">
+                <!-- Kubernetes -->
+                <div class="opacity-50 hover:opacity-100 transition-opacity">
+                    <svg class="w-10 h-10" viewBox="0 0 24 24" fill="#326CE5">
+                        <path d="M10.204 14.35l.007.01-.999 2.413a5.171 5.171 0 0 1-2.075-2.597l2.578-.437.004.005a.44.44 0 0 1 .484.606zm-.833-2.129a.44.44 0 0 0 .173-.756l.002-.011L7.585 9.7a5.143 5.143 0 0 0-.73 3.255l2.514-.725.002-.009zm1.145-1.98a.44.44 0 0 0 .699-.337l-.01-.034.747-2.487a5.145 5.145 0 0 0-2.853 1.7l1.406 1.166.011-.008zm1.767 1.18a.44.44 0 0 0-.198.745l-.002.004 1.386 1.181a5.153 5.153 0 0 0 .552-3.3l-1.738.369v.001zm.55 2.638a.44.44 0 0 0-.725.133l-.003.002-.74 2.453a5.153 5.153 0 0 0 2.821-1.648l-1.346-1.14-.008.2zm.996-9.059l-1.92 1.594.305 2.093 1.903.405 1.537-1.448-.253-2.644h.428zm-3.855 0l-.253 2.644 1.537 1.449 1.903-.406.305-2.092-1.92-1.595h-1.572zm4.538 6.656l-2.108.449-.094 2.028 1.67 1.193 1.89-1.148-.358-2.522h-1zm-5.221 0l-.358 2.522 1.89 1.148 1.67-1.193-.094-2.028-2.108-.449h-1zm6.591-3.97l-1.89 1.148.094 2.028 2.108.449 1-.001.358-2.522-1.67-1.102zm-7.962 0L5.26 8.79l.358 2.522 1 .001 2.108-.449.094-2.028-1.89-1.148zm3.981-2.478l-1.67 1.193.358 2.522 2.108-.449.094-2.028-1.89-1.148-.001-.09zm0 0"/>
+                    </svg>
+                </div>
+
+                <!-- Prometheus -->
+                <div class="opacity-50 hover:opacity-100 transition-opacity">
+                    <svg class="w-10 h-10" viewBox="0 0 24 24" fill="#E6522C">
+                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22.157c-1.332 0-2.412-1.08-2.412-2.412h4.824c0 1.332-1.08 2.412-2.412 2.412zm5.016-3.63H6.984v-1.608h10.032v1.608zm-.108-2.628H7.092c-.036-.036-.072-.108-.108-.144-1.116-1.296-1.692-2.952-1.692-4.596 0-1.404.504-2.772 1.404-3.888l.036-.036.828.9c-.72.864-1.152 1.98-1.152 3.132 0 1.26.54 2.412 1.404 3.24.036.036.072.072.072.108h8.232c0-.036.036-.072.072-.108.864-.828 1.404-1.98 1.404-3.24 0-1.152-.432-2.268-1.152-3.132l.828-.9.036.036c.9 1.116 1.404 2.484 1.404 3.888 0 1.644-.576 3.3-1.692 4.596-.036.036-.072.108-.108.144z"/>
+                    </svg>
+                </div>
+
+                <!-- Grafana -->
+                <div class="opacity-50 hover:opacity-100 transition-opacity">
+                    <svg class="w-10 h-10" viewBox="0 0 24 24" fill="#F46800">
+                        <path d="M23.922 12.908c-.072-.717-.144-1.434-.287-2.151-.143-.644-.287-1.29-.502-1.935-.215-.573-.43-1.147-.717-1.72-.215-.43-.43-.86-.717-1.29a11.878 11.878 0 0 0-2.008-2.366c-.072-.072-.143-.143-.215-.287-.072-.072-.072-.143-.072-.215 0-.143.072-.287.144-.358.072-.143.215-.287.358-.358.287-.143.574-.287.86-.358.287-.072.574-.072.86-.072.359 0 .717.072 1.076.143-.072-.143-.143-.287-.215-.358-.43-.502-.932-.932-1.506-1.29a6.276 6.276 0 0 0-1.792-.717c-.645-.143-1.29-.215-1.935-.215-.645 0-1.29.072-1.935.215-.287.072-.573.143-.86.287-.143.072-.287.072-.43.143-.072 0-.072 0-.143-.072-.072 0-.143-.072-.215-.143-.143-.143-.215-.287-.287-.502-.072-.143-.072-.358-.072-.502 0-.358.072-.645.143-.932.072-.287.215-.573.358-.86.143-.287.358-.502.574-.717-.502.072-1.004.215-1.434.43-.502.215-.932.502-1.362.86-.43.287-.788.645-1.147 1.076-.287.358-.573.717-.788 1.147-.215-.143-.43-.215-.717-.287a6.605 6.605 0 0 0-1.792-.215c-.43 0-.86.072-1.29.143-.573.143-1.147.358-1.649.645-.43.215-.86.502-1.218.86-.358.287-.645.645-.932 1.004 0 .072.072.072.072.143.072.072.143.143.215.215.143.143.287.215.502.287.143.072.358.143.502.143.358 0 .717-.072 1.004-.215.287-.143.573-.287.788-.502.072-.072.143-.072.287-.143.072 0 .143 0 .215.072.143.072.215.143.287.287.072.072.143.215.143.358.072.143.072.287.072.43 0 .215-.072.43-.143.645-.143.43-.358.788-.645 1.147-.287.358-.645.645-1.076.86-.43.287-.86.502-1.362.645-.502.143-1.004.215-1.506.215h-.215c.072.287.143.573.287.86.143.43.358.86.573 1.218.43.717.932 1.362 1.506 1.935.573.573 1.218 1.076 1.935 1.506.717.43 1.506.717 2.294.932.86.215 1.72.287 2.58.287.86 0 1.72-.072 2.58-.287.788-.143 1.577-.43 2.294-.86.717-.358 1.362-.86 1.935-1.434.573-.573 1.076-1.218 1.434-1.935.358-.717.645-1.506.788-2.294.143-.86.215-1.72.143-2.58z"/>
+                    </svg>
+                </div>
+
+                <!-- GitHub -->
+                <div class="opacity-50 hover:opacity-100 transition-opacity">
+                    <svg class="w-10 h-10" viewBox="0 0 24 24" fill="white">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </div>
+
+                <!-- Slack -->
+                <div class="opacity-50 hover:opacity-100 transition-opacity">
+                    <svg class="w-10 h-10" viewBox="0 0 24 24" fill="white">
+                        <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.522 2.521 2.527 2.527 0 0 1-2.522-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.522 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.522 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.522-2.522v-2.522h2.522zM15.165 17.688a2.527 2.527 0 0 1-2.522-2.522 2.527 2.527 0 0 1 2.522-2.522h6.312A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.522h-6.313z"/>
+                    </svg>
+                </div>
+
+                <!-- PagerDuty -->
+                <div class="opacity-50 hover:opacity-100 transition-opacity">
+                    <svg class="w-10 h-10" viewBox="0 0 24 24" fill="#06AC38">
+                        <path d="M16.965 1.18C15.085.164 13.769 0 10.683 0H3.73v14.55h6.926c2.743 0 4.8-.164 6.639-1.312 1.981-1.312 3.122-3.453 3.122-6.15 0-2.86-1.227-4.8-3.453-5.908zM10.642 10.5H8.161V4.149h2.535c2.953 0 4.637 1.052 4.637 3.122 0 2.317-1.907 3.23-4.69 3.23zM3.73 24h4.432v-6.314H3.73z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 border-t border-border">
+        <div class="max-w-2xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-semibold mb-4">Ready to fix incidents faster?</h2>
+            <p class="text-zinc-400 mb-8">
+                Join teams using Lumniverse to resolve production issues in minutes.
+            </p>
+            <a href="https://cal.com/anuragvishwa/30min" target="_blank" class="inline-block px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white font-medium rounded-lg transition-colors">
+                Book a Demo
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-border">
+        <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+            <div class="flex items-center gap-2 text-zinc-500">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span class="text-sm">© 2026 Lumniverse</span>
+            </div>
+            <div class="flex items-center gap-6 text-sm text-zinc-500">
+                <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
     <script>
-        // Autoplay video (muted) when scrolled into view
+        // Video autoplay on scroll
         const video = document.getElementById('demo-video');
         video.muted = true;
 
-        const observer = new IntersectionObserver((entries) => {
+        const videoObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     video.play();
@@ -819,915 +389,70 @@
                 }
             });
         }, { threshold: 0.5 });
-        observer.observe(video);
-    </script>
-
-    <!-- ========================= FEATURE SHOWCASE (IMAGES) ========================= -->
-    <section class="py-20 relative overflow-hidden" id="features">
-        <!-- Background Blobs (Matching Hero) -->
-        <div
-            class="absolute top-20 left-0 w-[600px] h-[600px] bg-primary-600/5 blur-[120px] rounded-full pointer-events-none -z-10">
-        </div>
-        <div
-            class="absolute bottom-0 right-0 w-[800px] h-[800px] bg-accent/5 blur-[150px] rounded-full pointer-events-none -z-10">
-        </div>
-
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-
-            <!-- Section Header -->
-            <!-- <div class="text-center max-w-3xl mx-auto mb-24">
-                <div
-                    class="inline-flex items-center px-3 py-1 rounded-full border border-primary-500/30 bg-primary-500/10 backdrop-blur-sm mb-6">
-                    <span class="text-xs font-medium text-primary-200 tracking-wide">V4 AGENT CAPABILITIES</span>
-                </div>
-                <h2 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                    <span class="magic-title">See What Your Agent Sees.</span>
-                </h2>
-                <p class="text-lg text-slate-400 leading-relaxed">
-                    Lumniverse doesn't just read logs. It constructs a living, breathing map of your entire
-                    infrastructure to understand <em>context</em>.
-                </p>
-            </div> -->
-
-            <!-- Feature 1: Topology -->
-            <div class="grid md:grid-cols-2 gap-12 items-stretch mb-16">
-                <!-- Image/Visual Side -->
-                <div class="relative group order-2 md:order-1 h-full min-h-[600px]">
-                    <!-- Glow effect -->
-                    <div
-                        class="absolute -inset-1 bg-gradient-to-r from-primary-600 to-accent rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000">
-                    </div>
-
-                    <div
-                        class="relative rounded-3xl overflow-hidden border border-white/10 bg-[#0A0A0A] shadow-2xl h-full w-full">
-                        <!-- Main Image (Static) -->
-                        <img src="bloom-generated-1764743301187.jpeg" alt="Topological Graph Visualization"
-                            class="absolute inset-0 w-full h-full object-cover opacity-90"
-                            style="object-position: center 100%;">
-
-                        <!-- Bottom gradient overlay to hide text -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#0A0A0A] from-40% via-[#0A0A0A]/95 to-transparent z-10 pointer-events-none">
-                        </div>
-
-                        <!-- Animated Feature Boxes -->
-                        <div class="absolute bottom-8 left-8 flex flex-col gap-3 z-20">
-                            <!-- Box 1 -->
-                            <div class="w-48 bg-black/70 backdrop-blur-xl border border-white/10 rounded-lg p-3 flex items-center gap-3 animate-fade-in-up opacity-0"
-                                style="animation-delay: 0.5s; animation-fill-mode: forwards;">
-                                <div class="w-2 h-2 rounded-full bg-primary-400 shadow-[0_0_8px_rgba(129,140,248,0.8)]">
-                                </div>
-                                <span class="text-xs font-mono text-slate-200">Active Pods: <span
-                                        class="text-white font-bold">842</span></span>
-                            </div>
-
-                            <!-- Box 2 -->
-                            <div class="w-48 bg-black/70 backdrop-blur-xl border border-white/10 rounded-lg p-3 flex items-center gap-3 animate-fade-in-up opacity-0"
-                                style="animation-delay: 1.2s; animation-fill-mode: forwards;">
-                                <div class="w-2 h-2 rounded-full bg-success shadow-[0_0_8px_rgba(16,185,129,0.8)]">
-                                </div>
-                                <span class="text-xs font-mono text-slate-200">Error Rate: <span
-                                        class="text-white font-bold">0.01%</span></span>
-                            </div>
-
-                            <!-- Box 3 -->
-                            <div class="w-48 bg-black/70 backdrop-blur-xl border border-white/10 rounded-lg p-3 flex items-center gap-3 animate-fade-in-up opacity-0"
-                                style="animation-delay: 1.9s; animation-fill-mode: forwards;">
-                                <div class="w-2 h-2 rounded-full bg-accent shadow-[0_0_8px_rgba(56,189,248,0.8)]"></div>
-                                <span class="text-xs font-mono text-slate-200">Latency: <span
-                                        class="text-white font-bold">14ms</span></span>
-                            </div>
-
-                            <!-- Box 4 -->
-                            <div class="w-48 bg-black/70 backdrop-blur-xl border border-white/10 rounded-lg p-3 flex items-center gap-3 animate-fade-in-up opacity-0"
-                                style="animation-delay: 2.6s; animation-fill-mode: forwards;">
-                                <div class="w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.8)]">
-                                </div>
-                                <span class="text-xs font-mono text-slate-200">RPS: <span
-                                        class="text-white font-bold">5.2k</span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Text Side -->
-                <div class="space-y-10 order-1 md:order-2 flex flex-col justify-center">
-                    <h3 class="text-2xl md:text-3xl font-bold text-white leading-tight">
-                        <span class="magic-subtitle">Topology Awareness</span>
-                    </h3>
-                    <p class="text-slate-400 text-base leading-relaxed">
-                        Automatically trace every alert back to its source. Our engine connects ephemeral events to
-                        their <strong class="text-slate-200">Root Owners</strong> — no manual mapping required.
-                    </p>
-
-                    <div class="space-y-6">
-                        <div
-                            class="flex items-start gap-5 p-5 rounded-2xl bg-white/5 border border-white/5 hover:border-primary-500/30 transition-colors group/item">
-                            <div
-                                class="mt-1 w-10 h-10 rounded-xl bg-primary-500/20 flex items-center justify-center shrink-0 text-primary-400 group-hover/item:scale-110 transition-transform">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-medium mb-1">Root Cause Triangulation</h4>
-                                <p class="text-sm text-slate-500">Automatically filter noise. We know that 100 pod
-                                    errors equal 1 deployment config error.</p>
-                            </div>
-                        </div>
-
-                        <div
-                            class="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:border-accent/30 transition-colors">
-                            <div
-                                class="mt-1 w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center shrink-0 text-accent">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-medium mb-1">Zero-Config Discovery</h4>
-                                <p class="text-sm text-slate-500">No manual tagging required. The agent learns service
-                                    dependencies by observing traffic and owner references.</p>
-                            </div>
-                        </div>
-
-                        <div
-                            class="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:border-purple-500/30 transition-colors">
-                            <div
-                                class="mt-1 w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center shrink-0 text-purple-400">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-medium mb-1">Time Travel Debugging</h4>
-                                <p class="text-sm text-slate-500">Rewind infrastructure state. See exactly what config
-                                    changed 5 seconds before the incident.</p>
-                            </div>
-                        </div>
-
-                        <div
-                            class="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:border-red-500/30 transition-colors">
-                            <div
-                                class="mt-1 w-8 h-8 rounded-lg bg-red-500/20 flex items-center justify-center shrink-0 text-red-400">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-medium mb-1">Predictive Pattern Matching</h4>
-                                <p class="text-sm text-slate-500">Identify recurring failure signatures. The agent
-                                    recognizes 'CrashLoop' patterns across your entire fleet.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Feature 2: Graph Analysis (Inverted) -->
-            <div id="forensic-analysis" class="grid md:grid-cols-2 gap-12 items-center">
-
-                <!-- Text Side -->
-                <div class="space-y-8">
-                    <h3 class="text-2xl md:text-3xl font-bold text-white">
-                        <span class="magic-subtitle">Forensic Graph Analysis</span>
-                    </h3>
-                    <p class="text-slate-400 text-base leading-relaxed">
-                        Ask complex questions about your infrastructure. The agent traverses the Knowledge Graph to find
-                        hidden correlations across time and space.
-                    </p>
-
-                    <div class="space-y-3">
-                        <div
-                            class="group relative p-3 rounded-lg bg-gradient-to-br from-white/5 to-transparent border border-white/10 hover:border-white/20 overflow-hidden">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                            </div>
-                            <div class="relative flex gap-3">
-                                <div class="text-base">🔍</div>
-                                <div>
-                                    <div class="font-mono text-[10px] text-primary-300 mb-0.5">QUERY</div>
-                                    <p class="text-white text-sm">"Find all pods that crashed within 5 minutes of the
-                                        last DB schema change."</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="group relative p-3 rounded-lg bg-gradient-to-br from-white/5 to-transparent border border-white/10 hover:border-white/20 overflow-hidden">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-r from-cyan-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                            </div>
-                            <div class="relative flex gap-3">
-                                <div class="text-base">🔄</div>
-                                <div>
-                                    <div class="font-mono text-[10px] text-cyan-300 mb-0.5">SCANNING</div>
-                                    <p class="text-white text-sm flex items-center flex-wrap gap-1.5">
-                                        Querying
-                                        <span
-                                            class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/10 text-xs">
-                                            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-                                                <path
-                                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                                            </svg>
-                                            GitHub PR
-                                        </span>
-                                        <span
-                                            class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/10 text-xs">
-                                            <svg class="w-3 h-3 text-purple-400" viewBox="0 0 24 24"
-                                                fill="currentColor">
-                                                <path
-                                                    d="M12.042 0L0 6.865v10.27L12.042 24l12.042-6.865V6.865L12.042 0zm9.14 16.127l-9.14 5.208-9.14-5.208V7.873l9.14-5.208 9.14 5.208v8.254z" />
-                                            </svg>
-                                            Terraform
-                                        </span>
-                                        <span
-                                            class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/10 text-xs">
-                                            <svg class="w-3 h-3 text-orange-400" viewBox="0 0 24 24"
-                                                fill="currentColor">
-                                                <path
-                                                    d="M10.59 15.41a2 2 0 01-2.83-2.83l4.24-4.24a2 2 0 012.82 0 2 2 0 010 2.82l-4.23 4.25zm2.83-8.49L16.24 4.1a2 2 0 012.83 0 2 2 0 010 2.83l-2.83 2.83a4 4 0 00-.35-.6 4 4 0 00-2.47-1.24zm-4.95 9.9L5.64 19.66a2 2 0 01-2.83 0 2 2 0 010-2.83l2.83-2.83a4 4 0 001.18 1.41 4 4 0 001.65.41zM12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
-                                            </svg>
-                                            ArgoCD
-                                        </span>
-                                        for latest changes...
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="group relative p-3 rounded-lg bg-gradient-to-br from-white/5 to-transparent border border-white/10 hover:border-white/20 overflow-hidden">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                            </div>
-                            <div class="relative flex gap-3">
-                                <div class="text-base">⚡</div>
-                                <div>
-                                    <div class="font-mono text-[10px] text-purple-300 mb-0.5">RESULT</div>
-                                    <p class="text-white text-sm">Found 3 cascading failures. Root cause: <span
-                                            class="text-red-400">Timeout in PaymentService</span>.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Terminal/Visual Side -->
-                <div class="relative group h-full min-h-[350px]">
-                    <!-- Glow effect -->
-                    <div
-                        class="absolute -inset-1 bg-gradient-to-l from-purple-600 to-primary-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000">
-                    </div>
-
-                    <div
-                        class="relative rounded-3xl overflow-hidden border border-white/10 bg-[#0A0A0A] shadow-2xl h-full w-full flex flex-col">
-                        <!-- Terminal Header -->
-                        <div class="bg-slate-900/80 px-6 py-4 flex items-center gap-3 border-b border-white/5">
-                            <div class="flex gap-2">
-                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            </div>
-                            <div class="ml-auto flex items-center gap-2 text-sm text-slate-400 font-mono">
-                                <span class="w-2 h-2 bg-success rounded-full animate-pulse"></span>
-                                lumniverse-agent — forensic-analysis
-                            </div>
-                        </div>
-
-                        <!-- Terminal Content -->
-                        <div id="forensic-terminal-output"
-                            class="p-6 font-mono text-sm flex-1 overflow-y-auto text-slate-300">
-                            <!-- JS will populate this -->
-                        </div>
-                    </div>
-                </div>
-
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const termOutput = document.getElementById('forensic-terminal-output');
-
-                        const commands = [
-                            { icon: '!', text: 'Alert: KubePodCrashLooping detected', color: 'text-red-400', iconColor: 'text-red-500' },
-                            { icon: '>', text: 'Querying Knowledge Graph...', color: 'text-slate-400', iconColor: 'text-primary-400' },
-                            { icon: '$', text: 'MATCH (e:Episodic)-[:ROOT_OWNER]->(w:Resource)', color: 'text-purple-400', iconColor: 'text-purple-400' },
-                            { icon: '$', text: 'WHERE e.severity = "ERROR"', color: 'text-purple-400', iconColor: 'text-purple-400' },
-                            { icon: '$', text: 'RETURN w.name, count(e) AS failures', color: 'text-purple-400', iconColor: 'text-purple-400' },
-                            { icon: '~', text: 'ROOT_OWNER: payment-api -> Deployment', color: 'text-slate-300', iconColor: 'text-accent' },
-                            { icon: '~', text: 'POTENTIAL_CAUSE: OOMKilled (confidence: 0.92)', color: 'text-yellow-300', iconColor: 'text-yellow-400' },
-                            { icon: '*', text: 'Root Cause: Memory limit exceeded (512Mi)', color: 'text-white font-semibold', iconColor: 'text-purple-400' },
-                            { icon: '+', text: 'Fix: kubectl set resources --limits=memory=1Gi', color: 'text-success', iconColor: 'text-success' },
-                            { icon: '>', text: 'Slack notification sent to #oncall', color: 'text-slate-500', iconColor: 'text-slate-400' },
-                        ];
-
-                        let cmdIndex = 0;
-                        let charIndex = 0;
-
-                        function typeCommand() {
-                            if (cmdIndex >= commands.length) {
-                                setTimeout(() => {
-                                    termOutput.innerHTML = '';
-                                    cmdIndex = 0;
-                                    typeCommand();
-                                }, 4000);
-                                return;
-                            }
-
-                            const cmd = commands[cmdIndex];
-                            let line = termOutput.lastElementChild;
-
-                            if (!line || line.dataset.complete === 'true') {
-                                line = document.createElement('div');
-                                line.className = `terminal-line mb-3 ${cmd.color} flex items-start gap-3`;
-                                line.innerHTML = `<span class="${cmd.iconColor} shrink-0 mt-0.5">${cmd.icon}</span><span class="flex-1 leading-relaxed"></span><span class="cursor inline-block w-2 h-4 bg-current ml-1 align-middle animate-pulse"></span>`;
-                                termOutput.appendChild(line);
-                                setTimeout(() => line.classList.add('show'), 10);
-                                charIndex = 0;
-                            }
-
-                            const textSpan = line.querySelector('span:nth-child(2)');
-                            const cursor = line.querySelector('.cursor');
-
-                            if (charIndex < cmd.text.length) {
-                                textSpan.textContent += cmd.text[charIndex];
-                                charIndex++;
-                                setTimeout(typeCommand, 30 + Math.random() * 30);
-                            } else {
-                                line.dataset.complete = 'true';
-                                if (cursor) cursor.remove();
-                                cmdIndex++;
-                                setTimeout(typeCommand, 800);
-                            }
-
-                            termOutput.scrollTo({ top: termOutput.scrollHeight, behavior: 'smooth' });
-                        }
-
-                        setTimeout(typeCommand, 1500);
-                    });
-                </script>
-
-            </div>
-
-            <!-- Feature 3: Slack Resolution (Lumniverse in Action) -->
-            <div class="grid md:grid-cols-2 gap-12 items-center mt-16">
-                <!-- Image Side -->
-                <div class="relative group order-2 md:order-1 flex items-center justify-center">
-                    <!-- Glow behind -->
-                    <div
-                        class="absolute -inset-6 bg-gradient-to-tr from-green-500/20 via-emerald-500/10 to-blue-500/20 rounded-[2.5rem] blur-3xl opacity-40 group-hover:opacity-60 transition duration-1000">
-                    </div>
-
-                    <!-- Window Container -->
-                    <div
-                        class="relative w-full max-w-lg rounded-2xl overflow-hidden border border-white/10 bg-[#1E1E1E] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.8)] ring-1 ring-white/5 transform transition-all duration-500 group-hover:scale-[1.02]">
-
-                        <!-- Mac-style Window Header -->
-                        <div class="h-9 bg-[#2C2C2C] border-b border-white/5 flex items-center px-4 gap-2">
-                            <div class="flex gap-1.5">
-                                <div class="w-3 h-3 rounded-full bg-[#FF5F57]"></div>
-                                <div class="w-3 h-3 rounded-full bg-[#FEBC2E]"></div>
-                                <div class="w-3 h-3 rounded-full bg-[#28C840]"></div>
-                            </div>
-                            <div
-                                class="ml-auto mr-auto text-[11px] text-slate-400 font-medium font-sans tracking-wide flex items-center gap-1.5 opacity-60">
-                                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.522 2.521 2.527 2.527 0 0 1-2.522-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.522 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.522 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.522-2.522v-2.522h2.522zM15.165 17.688a2.527 2.527 0 0 1-2.522-2.522 2.527 2.527 0 0 1 2.522-2.522h6.312A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.522h-6.313z" />
-                                </svg>
-                                #incidents-critical
-                            </div>
-                        </div>
-
-                        <!-- Image Container -->
-                        <div class="relative aspect-[4/3] w-full bg-[#1a1d21]">
-                            <!-- Gradient overlay for depth at top -->
-                            <div
-                                class="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-black/10 to-transparent z-10 pointer-events-none">
-                            </div>
-
-                            <img src="slack1.png" alt="Lumniverse Slack Interface"
-                                class="w-full h-full object-cover opacity-95 group-hover:opacity-100 transition-opacity"
-                                style="object-position: left 50%;">
-
-                            <!-- Scanning Line (Subtle) -->
-                            <div class="absolute inset-0 overflow-hidden pointer-events-none">
-                                <div
-                                    class="absolute top-0 left-0 w-full h-[1px] bg-green-400/40 shadow-[0_0_20px_rgba(74,222,128,0.4)] animate-scan">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Floating Badge (Refined) -->
-                        <div
-                            class="absolute bottom-5 right-5 bg-[#1E1E1E]/90 backdrop-blur-md border border-white/10 pl-2 pr-4 py-2 rounded-full flex items-center gap-3 shadow-2xl z-20 transform transition-transform group-hover:-translate-y-1">
-                            <div class="relative">
-                                <div
-                                    class="w-9 h-9 bg-[#4A154B] rounded-lg flex items-center justify-center shrink-0 shadow-inner">
-                                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                                        <path
-                                            d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.522 2.521 2.527 2.527 0 0 1-2.522-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.522 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.522 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.522-2.522v-2.522h2.522zM15.165 17.688a2.527 2.527 0 0 1-2.522-2.522 2.527 2.527 0 0 1 2.522-2.522h6.312A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.522h-6.313z" />
-                                    </svg>
-                                </div>
-                                <div
-                                    class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 border-2 border-[#1E1E1E] rounded-full animate-pulse">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="text-white text-xs font-bold leading-tight">Lumniverse</div>
-                                <div class="text-[10px] text-emerald-400 font-medium mt-0.5">Active Responder</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Text Side -->
-
-                <div class="space-y-8 order-1 md:order-2 h-full flex flex-col justify-center py-8">
-
-                    <div class="relative space-y-12 pl-2">
-
-                        <!-- Connecting Line -->
-
-                        <div
-                            class="absolute left-[37px] top-8 bottom-8 w-0.5 bg-gradient-to-b from-primary-500/50 via-purple-500/50 to-success/50 timeline-line">
-                        </div>
-
-
-
-                        <!-- Step 1: Ingest -->
-
-                        <div class="relative flex items-center gap-6 group">
-
-                            <div
-                                class="timeline-icon-1 z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#0A0A0A] border border-white/10 shadow-lg ring-1 ring-white/5 group-hover:scale-110 transition-transform duration-300">
-
-                                <svg class="h-7 w-7 text-primary-400" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-
-                                </svg>
-
-                            </div>
-
-                            <div
-                                class="glass-card p-6 rounded-2xl border border-white/10 bg-white/5 w-full hover:bg-white/10 transition-all hover:translate-x-2 shadow-xl">
-
-                                <h3 class="text-xl font-bold text-white mb-1">Ingest</h3>
-
-                                <p class="text-sm text-slate-400">Connect K8s, Prometheus, GitHub</p>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <!-- Step 2: Build Graph -->
-
-                        <div class="relative flex items-center gap-6 group">
-
-                            <div
-                                class="timeline-icon-2 z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#0A0A0A] border border-white/10 shadow-lg ring-1 ring-white/5 group-hover:scale-110 transition-transform duration-300">
-
-                                <svg class="h-7 w-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
-
-                                </svg>
-
-                            </div>
-
-                            <div
-                                class="glass-card p-6 rounded-2xl border border-white/10 bg-white/5 w-full hover:bg-white/10 transition-all hover:translate-x-2 shadow-xl">
-
-                                <h3 class="text-xl font-bold text-white mb-1">Build Graph</h3>
-
-                                <p class="text-sm text-slate-400">Auto-construct knowledge graph</p>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <!-- Step 3: AI Analysis -->
-
-                        <div class="relative flex items-center gap-6 group">
-
-                            <div
-                                class="timeline-icon-3 z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#0A0A0A] border border-white/10 shadow-lg ring-1 ring-white/5 group-hover:scale-110 transition-transform duration-300">
-
-                                <svg class="h-7 w-7 text-purple-400" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-
-                                </svg>
-
-                            </div>
-
-                            <div
-                                class="glass-card p-6 rounded-2xl border border-white/10 bg-white/5 w-full hover:bg-white/10 transition-all hover:translate-x-2 shadow-xl">
-
-                                <h3 class="text-xl font-bold text-white mb-1">AI Analysis</h3>
-
-                                <p class="text-sm text-slate-400">Claude traces root cause</p>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <!-- Step 4: Resolve -->
-
-                        <div class="relative flex items-center gap-6 group">
-
-                            <div
-                                class="timeline-icon-4 z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#0A0A0A] border border-white/10 shadow-lg ring-1 ring-white/5 group-hover:scale-110 transition-transform duration-300">
-
-                                <svg class="h-7 w-7 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-
-                                </svg>
-
-                            </div>
-
-                            <div
-                                class="glass-card p-6 rounded-2xl border border-white/10 bg-white/5 w-full hover:bg-white/10 transition-all hover:translate-x-2 shadow-xl">
-
-                                <h3 class="text-xl font-bold text-white mb-1">Resolve</h3>
-
-                                <p class="text-sm text-slate-400">Get fix recommendations</p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================= LIVE DEMO (INTEGRATIONS) ========================= -->
-    <section class="py-20 relative bg-background" id="integrations">
-        <div class="mx-auto max-w-7xl px-6">
-            <div class="mb-8 text-center lg:mb-10">
-                <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">
-                    Seamless <span class="gradient-text">Integrations</span>
-                </h2>
-                <p class="mx-auto max-w-2xl text-base text-slate-400 lg:text-lg">
-                    Works perfectly with your existing DevOps stack
-                </p>
-            </div>
-
-            <!-- Integration cards with proper icons -->
-            <div class="mb-8 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6 lg:gap-5">
-                <div
-                    class="glass-card hover-lift group flex cursor-pointer flex-col items-center justify-center rounded-2xl p-5">
-                    <svg class="mb-2 h-10 w-10 transition-transform group-hover:scale-125" viewBox="0 0 24 24"
-                        fill="currentColor">
-                        <path fill="#E01E5A"
-                            d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" />
-                        <path fill="#36C5F0"
-                            d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" />
-                        <path fill="#2EB67D"
-                            d="M18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z" />
-                        <path fill="#ECB22E"
-                            d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-300">Slack</span>
-                </div>
-
-                <div
-                    class="glass-card shape-card-1 hover-lift group flex cursor-pointer flex-col items-center justify-center p-5">
-                    <svg class="mb-2 h-10 w-10 text-blue-400 transition-transform group-hover:scale-125"
-                        viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M10.204 14.35l.007.01-.999 2.413a5.171 5.171 0 0 1-2.075-2.597l2.578-.437.004.005a.44.44 0 0 1 .484.606zm-.833-2.129a.44.44 0 0 0 .173-.756l.002-.011L7.585 9.7a5.143 5.143 0 0 0-.73 3.255l2.514-.725.002-.009zm1.145-1.98a.44.44 0 0 0 .699-.337l.01-.005.15-2.62a5.144 5.144 0 0 0-3.01 1.442l2.147 1.523.004-.002zm.76 2.75l.723.349.722-.347.18-.78-.5-.623h-.804l-.5.623.179.778zm1.5-2.095a.44.44 0 0 0 .7.336l.008.003 2.134-1.513a5.188 5.188 0 0 0-2.992-1.442l.148 2.615.002.001zm10.876 5.97l-5.773 7.181a1.6 1.6 0 0 1-1.248.594H9.261a1.6 1.6 0 0 1-1.247-.594l-5.776-7.18a1.583 1.583 0 0 1-.307-1.34L3.823 5.55a1.6 1.6 0 0 1 .947-1.074l7.108-2.987a1.6 1.6 0 0 1 1.244 0l7.108 2.987a1.6 1.6 0 0 1 .947 1.074l1.892 8.401c.094.456-.002.927-.307 1.34zM12 5.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11zm4.5 5.5c0 .96-.31 1.85-.834 2.58l-1.974-1.016a.44.44 0 0 0-.166-.755l-.009-.004.78-2.488a5.188 5.188 0 0 1 2.203 1.683zm-1.697-2.326l-2.146 1.514a.44.44 0 0 0-.699.337v.001l-.147 2.62a5.144 5.144 0 0 1-3.01-1.442l2.147-1.523a.44.44 0 0 0 .173-.756l-.002-.011 1.984-1.764a5.145 5.145 0 0 1 1.7 1.024z" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-300">Kubernetes</span>
-                </div>
-
-                <div
-                    class="glass-card hover-lift group flex cursor-pointer flex-col items-center justify-center rounded-2xl p-5">
-                    <svg class="mb-2 h-10 w-10 text-orange-400 transition-transform group-hover:scale-125"
-                        viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.19 0 2.34-.21 3.41-.6.3-.11.49-.4.49-.72v-3.5c0-.43-.35-.78-.78-.78-.17 0-.33.06-.46.14-.7.37-1.5.59-2.36.59-2.74 0-4.96-2.22-4.96-4.96s2.22-4.96 4.96-4.96 4.96 2.22 4.96 4.96c0 .28.03.56.07.83.05.27-.1.53-.36.61l-1.09.35c-.3.1-.63-.08-.73-.39-.17-.52-.44-.99-.79-1.4-1.06-1.23-2.92-1.37-4.15-.31-1.23 1.06-1.37 2.92-.31 4.15 1.06 1.23 2.92 1.37 4.15.31.41-.35.73-.79.95-1.28.11-.25.38-.39.65-.32l2.99.96c.21.07.37.24.41.46.15.81.23 1.64.23 2.5 0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-300">Prometheus</span>
-                </div>
-
-                <div
-                    class="glass-card shape-card-2 hover-lift group flex cursor-pointer flex-col items-center justify-center p-5">
-                    <svg class="mb-2 h-10 w-10 text-slate-100 transition-transform group-hover:scale-125"
-                        viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-300">GitHub</span>
-                </div>
-
-                <div
-                    class="glass-card hover-lift group flex cursor-pointer flex-col items-center justify-center rounded-2xl p-5">
-                    <svg class="mb-2 h-10 w-10 text-purple-400 transition-transform group-hover:scale-125"
-                        viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M2.7 2a.7.7 0 00-.7.7v18.6a.7.7 0 00.7.7h6.1v-5c.2.3.5.5.8.8 1.1 1 2.6 1.6 4.4 1.6s3.3-.6 4.4-1.6c1.1-1.1 1.6-2.6 1.6-4.4V2.7a.7.7 0 00-.7-.7H13v10.6c0 .9-.2 1.6-.6 2-.4.3-.9.5-1.6.5s-1.2-.2-1.6-.6c-.3-.4-.5-1-.5-1.9V2.7a.7.7 0 00-.7-.7H2.7z" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-300">Sentry</span>
-                </div>
-
-                <div
-                    class="glass-card shape-card-3 hover-lift group flex cursor-pointer flex-col items-center justify-center p-5">
-                    <svg class="mb-2 h-10 w-10 text-green-400 transition-transform group-hover:scale-125"
-                        viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M1.2 0l10.9 24L23 0h-8.2l-2.7 6.3L9.4 0z" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-300">Kafka</span>
-                </div>
-
-                <div
-                    class="glass-card hover-lift group flex cursor-pointer flex-col items-center justify-center rounded-2xl p-5">
-                    <svg class="mb-2 h-10 w-10 text-cyan-400 transition-transform group-hover:scale-125"
-                        viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M11.96 0L0 6.02v12.36L11.96 24l11.96-5.62V6.02L11.96 0zm7.14 17.18l-7.14 3.35-7.14-3.35V7.24l7.14-3.35 7.14 3.35v9.94z" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-300">ArgoCD</span>
-                </div>
-
-                <div
-                    class="glass-card shape-card-1 hover-lift group flex cursor-pointer flex-col items-center justify-center p-5">
-                    <svg class="mb-2 h-10 w-10 text-indigo-400 transition-transform group-hover:scale-125"
-                        viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M22.28 8.01c-.41-.41-1.01-.67-1.62-.72-.34-.03-.68 0-1.02.1-.17.05-.34.12-.5.2l-.02-.05c-.48-1.26-1.36-2.29-2.47-2.98-.31-.19-.64-.35-.98-.48.31-.85.44-1.77.33-2.7-.08-.69-.31-1.35-.67-1.94-.12-.2-.26-.39-.41-.57-.63-.76-1.52-1.27-2.48-1.45-.95-.18-1.95 0-2.85.43-.77.37-1.42.95-1.88 1.67-.08.12-.15.24-.21.37-.48-.33-1.04-.57-1.63-.68-.8-.15-1.63-.02-2.36.36-.73.38-1.32 1-1.65 1.76-.24.55-.36 1.15-.35 1.75 0 .2.02.4.05.59-1.56.18-2.84 1.29-3.27 2.73-.2.66-.23 1.37-.06 2.04.16.67.5 1.28.98 1.77.37.38.82.68 1.31.88-.17.89-.16 1.82.06 2.71.29 1.18.92 2.23 1.82 3.02.58.51 1.26.9 1.99 1.13.73.23 1.5.3 2.26.21.58-.07 1.14-.23 1.67-.48.16.45.38.88.66 1.26.65.91 1.59 1.56 2.65 1.85.7.19 1.43.22 2.14.08.71-.14 1.38-.44 1.95-.89.45-.35.82-.78 1.09-1.28.09-.16.16-.33.22-.5.89.31 1.86.35 2.78.08 1.05-.31 1.96-.97 2.59-1.86.36-.51.62-1.08.75-1.69.09-.42.13-.86.11-1.29 1.17-.42 2.1-1.34 2.52-2.48.24-.65.32-1.35.22-2.04-.1-.69-.37-1.34-.79-1.89zm-11.96 6.26l-5.64-5.64 1.4-1.4 4.24 4.23 7.06-7.05 1.4 1.41-8.46 8.45z" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-300">Neo4j</span>
-                </div>
-
-                <div
-                    class="glass-card shape-card-2 hover-lift group flex cursor-pointer flex-col items-center justify-center p-5">
-                    <svg class="mb-2 h-10 w-10 text-orange-400 transition-transform group-hover:scale-125"
-                        viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M21.901 6.443c-.013-.243-.065-.472-.154-.683a1.891 1.891 0 00-.414-.581 2.029 2.029 0 00-.615-.408 2.19 2.19 0 00-.748-.152c-.132 0-.263.013-.391.038-.073-.436-.242-.842-.49-1.186a2.785 2.785 0 00-.914-.834 2.962 2.962 0 00-1.209-.384 3.069 3.069 0 00-1.262.137c-.395.143-.75.369-1.041.66a2.755 2.755 0 00-.66 1.041 3.064 3.064 0 00-.137 1.261c.05.424.194.827.384 1.209.19.381.455.715.833.914.068.036.138.067.209.095-.063.104-.119.212-.168.324a2.048 2.048 0 00-.168.771c0 .132.012.263.037.391a1.891 1.891 0 00-.682.154 2.032 2.032 0 00-.582.414 1.88 1.88 0 00-.407.615c-.102.235-.153.492-.153.749 0 .131.013.262.039.391a2.85 2.85 0 00-1.186.49 2.79 2.79 0 00-.834.914 2.959 2.959 0 00-.384 1.209 3.074 3.074 0 00.136 1.262c.144.395.37.75.661 1.041.291.291.646.517 1.041.66.395.144.819.2 1.262.137a2.959 2.959 0 001.209-.384 2.785 2.785 0 00.914-.834c.248-.344.417-.75.49-1.186.128.026.259.039.391.039.256 0 .513-.051.748-.153.235-.102.447-.246.615-.407.169-.161.304-.356.414-.582a1.89 1.89 0 00.154-.682c.129.025.26.038.391.038.257 0 .513-.051.749-.153a1.88 1.88 0 00.615-.407c.162-.169.305-.356.414-.582.109-.226.165-.469.165-.72 0-.144-.019-.288-.054-.428.344-.247.616-.579.79-.961.174-.382.249-.809.211-1.232z" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-300">Grafana</span>
-                </div>
-
-                <div
-                    class="glass-card hover-lift group flex cursor-pointer flex-col items-center justify-center rounded-2xl p-5">
-                    <svg class="mb-2 h-10 w-10 text-yellow-400 transition-transform group-hover:scale-125"
-                        viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M13.068.63a.536.536 0 00-.401-.196h-.001a.537.537 0 00-.416.183l-5.902 6.631-3.213-2.474a.536.536 0 00-.773.098l-1.999 3.011a.535.535 0 00.032.64l3.921 4.213-2.962 5.289a.536.536 0 00.193.718.54.54 0 00.235.054c.097 0 .194-.026.28-.08l6.282-3.916 1.162 3.326c.085.243.33.385.58.333l2.554-.531a.533.533 0 00.374-.705L11.971 8.84l7.265-6.928a.536.536 0 00.179-.415.532.532 0 00-.194-.409L13.068.63z" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-300">Elastic</span>
-                </div>
-
-                <div
-                    class="glass-card shape-card-3 hover-lift group flex cursor-pointer flex-col items-center justify-center p-5">
-                    <svg class="mb-2 h-10 w-10 text-green-400 transition-transform group-hover:scale-125"
-                        viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M3.6 3L12 10.5 20.4 3C18.9 1.2 16.1 0 13 0h-.1C8.2 0 4.1 2.7 2.3 6.6L3.6 3zm8.4 10.2L.3 3.3C.1 3.9 0 4.5 0 5.1v.1C0 10 2.9 14.2 7 16.2l5-3zm0 1.6l-4.5 2.8C9.1 18.5 11 19 13 19s3.9-.5 5.5-1.4L12 13.8zm0 0l5 3c3.1-2 5.2-5.5 5.2-9.5 0-.3 0-.5-.1-.8L12 13.8z" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-300">PagerDuty</span>
-                </div>
-
-                <div
-                    class="glass-card hover-lift group flex cursor-pointer flex-col items-center justify-center rounded-2xl p-5">
-                    <div class="mb-2 transform text-3xl transition-transform group-hover:scale-125">
-                        ➕
-                    </div>
-                    <span class="text-sm font-semibold text-slate-300">100+ More</span>
-                </div>
-            </div>
-
-            <!-- API Showcase with animated code -->
-            <div class="glass-card overflow-hidden rounded-3xl p-8 lg:p-10">
-                <div class="grid items-center gap-8 md:grid-cols-2 lg:gap-10">
-                    <div>
-                        <h3 class="gradient-text mb-4 text-2xl font-bold lg:mb-5 lg:text-3xl">
-                            Inhouse API
-                        </h3>
-                        <p class="mb-6 text-sm text-slate-400 lg:text-base">
-                            Integrate Lumniverse into your workflow with our comprehensive
-                            REST API and real-time webhooks.
-                        </p>
-                        <div class="space-y-3">
-                            <div class="group flex items-center space-x-3">
-                                <div
-                                    class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg transition-transform group-hover:scale-110">
-                                    ✓
-                                </div>
-                                <span class="text-sm font-medium text-slate-300">RESTful API with full CRUD
-                                    operations</span>
-                            </div>
-                            <div class="group flex items-center space-x-3">
-                                <div
-                                    class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg transition-transform group-hover:scale-110">
-                                    ✓
-                                </div>
-                                <span class="text-sm font-medium text-slate-300">Real-time webhooks for instant
-                                    updates</span>
-                            </div>
-                            <div class="group flex items-center space-x-3">
-                                <div
-                                    class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg transition-transform group-hover:scale-110">
-                                    ✓
-                                </div>
-                                <span class="text-sm font-medium text-slate-300">SDKs for Python, Node.js, Go, and
-                                    more</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative">
-                        <div
-                            class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 opacity-20 blur">
-                        </div>
-                        <div
-                            class="relative overflow-x-auto rounded-2xl bg-gray-900 p-5 font-mono text-xs shadow-2xl lg:text-sm">
-                            <div class="mb-3 flex items-center justify-between">
-                                <div class="flex space-x-2">
-                                    <div class="h-2 w-2 rounded-full bg-red-500 lg:h-3 lg:w-3"></div>
-                                    <div class="h-2 w-2 rounded-full bg-yellow-500 lg:h-3 lg:w-3"></div>
-                                    <div class="h-2 w-2 rounded-full bg-green-500 lg:h-3 lg:w-3"></div>
-                                </div>
-                                <span class="text-xs text-gray-500">api.lumniverse.com</span>
-                            </div>
-                            <div class="mb-2 text-gray-500"># Quick Start</div>
-                            <div class="text-green-400">
-                                curl -X POST https://api.lumniverse.com/v1/incidents \
-                            </div>
-                            <div class="ml-4 text-white">
-                                -H "Authorization: Bearer YOUR_API_KEY" \
-                            </div>
-                            <div class="ml-4 text-white">
-                                -H "Content-Type: application/json" \
-                            </div>
-                            <div class="ml-4 text-white">
-                                -d '{"service": "checkout", "severity": "high"}'
-                            </div>
-                        </div>
-                        <div
-                            class="absolute -right-2 -top-2 animate-pulse rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-3 py-1.5 text-xs font-bold text-white shadow-lg">
-                            Live Code
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const termOutput = document.getElementById('terminal-output');
-
-            const icons = {
-                info: `<svg class="w-4 h-4 text-blue-400 mr-3 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`,
-                alert: `<svg class="w-4 h-4 text-red-500 mr-3 inline-block animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`,
-                check: `<svg class="w-4 h-4 text-green-400 mr-3 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`,
-                search: `<svg class="w-4 h-4 text-purple-400 mr-3 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>`,
-                code: `<svg class="w-4 h-4 text-yellow-400 mr-3 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>`
-            };
-
-            const commands = [
-                { icon: icons.info, text: 'Listening for webhooks...', color: 'text-slate-500' },
-                { icon: icons.alert, text: 'Sentry Alert: PaymentService Failure (500)', color: 'text-red-400 font-bold' },
-                { icon: icons.search, text: 'Analyzing Knowledge Graph Topology...', color: 'text-primary-400' },
-                { icon: icons.search, text: 'Trace: Sentry -> Pod -> Deployment -> GitHub', color: 'text-slate-300' },
-                { icon: icons.code, text: 'Correlation Found: Commit #a1b2c3', color: 'text-white' },
-                { icon: icons.code, text: 'Diff: DB_TIMEOUT changed 30s -> 3s', color: 'text-yellow-200' },
-                { icon: icons.check, text: 'Root Cause: Timeout Misconfiguration', color: 'text-green-400' },
-                { icon: icons.check, text: 'Action: Revert PR #402 Initiated', color: 'text-accent' },
-                { icon: icons.info, text: 'Slack Notification Sent', color: 'text-slate-500' }
-            ];
-
-            const typingSpeed = 26;
-            const linePause = 650;
-            const resetPause = 1200;
-
-            let cmdIndex = 0;
-            let charIndex = 0;
-            let isTyping = false;
-
-            function smoothScrollToBottom() {
-                termOutput.scrollTo({ top: termOutput.scrollHeight, behavior: 'smooth' });
-            }
-
-            function vanishAndReset() {
-                const lines = Array.from(termOutput.children);
-                if (!lines.length) {
-                    cmdIndex = 0;
-                    typeCommand();
-                    return;
-                }
-
-                lines.forEach((line, i) => {
-                    line.style.animation = `vanishOut 0.7s ease forwards`;
-                    line.style.animationDelay = `${i * 60}ms`;
-                });
-
-                const totalMs = 700 + lines.length * 60 + 150;
+        videoObserver.observe(video);
+
+        // Terminal typewriter effect
+        const terminalOutput = document.getElementById('terminal-output');
+        const lines = [
+            { text: '$ lumniverse analyze --incident INC-4521', color: 'text-zinc-400' },
+            { text: '', color: '' },
+            { text: 'Scanning infrastructure topology...', color: 'text-zinc-500' },
+            { text: '✓ Discovered 47 services, 12 databases', color: 'text-green-400' },
+            { text: '', color: '' },
+            { text: 'Tracing error propagation...', color: 'text-zinc-500' },
+            { text: '→ api-gateway → user-service → postgres-primary', color: 'text-primary-400' },
+            { text: '', color: '' },
+            { text: 'Root cause identified:', color: 'text-zinc-500' },
+            { text: '  Connection pool exhausted on postgres-primary', color: 'text-yellow-400' },
+            { text: '  Started: 14:32 UTC | Affected: 3 services', color: 'text-zinc-500' },
+            { text: '', color: '' },
+            { text: 'Suggested fix: Increase max_connections to 200', color: 'text-green-400' },
+        ];
+
+        let lineIndex = 0;
+        let charIndex = 0;
+        let currentLine = null;
+
+        function typeNextChar() {
+            if (lineIndex >= lines.length) {
+                // Reset after delay
                 setTimeout(() => {
-                    termOutput.innerHTML = '';
-                    cmdIndex = 0;
-                    typeCommand();
-                }, totalMs);
-            }
-
-            function typeCommand() {
-                if (cmdIndex >= commands.length) {
-                    setTimeout(vanishAndReset, resetPause);
-                    return;
-                }
-
-                const cmd = commands[cmdIndex];
-                let currentLine = termOutput.lastElementChild;
-
-                if (!currentLine || !isTyping) {
-                    currentLine = document.createElement('div');
-                    currentLine.className = `terminal-line mb-3 ${cmd.color} flex items-center`;
-
-                    const iconSpan = document.createElement('span');
-                    iconSpan.innerHTML = cmd.icon;
-                    currentLine.appendChild(iconSpan);
-
-                    const textSpan = document.createElement('span');
-                    textSpan.className = 'whitespace-pre-wrap';
-                    currentLine.appendChild(textSpan);
-
-                    const cursorSpan = document.createElement('span');
-                    cursorSpan.className = 'cursor ml-1';
-                    currentLine.appendChild(cursorSpan);
-
-                    termOutput.appendChild(currentLine);
-                    requestAnimationFrame(() => currentLine.classList.add('show'));
-
-                    isTyping = true;
+                    terminalOutput.innerHTML = '';
+                    lineIndex = 0;
                     charIndex = 0;
-                    smoothScrollToBottom();
-                }
-
-                const textNode = currentLine.children[1];
-                const cursorNode = currentLine.children[2];
-
-                if (charIndex < cmd.text.length) {
-                    textNode.textContent += cmd.text.charAt(charIndex);
-                    charIndex++;
-                    setTimeout(typeCommand, typingSpeed);
-                } else {
-                    isTyping = false;
-                    cmdIndex++;
-                    if (cursorNode) cursorNode.remove();
-                    smoothScrollToBottom();
-                    setTimeout(typeCommand, linePause);
-                }
+                    currentLine = null;
+                    typeNextChar();
+                }, 3000);
+                return;
             }
 
-            setTimeout(typeCommand, 900);
-        });
+            const line = lines[lineIndex];
 
-        // Create floating particles
-        const createParticle = () => {
-            const container = document.getElementById('particles-container');
-            if (!container) return;
+            if (!currentLine) {
+                currentLine = document.createElement('div');
+                currentLine.className = `terminal-line ${line.color}`;
+                terminalOutput.appendChild(currentLine);
+            }
 
-            const particle = document.createElement('div');
-            particle.className =
-                'absolute w-1 h-1 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.opacity = Math.random() * 0.5 + 0.2;
-            particle.style.animation = `float ${15 + Math.random() * 20}s ease-in-out infinite`;
-            particle.style.animationDelay = Math.random() * 5 + 's';
+            if (charIndex < line.text.length) {
+                currentLine.innerHTML = line.text.substring(0, charIndex + 1) + '<span class="cursor"></span>';
+                charIndex++;
+                setTimeout(typeNextChar, 30);
+            } else {
+                currentLine.innerHTML = line.text;
+                lineIndex++;
+                charIndex = 0;
+                currentLine = null;
+                setTimeout(typeNextChar, line.text ? 100 : 50);
+            }
 
-            container.appendChild(particle);
-            setTimeout(() => particle.remove(), 35000);
-        };
-
-        // Create initial particles
-        for (let i = 0; i < 30; i++) {
-            setTimeout(createParticle, i * 100);
+            // Auto-scroll
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
         }
-    </script>
-</body>
 
+        // Start typing after a short delay
+        setTimeout(typeNextChar, 1000);
+    </script>
+
+</body>
 </html>
