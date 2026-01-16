@@ -97,37 +97,83 @@ export function InstantDetectionIllustration() {
     const ctx = canvas.getContext('2d');
     let animationId;
     let dataPoints = Array(50).fill(0).map((_, i) => 50 + Math.sin(i * 0.2) * 20 + Math.random() * 10);
+    let time = 0;
+
+    // Floating particles
+    let particles = [];
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * window.devicePixelRatio;
       canvas.height = rect.height * window.devicePixelRatio;
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+      // Initialize particles on resize
+      particles = Array(30).fill(null).map(() => ({
+        x: Math.random() * rect.width,
+        y: Math.random() * rect.height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        radius: 1 + Math.random() * 2,
+        isGreen: Math.random() > 0.6,
+      }));
     };
 
     const animate = () => {
       const rect = canvas.getBoundingClientRect();
       const width = rect.width;
       const height = rect.height;
+      time += 0.01;
 
       ctx.fillStyle = '#1a1625';
       ctx.fillRect(0, 0, width, height);
 
-      // Subtle grid
-      ctx.strokeStyle = 'rgba(61, 52, 85, 0.15)';
-      ctx.lineWidth = 1;
-      for (let i = 0; i < width; i += 30) {
-        ctx.beginPath();
-        ctx.moveTo(i, 0);
-        ctx.lineTo(i, height);
-        ctx.stroke();
+      // Dot grid pattern
+      ctx.fillStyle = 'rgba(61, 52, 85, 0.12)';
+      for (let x = 0; x < width; x += 25) {
+        for (let y = 0; y < height; y += 25) {
+          ctx.beginPath();
+          ctx.arc(x, y, 1, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
-      for (let i = 0; i < height; i += 30) {
+
+      // Radial gradient glow in center
+      const bgGradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width * 0.6);
+      bgGradient.addColorStop(0, 'rgba(34, 197, 94, 0.03)');
+      bgGradient.addColorStop(0.5, 'rgba(139, 92, 246, 0.02)');
+      bgGradient.addColorStop(1, 'rgba(26, 22, 37, 0)');
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, width, height);
+
+      // Floating ambient particles
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        p.x = Math.max(0, Math.min(width, p.x));
+        p.y = Math.max(0, Math.min(height, p.y));
+
         ctx.beginPath();
-        ctx.moveTo(0, i);
-        ctx.lineTo(width, i);
-        ctx.stroke();
-      }
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.isGreen ? 'rgba(34, 197, 94, 0.25)' : 'rgba(139, 92, 246, 0.2)';
+        ctx.fill();
+
+        // Particle glow
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius * 3, 0, Math.PI * 2);
+        ctx.fillStyle = p.isGreen ? 'rgba(34, 197, 94, 0.08)' : 'rgba(139, 92, 246, 0.06)';
+        ctx.fill();
+      });
+
+      // Subtle horizontal scan lines
+      ctx.fillStyle = 'rgba(34, 197, 94, 0.015)';
+      const scanY = (time * 100) % height;
+      ctx.fillRect(0, scanY, width, 2);
+      ctx.fillRect(0, (scanY + height / 2) % height, width, 1);
 
       // Animated line chart
       dataPoints.shift();
@@ -242,6 +288,7 @@ export function InstantDetectionIllustration() {
 
 // Auto-Resolution - Animated workflow pipeline
 export function AutoResolutionIllustration() {
+  const canvasRef = useRef(null);
   const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
@@ -251,6 +298,125 @@ export function AutoResolutionIllustration() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let animationId;
+    let time = 0;
+    let particles = [];
+    let flowParticles = [];
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * window.devicePixelRatio;
+      canvas.height = rect.height * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+      // Ambient floating particles
+      particles = Array(25).fill(null).map(() => ({
+        x: Math.random() * rect.width,
+        y: Math.random() * rect.height,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: (Math.random() - 0.5) * 0.2,
+        radius: 1 + Math.random() * 1.5,
+        isGreen: Math.random() > 0.5,
+      }));
+
+      // Horizontal flow particles (pipeline direction)
+      flowParticles = Array(12).fill(null).map(() => ({
+        x: Math.random() * rect.width,
+        y: rect.height * 0.4 + (Math.random() - 0.5) * 60,
+        speed: 0.5 + Math.random() * 1,
+        radius: 1.5 + Math.random() * 2,
+      }));
+    };
+
+    const animate = () => {
+      const rect = canvas.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+      time += 0.01;
+
+      ctx.fillStyle = '#1a1625';
+      ctx.fillRect(0, 0, width, height);
+
+      // Dot grid pattern
+      ctx.fillStyle = 'rgba(61, 52, 85, 0.1)';
+      for (let x = 0; x < width; x += 25) {
+        for (let y = 0; y < height; y += 25) {
+          ctx.beginPath();
+          ctx.arc(x, y, 1, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Radial gradient glow
+      const bgGradient = ctx.createRadialGradient(width / 2, height * 0.4, 0, width / 2, height * 0.4, width * 0.5);
+      bgGradient.addColorStop(0, 'rgba(34, 197, 94, 0.04)');
+      bgGradient.addColorStop(0.5, 'rgba(139, 92, 246, 0.02)');
+      bgGradient.addColorStop(1, 'rgba(26, 22, 37, 0)');
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, width, height);
+
+      // Horizontal flow particles (along pipeline)
+      flowParticles.forEach((p) => {
+        p.x += p.speed;
+        if (p.x > width + 10) {
+          p.x = -10;
+          p.y = height * 0.4 + (Math.random() - 0.5) * 60;
+        }
+
+        // Trail effect
+        const trailGradient = ctx.createLinearGradient(p.x - 20, 0, p.x, 0);
+        trailGradient.addColorStop(0, 'rgba(34, 197, 94, 0)');
+        trailGradient.addColorStop(1, 'rgba(34, 197, 94, 0.3)');
+        ctx.fillStyle = trailGradient;
+        ctx.fillRect(p.x - 20, p.y - 1, 20, 2);
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(34, 197, 94, 0.5)';
+        ctx.fill();
+
+        // Glow
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius * 3, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(34, 197, 94, 0.1)';
+        ctx.fill();
+      });
+
+      // Floating ambient particles
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        p.x = Math.max(0, Math.min(width, p.x));
+        p.y = Math.max(0, Math.min(height, p.y));
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.isGreen ? 'rgba(34, 197, 94, 0.2)' : 'rgba(139, 92, 246, 0.15)';
+        ctx.fill();
+      });
+
+      animationId = requestAnimationFrame(animate);
+    };
+
+    resize();
+    window.addEventListener('resize', resize);
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', resize);
+      if (animationId) cancelAnimationFrame(animationId);
+    };
+  }, []);
+
   const getStepStatus = (index) => {
     if (index < activeStep) return 'completed';
     if (index === activeStep) return 'active';
@@ -258,25 +424,11 @@ export function AutoResolutionIllustration() {
   };
 
   return (
-    <div className="relative h-[280px] bg-[#1a1625] overflow-hidden p-4">
-      {/* Background animated particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-green-500/30 rounded-full"
-            style={{
-              left: `${15 + i * 15}%`,
-              top: '50%',
-              animation: `flowRight 3s ease-in-out infinite`,
-              animationDelay: `${i * 0.5}s`,
-            }}
-          />
-        ))}
-      </div>
+    <div className="relative h-[280px] bg-[#1a1625] overflow-hidden">
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
       {/* Pipeline visualization */}
-      <div className="relative z-10 h-full flex flex-col">
+      <div className="relative z-10 h-full p-4 flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <div className="text-[10px] font-mono text-gray-400">Incident Pipeline</div>
@@ -359,13 +511,6 @@ export function AutoResolutionIllustration() {
           </div>
         </div>
       </div>
-
-      <style>{`
-        @keyframes flowRight {
-          0%, 100% { transform: translateX(0) scale(1); opacity: 0.3; }
-          50% { transform: translateX(100px) scale(1.5); opacity: 0.8; }
-        }
-      `}</style>
     </div>
   );
 }
@@ -401,11 +546,24 @@ export function SmartContextIllustration() {
       { from: 'core', to: 'metrics' },
     ];
 
+    // Floating ambient particles
+    let particles = [];
+
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * window.devicePixelRatio;
       canvas.height = rect.height * window.devicePixelRatio;
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+      // Initialize floating particles
+      particles = Array(20).fill(null).map(() => ({
+        x: Math.random() * rect.width,
+        y: Math.random() * rect.height,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        radius: 1 + Math.random() * 1.5,
+        isGreen: Math.random() > 0.5,
+      }));
     };
 
     const animate = () => {
@@ -417,6 +575,41 @@ export function SmartContextIllustration() {
       ctx.fillStyle = '#1a1625';
       ctx.fillRect(0, 0, width, height);
 
+      // Dot grid pattern
+      ctx.fillStyle = 'rgba(61, 52, 85, 0.1)';
+      for (let x = 0; x < width; x += 25) {
+        for (let y = 0; y < height; y += 25) {
+          ctx.beginPath();
+          ctx.arc(x, y, 1, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Radial gradient glow in center
+      const bgGradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width * 0.5);
+      bgGradient.addColorStop(0, 'rgba(34, 197, 94, 0.05)');
+      bgGradient.addColorStop(0.5, 'rgba(139, 92, 246, 0.02)');
+      bgGradient.addColorStop(1, 'rgba(26, 22, 37, 0)');
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, width, height);
+
+      // Floating ambient particles
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        p.x = Math.max(0, Math.min(width, p.x));
+        p.y = Math.max(0, Math.min(height, p.y));
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.isGreen ? 'rgba(34, 197, 94, 0.2)' : 'rgba(139, 92, 246, 0.15)';
+        ctx.fill();
+      });
+
       // Draw connections with animated particles
       connections.forEach((conn, i) => {
         const fromNode = nodes.find(n => n.id === conn.from);
@@ -426,45 +619,72 @@ export function SmartContextIllustration() {
         const x2 = toNode.x * width;
         const y2 = toNode.y * height;
 
-        // Connection line
+        // Connection line with gradient
+        const lineGradient = ctx.createLinearGradient(x1, y1, x2, y2);
+        lineGradient.addColorStop(0, 'rgba(34, 197, 94, 0.4)');
+        lineGradient.addColorStop(1, 'rgba(61, 52, 85, 0.3)');
         ctx.beginPath();
-        ctx.strokeStyle = 'rgba(61, 52, 85, 0.5)';
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = lineGradient;
+        ctx.lineWidth = 1.5;
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
         ctx.stroke();
 
-        // Animated particle along connection
-        const particleProgress = (time * 0.3 + i * 0.2) % 1;
-        const px = x1 + (x2 - x1) * particleProgress;
-        const py = y1 + (y2 - y1) * particleProgress;
+        // Multiple animated particles along connection
+        for (let p = 0; p < 2; p++) {
+          const particleProgress = (time * 0.3 + i * 0.2 + p * 0.5) % 1;
+          const px = x1 + (x2 - x1) * particleProgress;
+          const py = y1 + (y2 - y1) * particleProgress;
 
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(34, 197, 94, ${0.8 - particleProgress * 0.5})`;
-        ctx.arc(px, py, 3, 0, Math.PI * 2);
-        ctx.fill();
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(34, 197, 94, ${0.8 - particleProgress * 0.5})`;
+          ctx.arc(px, py, 3 - p, 0, Math.PI * 2);
+          ctx.fill();
 
-        // Glow
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(34, 197, 94, ${0.2 - particleProgress * 0.15})`;
-        ctx.arc(px, py, 8, 0, Math.PI * 2);
-        ctx.fill();
+          // Glow
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(34, 197, 94, ${0.15 - particleProgress * 0.1})`;
+          ctx.arc(px, py, 8, 0, Math.PI * 2);
+          ctx.fill();
+        }
       });
 
-      // Draw node glows
+      // Draw node glows and orbit trails
       nodes.forEach((node) => {
         const x = node.x * width;
         const y = node.y * height;
         const pulseScale = 1 + Math.sin(time * 2) * 0.1;
 
         if (node.id === 'core') {
+          // Orbit trails around center
+          for (let i = 0; i < 3; i++) {
+            const orbitRadius = 35 + i * 12;
+            const orbitAngle = time * (0.5 - i * 0.1) + i * (Math.PI * 2 / 3);
+            const orbX = x + Math.cos(orbitAngle) * orbitRadius;
+            const orbY = y + Math.sin(orbitAngle) * orbitRadius;
+
+            // Orbit path (subtle)
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(34, 197, 94, ${0.1 - i * 0.02})`;
+            ctx.lineWidth = 1;
+            ctx.arc(x, y, orbitRadius, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Orbiting particle
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(34, 197, 94, ${0.6 - i * 0.15})`;
+            ctx.arc(orbX, orbY, 3 - i * 0.5, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
           // Central glow
-          const gradient = ctx.createRadialGradient(x, y, 0, x, y, node.radius * 2 * pulseScale);
-          gradient.addColorStop(0, 'rgba(34, 197, 94, 0.3)');
+          const gradient = ctx.createRadialGradient(x, y, 0, x, y, node.radius * 2.5 * pulseScale);
+          gradient.addColorStop(0, 'rgba(34, 197, 94, 0.35)');
+          gradient.addColorStop(0.5, 'rgba(34, 197, 94, 0.15)');
           gradient.addColorStop(1, 'rgba(34, 197, 94, 0)');
           ctx.fillStyle = gradient;
           ctx.beginPath();
-          ctx.arc(x, y, node.radius * 2 * pulseScale, 0, Math.PI * 2);
+          ctx.arc(x, y, node.radius * 2.5 * pulseScale, 0, Math.PI * 2);
           ctx.fill();
         }
       });
@@ -573,11 +793,24 @@ export function GlobalCoverageIllustration() {
     let animationId;
     let time = 0;
 
+    // Floating ambient particles
+    let particles = [];
+
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * window.devicePixelRatio;
       canvas.height = rect.height * window.devicePixelRatio;
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+      // Initialize floating particles
+      particles = Array(25).fill(null).map(() => ({
+        x: Math.random() * rect.width,
+        y: Math.random() * rect.height,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: (Math.random() - 0.5) * 0.2,
+        radius: 1 + Math.random() * 1.5,
+        isGreen: Math.random() > 0.5,
+      }));
     };
 
     const animate = () => {
@@ -588,6 +821,45 @@ export function GlobalCoverageIllustration() {
 
       ctx.fillStyle = '#1a1625';
       ctx.fillRect(0, 0, width, height);
+
+      // Dot grid pattern (representing world map dots)
+      ctx.fillStyle = 'rgba(61, 52, 85, 0.08)';
+      for (let x = 0; x < width; x += 20) {
+        for (let y = 0; y < height; y += 20) {
+          // Add some variation to simulate continental shapes
+          const noise = Math.sin(x * 0.02) * Math.cos(y * 0.03);
+          if (noise > -0.3) {
+            ctx.beginPath();
+            ctx.arc(x, y, 1, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+      }
+
+      // Radial gradient glow
+      const bgGradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width * 0.6);
+      bgGradient.addColorStop(0, 'rgba(34, 197, 94, 0.03)');
+      bgGradient.addColorStop(0.5, 'rgba(139, 92, 246, 0.02)');
+      bgGradient.addColorStop(1, 'rgba(26, 22, 37, 0)');
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, width, height);
+
+      // Floating ambient particles
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        p.x = Math.max(0, Math.min(width, p.x));
+        p.y = Math.max(0, Math.min(height, p.y));
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.isGreen ? 'rgba(34, 197, 94, 0.2)' : 'rgba(139, 92, 246, 0.15)';
+        ctx.fill();
+      });
 
       // Draw connection arcs between regions
       regions.forEach((region, i) => {
@@ -603,23 +875,36 @@ export function GlobalCoverageIllustration() {
           const midX = (x1 + x2) / 2;
           const midY = (y1 + y2) / 2 - 30;
 
+          // Connection line with gradient
+          const lineGradient = ctx.createLinearGradient(x1, y1, x2, y2);
+          lineGradient.addColorStop(0, 'rgba(34, 197, 94, 0.2)');
+          lineGradient.addColorStop(0.5, 'rgba(34, 197, 94, 0.25)');
+          lineGradient.addColorStop(1, 'rgba(34, 197, 94, 0.2)');
           ctx.beginPath();
-          ctx.strokeStyle = 'rgba(34, 197, 94, 0.15)';
+          ctx.strokeStyle = lineGradient;
           ctx.lineWidth = 1;
           ctx.moveTo(x1, y1);
           ctx.quadraticCurveTo(midX, midY, x2, y2);
           ctx.stroke();
 
-          // Animated data packet
-          const progress = (time * 0.2 + i * 0.15) % 1;
-          const t = progress;
-          const px = (1-t)*(1-t)*x1 + 2*(1-t)*t*midX + t*t*x2;
-          const py = (1-t)*(1-t)*y1 + 2*(1-t)*t*midY + t*t*y2;
+          // Multiple animated data packets
+          for (let p = 0; p < 2; p++) {
+            const progress = (time * 0.2 + i * 0.15 + j * 0.1 + p * 0.5) % 1;
+            const t = progress;
+            const px = (1-t)*(1-t)*x1 + 2*(1-t)*t*midX + t*t*x2;
+            const py = (1-t)*(1-t)*y1 + 2*(1-t)*t*midY + t*t*y2;
 
-          ctx.beginPath();
-          ctx.fillStyle = `rgba(34, 197, 94, ${0.8 - progress * 0.6})`;
-          ctx.arc(px, py, 2, 0, Math.PI * 2);
-          ctx.fill();
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(34, 197, 94, ${0.7 - progress * 0.5})`;
+            ctx.arc(px, py, 2.5 - p * 0.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Particle glow
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(34, 197, 94, ${0.1 - progress * 0.08})`;
+            ctx.arc(px, py, 6, 0, Math.PI * 2);
+            ctx.fill();
+          }
         });
       });
 
@@ -630,21 +915,25 @@ export function GlobalCoverageIllustration() {
         const isActive = i === activeRegion;
 
         if (isActive) {
-          const pulseRadius = 20 + Math.sin(time * 3) * 5;
-          ctx.beginPath();
-          ctx.strokeStyle = 'rgba(34, 197, 94, 0.3)';
-          ctx.lineWidth = 2;
-          ctx.arc(x, y, pulseRadius, 0, Math.PI * 2);
-          ctx.stroke();
+          // Multiple expanding rings
+          for (let r = 0; r < 2; r++) {
+            const pulseRadius = 18 + Math.sin(time * 3 + r * Math.PI) * 6 + r * 8;
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(34, 197, 94, ${0.3 - r * 0.1})`;
+            ctx.lineWidth = 2 - r * 0.5;
+            ctx.arc(x, y, pulseRadius, 0, Math.PI * 2);
+            ctx.stroke();
+          }
         }
 
         // Region glow
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, 15);
-        gradient.addColorStop(0, isActive ? 'rgba(34, 197, 94, 0.4)' : 'rgba(34, 197, 94, 0.2)');
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, 18);
+        gradient.addColorStop(0, isActive ? 'rgba(34, 197, 94, 0.5)' : 'rgba(34, 197, 94, 0.25)');
+        gradient.addColorStop(0.5, isActive ? 'rgba(34, 197, 94, 0.2)' : 'rgba(34, 197, 94, 0.1)');
         gradient.addColorStop(1, 'rgba(34, 197, 94, 0)');
         ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.arc(x, y, 15, 0, Math.PI * 2);
+        ctx.arc(x, y, 18, 0, Math.PI * 2);
         ctx.fill();
       });
 
