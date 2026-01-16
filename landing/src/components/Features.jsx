@@ -399,10 +399,10 @@ export function Features() {
           </div>
 
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-foreground mb-6">
-            Everything you need to stay online
+            Incidents happen. Downtime doesn't have to.
           </h2>
           <p className="text-lg text-muted max-w-2xl mx-auto">
-            Lumni combines AI intelligence with human expertise to keep your services running smoothly.
+            Lumni detects, diagnoses, and resolves issues before your users even notice.
           </p>
         </div>
 
