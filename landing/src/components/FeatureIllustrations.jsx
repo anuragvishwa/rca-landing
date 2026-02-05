@@ -125,7 +125,7 @@ export function InstantDetectionIllustration() {
       const height = rect.height;
       time += 0.01;
 
-      ctx.fillStyle = '#1a1625';
+      ctx.fillStyle = '#0b0b0b';
       ctx.fillRect(0, 0, width, height);
 
       // Dot grid pattern
@@ -219,20 +219,20 @@ export function InstantDetectionIllustration() {
   }, []);
 
   return (
-    <div className="relative h-[280px] bg-[#1a1625] overflow-hidden">
+    <div className="relative h-[280px] bg-canvas overflow-hidden">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
       <div className="relative z-10 w-full h-full p-4 flex flex-col">
         {/* Top bar with integrations */}
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
-            <div className={`w-8 h-8 rounded-lg bg-[#241e33] border ${alertActive ? 'border-red-500' : 'border-[#3d3455]'} flex items-center justify-center transition-all`}>
+            <div className={`w-8 h-8 rounded-lg bg-surface border ${alertActive ? 'border-red-500' : 'border-border'} flex items-center justify-center transition-all`}>
               <div className={alertActive ? 'text-red-500' : 'text-[#f43f5e]'}><SentryIcon /></div>
             </div>
-            <div className="w-8 h-8 rounded-lg bg-[#241e33] border border-[#3d3455] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-surface border border-border flex items-center justify-center">
               <div className="text-[#632ca6]"><DatadogIcon /></div>
             </div>
-            <div className="w-8 h-8 rounded-lg bg-[#241e33] border border-[#3d3455] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-surface border border-border flex items-center justify-center">
               <div className="text-[#e6522c]"><PrometheusIcon /></div>
             </div>
           </div>
@@ -243,31 +243,31 @@ export function InstantDetectionIllustration() {
 
         {/* Metrics cards */}
         <div className="flex gap-2 mb-3">
-          <div className="flex-1 bg-[#241e33]/80 rounded-lg p-2 border border-[#3d3455]">
-            <div className="text-[9px] text-gray-500 font-mono mb-1">CPU</div>
+          <div className="flex-1 bg-surface/80 rounded-lg p-2 border border-border">
+            <div className="text-[9px] text-muted font-mono mb-1">CPU</div>
             <div className="text-lg font-mono text-green-400">{metrics.cpu.toFixed(0)}%</div>
-            <div className="h-1 bg-[#3d3455] rounded-full mt-1 overflow-hidden">
+            <div className="h-1 bg-border rounded-full mt-1 overflow-hidden">
               <div className="h-full bg-green-500 rounded-full transition-all duration-500" style={{ width: `${metrics.cpu}%` }} />
             </div>
           </div>
-          <div className="flex-1 bg-[#241e33]/80 rounded-lg p-2 border border-[#3d3455]">
-            <div className="text-[9px] text-gray-500 font-mono mb-1">Memory</div>
+          <div className="flex-1 bg-surface/80 rounded-lg p-2 border border-border">
+            <div className="text-[9px] text-muted font-mono mb-1">Memory</div>
             <div className="text-lg font-mono text-purple-400">{metrics.memory.toFixed(0)}%</div>
-            <div className="h-1 bg-[#3d3455] rounded-full mt-1 overflow-hidden">
+            <div className="h-1 bg-border rounded-full mt-1 overflow-hidden">
               <div className="h-full bg-purple-500 rounded-full transition-all duration-500" style={{ width: `${metrics.memory}%` }} />
             </div>
           </div>
-          <div className="flex-1 bg-[#241e33]/80 rounded-lg p-2 border border-[#3d3455]">
-            <div className="text-[9px] text-gray-500 font-mono mb-1">Latency</div>
+          <div className="flex-1 bg-surface/80 rounded-lg p-2 border border-border">
+            <div className="text-[9px] text-muted font-mono mb-1">Latency</div>
             <div className="text-lg font-mono text-blue-400">{metrics.latency.toFixed(0)}ms</div>
-            <div className="h-1 bg-[#3d3455] rounded-full mt-1 overflow-hidden">
+            <div className="h-1 bg-border rounded-full mt-1 overflow-hidden">
               <div className="h-full bg-blue-500 rounded-full transition-all duration-500" style={{ width: `${metrics.latency * 2}%` }} />
             </div>
           </div>
         </div>
 
         {/* Alert popup */}
-        <div className={`absolute bottom-4 left-4 right-4 bg-[#241e33] border rounded-lg p-3 transition-all duration-300 ${alertActive ? 'border-red-500 opacity-100 translate-y-0' : 'border-[#3d3455] opacity-0 translate-y-4'}`}>
+        <div className={`absolute bottom-4 left-4 right-4 bg-surface border rounded-lg p-3 transition-all duration-300 ${alertActive ? 'border-red-500 opacity-100 translate-y-0' : 'border-border opacity-0 translate-y-4'}`}>
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center">
               <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -276,7 +276,7 @@ export function InstantDetectionIllustration() {
             </div>
             <div className="flex-1">
               <div className="text-[10px] text-red-400 font-mono">PaymentService Error</div>
-              <div className="text-[9px] text-gray-500">Detected 0.3s ago • Severity: High</div>
+              <div className="text-[9px] text-muted">Detected 0.3s ago • Severity: High</div>
             </div>
             <div className="text-[9px] text-green-400 font-mono">Analyzing...</div>
           </div>
@@ -339,7 +339,7 @@ export function AutoResolutionIllustration() {
       const height = rect.height;
       time += 0.01;
 
-      ctx.fillStyle = '#1a1625';
+      ctx.fillStyle = '#0b0b0b';
       ctx.fillRect(0, 0, width, height);
 
       // Dot grid pattern
@@ -424,14 +424,14 @@ export function AutoResolutionIllustration() {
   };
 
   return (
-    <div className="relative h-[280px] bg-[#1a1625] overflow-hidden">
+    <div className="relative h-[280px] bg-canvas overflow-hidden">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
       {/* Pipeline visualization */}
       <div className="relative z-10 h-full p-4 flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
-          <div className="text-[10px] font-mono text-gray-400">Incident Pipeline</div>
+          <div className="text-[10px] font-mono text-muted">Incident Pipeline</div>
           <div className="text-[10px] font-mono text-green-400">Auto-remediation active</div>
         </div>
 
@@ -447,7 +447,7 @@ export function AutoResolutionIllustration() {
                 <stop offset="100%" stopColor="#22c55e" />
               </linearGradient>
             </defs>
-            <line x1="12%" y1="50%" x2="88%" y2="50%" stroke="#3d3455" strokeWidth="2" />
+            <line x1="12%" y1="50%" x2="88%" y2="50%" stroke="#2a2a2a" strokeWidth="2" />
             <line
               x1="12%" y1="50%" x2={`${12 + (activeStep / 4) * 76}%`} y2="50%"
               stroke="url(#pipelineGrad)"
@@ -472,18 +472,18 @@ export function AutoResolutionIllustration() {
                 <div
                   className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
                     status === 'completed' ? 'bg-green-500/20 border-2 border-green-500' :
-                    status === 'active' ? 'bg-[#241e33] border-2 scale-110' :
-                    'bg-[#241e33] border border-[#3d3455]'
+                    status === 'active' ? 'bg-surface border-2 scale-110' :
+                    'bg-surface border border-border'
                   }`}
                   style={{ borderColor: status === 'active' ? colors[index] : undefined }}
                 >
-                  <div className={status === 'completed' ? 'text-green-500' : status === 'active' ? `text-[${colors[index]}]` : 'text-gray-500'} style={{ color: status === 'active' ? colors[index] : undefined }}>
+                  <div className={status === 'completed' ? 'text-green-500' : status === 'active' ? `text-[${colors[index]}]` : 'text-muted'} style={{ color: status === 'active' ? colors[index] : undefined }}>
                     {status === 'completed' ? (
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
                     ) : icons[index]}
                   </div>
                 </div>
-                <span className={`text-[9px] mt-2 font-mono ${status === 'active' ? 'text-white' : 'text-gray-500'}`}>{label}</span>
+                <span className={`text-[9px] mt-2 font-mono ${status === 'active' ? 'text-white' : 'text-muted'}`}>{label}</span>
                 {status === 'active' && (
                   <div className="absolute -bottom-1 w-1 h-1 bg-white rounded-full animate-ping" />
                 )}
@@ -493,11 +493,11 @@ export function AutoResolutionIllustration() {
         </div>
 
         {/* Status log */}
-        <div className="mt-4 bg-[#241e33]/80 rounded-lg p-3 border border-[#3d3455]">
+        <div className="mt-4 bg-surface/80 rounded-lg p-3 border border-border">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-[10px] font-mono text-gray-400">
+              <span className="text-[10px] font-mono text-muted">
                 {activeStep === 0 && 'Incident detected from Sentry webhook'}
                 {activeStep === 1 && 'Analyzing root cause via knowledge graph...'}
                 {activeStep === 2 && 'Applying automated fix: Revert PR #402'}
@@ -572,7 +572,7 @@ export function SmartContextIllustration() {
       const height = rect.height;
       time += 0.02;
 
-      ctx.fillStyle = '#1a1625';
+      ctx.fillStyle = '#0b0b0b';
       ctx.fillRect(0, 0, width, height);
 
       // Dot grid pattern
@@ -703,56 +703,56 @@ export function SmartContextIllustration() {
   }, []);
 
   return (
-    <div className="relative h-[280px] bg-[#1a1625] overflow-hidden">
+    <div className="relative h-[280px] bg-canvas overflow-hidden">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
       <div className="relative z-10 w-full h-full">
         {/* Integration nodes */}
         <div className="absolute top-[18%] left-[10%] flex flex-col items-center">
-          <div className="w-9 h-9 bg-[#241e33] border border-[#3d3455] rounded-lg flex items-center justify-center hover:scale-110 transition-transform cursor-pointer" style={{ boxShadow: '0 0 15px rgba(255, 255, 255, 0.1)' }}>
+          <div className="w-9 h-9 bg-surface border border-border rounded-lg flex items-center justify-center hover:scale-110 transition-transform cursor-pointer" style={{ boxShadow: '0 0 15px rgba(255, 255, 255, 0.1)' }}>
             <div className="text-white"><GitHubIcon /></div>
           </div>
-          <span className="text-[8px] text-gray-500 mt-1 font-mono">Code</span>
+          <span className="text-[8px] text-muted mt-1 font-mono">Code</span>
         </div>
 
         <div className="absolute top-[18%] right-[10%] flex flex-col items-center">
-          <div className="w-9 h-9 bg-[#241e33] border border-[#3d3455] rounded-lg flex items-center justify-center hover:scale-110 transition-transform cursor-pointer" style={{ boxShadow: '0 0 15px rgba(224, 30, 90, 0.2)' }}>
+          <div className="w-9 h-9 bg-surface border border-border rounded-lg flex items-center justify-center hover:scale-110 transition-transform cursor-pointer" style={{ boxShadow: '0 0 15px rgba(224, 30, 90, 0.2)' }}>
             <div className="text-[#E01E5A]"><SlackIcon /></div>
           </div>
-          <span className="text-[8px] text-gray-500 mt-1 font-mono">Comms</span>
+          <span className="text-[8px] text-muted mt-1 font-mono">Comms</span>
         </div>
 
         <div className="absolute top-[62%] left-[5%] flex flex-col items-center">
-          <div className="w-9 h-9 bg-[#241e33] border border-[#3d3455] rounded-lg flex items-center justify-center hover:scale-110 transition-transform cursor-pointer" style={{ boxShadow: '0 0 15px rgba(0, 82, 204, 0.2)' }}>
+          <div className="w-9 h-9 bg-surface border border-border rounded-lg flex items-center justify-center hover:scale-110 transition-transform cursor-pointer" style={{ boxShadow: '0 0 15px rgba(0, 82, 204, 0.2)' }}>
             <div className="text-[#0052CC]"><ConfluenceIcon /></div>
           </div>
-          <span className="text-[8px] text-gray-500 mt-1 font-mono">Docs</span>
+          <span className="text-[8px] text-muted mt-1 font-mono">Docs</span>
         </div>
 
         <div className="absolute top-[62%] right-[5%] flex flex-col items-center">
-          <div className="w-9 h-9 bg-[#241e33] border border-[#3d3455] rounded-lg flex items-center justify-center hover:scale-110 transition-transform cursor-pointer" style={{ boxShadow: '0 0 15px rgba(0, 82, 204, 0.2)' }}>
+          <div className="w-9 h-9 bg-surface border border-border rounded-lg flex items-center justify-center hover:scale-110 transition-transform cursor-pointer" style={{ boxShadow: '0 0 15px rgba(0, 82, 204, 0.2)' }}>
             <div className="text-[#0052CC]"><JiraIcon /></div>
           </div>
-          <span className="text-[8px] text-gray-500 mt-1 font-mono">Issues</span>
+          <span className="text-[8px] text-muted mt-1 font-mono">Issues</span>
         </div>
 
         <div className="absolute bottom-[8%] left-[28%] flex flex-col items-center">
-          <div className="w-9 h-9 bg-[#241e33] border border-[#3d3455] rounded-lg flex items-center justify-center hover:scale-110 transition-transform cursor-pointer" style={{ boxShadow: '0 0 15px rgba(99, 44, 166, 0.2)' }}>
+          <div className="w-9 h-9 bg-surface border border-border rounded-lg flex items-center justify-center hover:scale-110 transition-transform cursor-pointer" style={{ boxShadow: '0 0 15px rgba(99, 44, 166, 0.2)' }}>
             <div className="text-[#632ca6]"><DatadogIcon /></div>
           </div>
-          <span className="text-[8px] text-gray-500 mt-1 font-mono">Logs</span>
+          <span className="text-[8px] text-muted mt-1 font-mono">Logs</span>
         </div>
 
         <div className="absolute bottom-[8%] right-[28%] flex flex-col items-center">
-          <div className="w-9 h-9 bg-[#241e33] border border-[#3d3455] rounded-lg flex items-center justify-center hover:scale-110 transition-transform cursor-pointer" style={{ boxShadow: '0 0 15px rgba(230, 82, 44, 0.2)' }}>
+          <div className="w-9 h-9 bg-surface border border-border rounded-lg flex items-center justify-center hover:scale-110 transition-transform cursor-pointer" style={{ boxShadow: '0 0 15px rgba(230, 82, 44, 0.2)' }}>
             <div className="text-[#e6522c]"><PrometheusIcon /></div>
           </div>
-          <span className="text-[8px] text-gray-500 mt-1 font-mono">Metrics</span>
+          <span className="text-[8px] text-muted mt-1 font-mono">Metrics</span>
         </div>
 
         {/* Center node */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-          <div className="w-14 h-14 rounded-full bg-[#241e33] border-2 border-green-500 flex items-center justify-center" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)' }}>
+          <div className="w-14 h-14 rounded-full bg-surface border-2 border-green-500 flex items-center justify-center" style={{ boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)' }}>
             <svg className="w-7 h-7 text-green-500" fill="currentColor" viewBox="0 0 24 24">
               <path d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
@@ -819,7 +819,7 @@ export function GlobalCoverageIllustration() {
       const height = rect.height;
       time += 0.02;
 
-      ctx.fillStyle = '#1a1625';
+      ctx.fillStyle = '#0b0b0b';
       ctx.fillRect(0, 0, width, height);
 
       // Dot grid pattern (representing world map dots)
@@ -963,7 +963,7 @@ export function GlobalCoverageIllustration() {
   };
 
   return (
-    <div className="relative h-[280px] bg-[#1a1625] overflow-hidden">
+    <div className="relative h-[280px] bg-canvas overflow-hidden">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
       <div className="relative z-10 w-full h-full">
@@ -979,12 +979,12 @@ export function GlobalCoverageIllustration() {
             }}
           >
             <div
-              className={`w-8 h-8 rounded-lg bg-[#241e33] border flex items-center justify-center transition-all ${i === activeRegion ? 'scale-125 border-green-500' : 'border-[#3d3455]'}`}
+              className={`w-8 h-8 rounded-lg bg-surface border flex items-center justify-center transition-all ${i === activeRegion ? 'scale-125 border-green-500' : 'border-border'}`}
               style={{ boxShadow: `0 0 15px ${providerColors[region.provider]}30` }}
             >
               <div style={{ color: providerColors[region.provider] }}>{providerIcons[region.provider]}</div>
             </div>
-            <span className="text-[8px] text-gray-500 mt-1 font-mono">{region.name}</span>
+            <span className="text-[8px] text-muted mt-1 font-mono">{region.name}</span>
             {i === activeRegion && (
               <span className="text-[8px] text-green-400 font-mono">{region.latency}ms</span>
             )}
@@ -992,14 +992,14 @@ export function GlobalCoverageIllustration() {
         ))}
 
         {/* Status panel */}
-        <div className="absolute bottom-3 left-3 right-3 bg-[#241e33]/90 rounded-lg p-2 border border-[#3d3455]">
+        <div className="absolute bottom-3 left-3 right-3 bg-surface/90 rounded-lg p-2 border border-border">
           <div className="flex items-center justify-between text-[9px] font-mono">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
               <span className="text-green-400">6 Regions Online</span>
             </div>
             <span className="text-purple-400">Avg: 58ms</span>
-            <span className="text-gray-500">Multi-cloud Active</span>
+            <span className="text-muted">Multi-cloud Active</span>
           </div>
         </div>
       </div>

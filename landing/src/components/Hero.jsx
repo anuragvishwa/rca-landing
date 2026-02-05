@@ -30,7 +30,7 @@ export function Hero() {
             href="https://cal.com/anuragvishwa/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-secondary text-background px-8 py-3 rounded-md font-mono text-sm font-medium hover:bg-secondary/90 transition-colors"
+            className="bg-secondary text-primary-foreground px-8 py-3 rounded-md font-mono text-sm font-medium hover:bg-secondary/90 transition-colors"
           >
             Book Demo
           </a>

@@ -12,12 +12,53 @@ html {
   scroll-behavior: smooth;
 }
 
+:root {
+  color-scheme: light;
+  --background: 0 0% 100%;
+  --canvas: 0 0% 98%;
+  --surface: 0 0% 96%;
+  --border: 240 6% 90%;
+  --border-hover: 240 6% 82%;
+  --foreground: 240 5% 4%;
+  --muted: 240 4% 46%;
+  --secondary: 142 71% 45%;
+  --primary: 142 71% 45%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 142 71% 45%;
+  --accent-foreground: 0 0% 100%;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: 0 0% 6%;
+  --canvas: 0 0% 8%;
+  --surface: 0 0% 12%;
+  --border: 0 0% 18%;
+  --border-hover: 0 0% 28%;
+  --foreground: 0 0% 98%;
+  --muted: 0 0% 65%;
+  --secondary: 142 71% 45%;
+  --primary: 142 71% 45%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 142 71% 45%;
+  --accent-foreground: 0 0% 100%;
+}
+
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background-color: #ffffff;
-  color: #0a0a0a;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.app-shell {
+  background-color: hsl(var(--background));
+  background-image:
+    radial-gradient(600px 320px at 50% 0%, hsl(var(--secondary) / 0.16), transparent 60%),
+    radial-gradient(520px 320px at 10% 20%, hsl(265 80% 55% / 0.08), transparent 60%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 /* Custom scrollbar - minimal */
@@ -30,24 +71,24 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d4d4d4;
+  background: hsl(var(--border-hover));
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a1a1aa;
+  background: hsl(var(--border));
 }
 
 /* Selection - green accent */
 ::selection {
-  background: rgba(34, 197, 94, 0.3);
-  color: #0a0a0a;
+  background: hsl(var(--secondary) / 0.35);
+  color: hsl(var(--foreground));
 }
 
 /* Terminal animations */
 .connector-beam {
   fill: none;
-  stroke: #22c55e;
+  stroke: hsl(var(--secondary));
   stroke-width: 2.5;
   stroke-dasharray: 12 100;
   stroke-linecap: round;
@@ -66,13 +107,13 @@ body {
 
 .connector-path {
   fill: none;
-  stroke: #3d3455;
+  stroke: hsl(var(--border));
   stroke-width: 1.5;
 }
 
 /* Traveling particle along beam */
 .beam-particle {
-  fill: #22c55e;
+  fill: hsl(var(--secondary));
   filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.9));
 }
 
@@ -111,7 +152,7 @@ body {
   display: inline-block;
   width: 2px;
   height: 16px;
-  background: #22c55e;
+  background: hsl(var(--secondary));
   margin-left: 2px;
   animation: cursorBlink 1s steps(2, start) infinite;
   vertical-align: middle;
@@ -154,12 +195,12 @@ body {
 }
 
 .terminal-scroll::-webkit-scrollbar-thumb {
-  background: #3d3455;
+  background: hsl(var(--border));
   border-radius: 2px;
 }
 
 .terminal-scroll::-webkit-scrollbar-thumb:hover {
-  background: #5a4f75;
+  background: hsl(var(--border-hover));
 }
 
 /* Glow effect for center node */

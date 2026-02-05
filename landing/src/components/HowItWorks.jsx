@@ -128,14 +128,14 @@ function FlowingParticles({ activeStep }) {
 
         // Connection dot
         ctx.beginPath();
-        ctx.fillStyle = isActive ? '#22c55e' : '#3d3455';
+        ctx.fillStyle = isActive ? '#22c55e' : '#2a2a2a';
         ctx.arc(x, y, 4, 0, Math.PI * 2);
         ctx.fill();
       });
 
       // Draw connection line
       ctx.beginPath();
-      ctx.strokeStyle = '#3d3455';
+      ctx.strokeStyle = '#2a2a2a';
       ctx.lineWidth = 2;
       ctx.moveTo(stepPositions[0] * width, height / 2);
       ctx.lineTo(stepPositions[3] * width, height / 2);
@@ -215,7 +215,7 @@ export function HowItWorks() {
     <section id="how-it-works" ref={sectionRef} className="py-24 bg-background/80">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header - Dark themed */}
-        <div className="relative bg-[#1a1625] rounded-2xl p-8 md:p-12 border border-[#2d2640] mb-12 overflow-hidden">
+        <div className="relative bg-canvas rounded-2xl p-8 md:p-12 border border-border mb-12 overflow-hidden">
           {/* Background gradient accents */}
           <div
             className="absolute -top-32 -right-32 w-64 h-64 rounded-full opacity-20 blur-3xl pointer-events-none"
@@ -227,7 +227,7 @@ export function HowItWorks() {
           />
 
           <div className="relative z-10 text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#241e33] border border-[#3d3455] rounded-lg mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-surface border border-border rounded-lg mb-6">
               <ArrowRight className="w-4 h-4 text-green-400" />
               <span className="font-mono text-xs uppercase tracking-widest text-green-400">
                 How it works
@@ -237,7 +237,7 @@ export function HowItWorks() {
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-6">
               From data to resolution
             </h2>
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg text-muted max-w-2xl mx-auto">
               Four simple steps to transform your incident response workflow
             </p>
           </div>
@@ -258,8 +258,8 @@ export function HowItWorks() {
             return (
               <div
                 key={step.id}
-                className={`relative bg-[#1a1625] rounded-xl p-6 border transition-all duration-500 overflow-hidden group ${
-                  isActive ? 'border-[#3d3455]' : 'border-[#2d2640]'
+                className={`relative bg-canvas rounded-xl p-6 border transition-all duration-500 overflow-hidden group ${
+                  isActive ? 'border-border' : 'border-border'
                 } ${isCurrent ? 'scale-[1.02]' : ''}`}
               >
                 {/* Glow effect on active */}
@@ -282,7 +282,7 @@ export function HowItWorks() {
                       className={`font-mono text-xs px-2 py-1 rounded transition-colors duration-300 ${
                         isActive
                           ? 'bg-green-500/20 text-green-400'
-                          : 'bg-[#241e33] text-gray-500'
+                          : 'bg-surface text-muted'
                       }`}
                     >
                       {step.number}
@@ -290,7 +290,7 @@ export function HowItWorks() {
                     {index < steps.length - 1 && (
                       <ArrowRight
                         className={`w-4 h-4 hidden md:block transition-colors duration-300 ${
-                          activeStep > index ? 'text-green-400' : 'text-gray-600'
+                          activeStep > index ? 'text-green-400' : 'text-muted/70'
                         }`}
                       />
                     )}
@@ -300,14 +300,14 @@ export function HowItWorks() {
                   <div
                     className={`w-12 h-12 rounded-lg border flex items-center justify-center mb-4 transition-all duration-300 ${
                       isActive
-                        ? 'bg-[#241e33] border-green-500/50'
-                        : 'bg-[#241e33] border-[#3d3455]'
+                        ? 'bg-surface border-green-500/50'
+                        : 'bg-surface border-border'
                     }`}
                     style={isActive ? { boxShadow: '0 0 20px rgba(34, 197, 94, 0.2)' } : {}}
                   >
                     <Icon
                       className={`w-6 h-6 transition-colors duration-300 ${
-                        isActive ? 'text-green-400' : 'text-gray-500'
+                        isActive ? 'text-green-400' : 'text-muted'
                       }`}
                     />
                   </div>
@@ -315,12 +315,12 @@ export function HowItWorks() {
                   {/* Content */}
                   <h3
                     className={`font-serif text-lg mb-2 transition-colors duration-300 ${
-                      isActive ? 'text-white' : 'text-gray-500'
+                      isActive ? 'text-white' : 'text-muted'
                     }`}
                   >
                     {step.title}
                   </h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">
+                  <p className="text-sm text-muted leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -332,12 +332,12 @@ export function HowItWorks() {
         {/* CTA - Dark themed */}
         <div className="text-center mt-12">
           <div className="inline-flex flex-col sm:flex-row items-center gap-4">
-            <span className="text-gray-400 text-sm">Ready to get started?</span>
+            <span className="text-muted text-sm">Ready to get started?</span>
             <a
               href="https://cal.com/anuragvishwa/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-secondary text-background px-6 py-2.5 rounded-md font-mono text-sm font-medium hover:bg-secondary/90 transition-colors"
+              className="inline-flex items-center gap-2 bg-secondary text-primary-foreground px-6 py-2.5 rounded-md font-mono text-sm font-medium hover:bg-secondary/90 transition-colors"
             >
               Book Demo
               <ArrowRight className="w-4 h-4" />

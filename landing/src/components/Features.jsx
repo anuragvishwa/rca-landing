@@ -228,7 +228,7 @@ function AnimatedStep({ step, index, isActive }) {
     <div
       className={`group relative rounded-xl transition-all duration-300 p-5
         ${isActive
-          ? 'bg-white border border-border shadow-sm'
+          ? 'bg-canvas border border-border shadow-sm'
           : 'bg-transparent border border-transparent hover:bg-canvas/50'
         }
       `}
@@ -337,7 +337,7 @@ function FeatureBlock({ feature, index }) {
 
         {/* Illustration */}
         <div className={isReversed ? 'lg:order-1' : 'lg:order-2'}>
-          <div className="rounded-xl bg-[#1a1625] border border-[#2d2640] overflow-hidden shadow-2xl">
+          <div className="rounded-xl bg-canvas border border-border overflow-hidden shadow-2xl">
             <Illustration />
           </div>
         </div>

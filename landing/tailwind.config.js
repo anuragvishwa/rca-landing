@@ -1,24 +1,25 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        background: '#ffffff',
-        canvas: '#ffffff',
-        surface: '#fafafa',
-        border: '#e5e5e5',
-        'border-hover': '#d4d4d4',
-        foreground: '#0a0a0a',
-        muted: '#71717a',
-        secondary: '#22c55e',
+        background: 'hsl(var(--background) / <alpha-value>)',
+        canvas: 'hsl(var(--canvas) / <alpha-value>)',
+        surface: 'hsl(var(--surface) / <alpha-value>)',
+        border: 'hsl(var(--border) / <alpha-value>)',
+        'border-hover': 'hsl(var(--border-hover) / <alpha-value>)',
+        foreground: 'hsl(var(--foreground) / <alpha-value>)',
+        muted: 'hsl(var(--muted) / <alpha-value>)',
+        secondary: 'hsl(var(--secondary) / <alpha-value>)',
         primary: {
-          DEFAULT: '#22c55e',
-          foreground: '#ffffff',
+          DEFAULT: 'hsl(var(--primary) / <alpha-value>)',
+          foreground: 'hsl(var(--primary-foreground) / <alpha-value>)',
         },
         accent: {
-          DEFAULT: '#22c55e',
-          foreground: '#ffffff',
+          DEFAULT: 'hsl(var(--accent) / <alpha-value>)',
+          foreground: 'hsl(var(--accent-foreground) / <alpha-value>)',
         },
       },
       fontFamily: {

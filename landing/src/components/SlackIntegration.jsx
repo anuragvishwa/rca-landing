@@ -49,7 +49,7 @@ function SlackMessage({ avatar, name, time, children, isNew = false }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className={`flex gap-3 p-3 hover:bg-gray-100 rounded-lg transition-colors ${isNew ? 'bg-violet-50/50' : ''}`}
+      className={`flex gap-3 p-3 hover:bg-surface rounded-lg transition-colors ${isNew ? 'bg-violet-500/10' : ''}`}
     >
       <div
         className="w-9 h-9 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
@@ -62,7 +62,7 @@ function SlackMessage({ avatar, name, time, children, isNew = false }) {
           <span className="font-semibold text-foreground">{name}</span>
           <span className="text-xs text-muted">{time}</span>
           {isNew && (
-            <span className="px-1.5 py-0.5 bg-violet-100 rounded text-[10px] text-violet-600 font-medium">NEW</span>
+            <span className="px-1.5 py-0.5 bg-violet-500/20 rounded text-[10px] text-violet-600 dark:text-violet-300 font-medium">NEW</span>
           )}
         </div>
         <div className="text-muted text-sm mt-0.5">{children}</div>
@@ -74,18 +74,18 @@ function SlackMessage({ avatar, name, time, children, isNew = false }) {
 // Alert card component
 function AlertCard() {
   return (
-    <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+    <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
       <div className="flex items-start gap-3">
-        <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
-          <AlertTriangle className="w-4 h-4 text-red-500" />
+        <div className="w-8 h-8 bg-red-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+          <AlertTriangle className="w-4 h-4 text-red-500 dark:text-red-300" />
         </div>
         <div className="flex-1">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-red-600">Critical Alert</span>
-            <span className="px-2 py-0.5 bg-red-100 rounded text-xs text-red-600">P1</span>
+            <span className="font-semibold text-red-500 dark:text-red-300">Critical Alert</span>
+            <span className="px-2 py-0.5 bg-red-500/20 rounded text-xs text-red-500 dark:text-red-300">P1</span>
           </div>
           <p className="text-sm text-muted mt-1">
-            Production API latency spike detected on <code className="text-red-600 bg-red-50 px-1 rounded border border-red-200">user-service</code>
+            Production API latency spike detected on <code className="text-red-500 dark:text-red-300 bg-red-500/10 px-1 rounded border border-red-500/30">user-service</code>
           </p>
           <div className="flex items-center gap-4 mt-3 text-xs text-muted">
             <span className="flex items-center gap-1">
@@ -114,15 +114,15 @@ function AnalysisCard({ onApplyFix }) {
   };
 
   return (
-    <div className="bg-violet-50 border border-violet-200 rounded-lg p-4">
+    <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
       <div className="flex items-start gap-3">
-        <div className="w-8 h-8 bg-violet-100 rounded-lg flex items-center justify-center flex-shrink-0">
-          <Zap className="w-4 h-4 text-violet-500" />
+        <div className="w-8 h-8 bg-violet-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+          <Zap className="w-4 h-4 text-violet-500 dark:text-violet-300" />
         </div>
         <div className="flex-1">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-violet-600">Lumniverse Analysis</span>
-            <span className="px-2 py-0.5 bg-violet-100 rounded text-xs text-violet-600">AI</span>
+            <span className="font-semibold text-violet-500 dark:text-violet-300">Lumniverse Analysis</span>
+            <span className="px-2 py-0.5 bg-violet-500/20 rounded text-xs text-violet-500 dark:text-violet-300">AI</span>
           </div>
           <div className="mt-3 space-y-2 text-sm">
             <div className="flex items-start gap-2">
@@ -162,7 +162,7 @@ function AnalysisCard({ onApplyFix }) {
                     'Apply Fix'
                   )}
                 </motion.button>
-                <button className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-muted text-sm font-medium rounded-lg transition-colors">
+                <button className="px-4 py-2 bg-surface hover:bg-border text-muted text-sm font-medium rounded-lg transition-colors">
                   View Details
                 </button>
               </>
@@ -182,18 +182,18 @@ function AnalysisCard({ onApplyFix }) {
 // Resolution card
 function ResolutionCard() {
   return (
-    <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+    <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
       <div className="flex items-start gap-3">
-        <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-          <CheckCircle className="w-4 h-4 text-green-500" />
+        <div className="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+          <CheckCircle className="w-4 h-4 text-emerald-500 dark:text-emerald-300" />
         </div>
         <div className="flex-1">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-green-600">Incident Resolved</span>
-            <span className="px-2 py-0.5 bg-green-100 rounded text-xs text-green-600">Auto</span>
+            <span className="font-semibold text-emerald-500 dark:text-emerald-300">Incident Resolved</span>
+            <span className="px-2 py-0.5 bg-emerald-500/20 rounded text-xs text-emerald-500 dark:text-emerald-300">Auto</span>
           </div>
           <p className="text-sm text-muted mt-1">
-            Database connection pool increased. All services recovered. MTTR: <span className="text-green-600 font-semibold">3m 42s</span>
+            Database connection pool increased. All services recovered. MTTR: <span className="text-emerald-500 dark:text-emerald-300 font-semibold">3m 42s</span>
           </p>
         </div>
       </div>
@@ -204,22 +204,22 @@ function ResolutionCard() {
 // Git card
 function GitCard() {
   return (
-    <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+    <div className="bg-surface border border-border rounded-lg p-4">
       <div className="flex items-start gap-3">
-        <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-          <GitBranch className="w-4 h-4 text-gray-600" />
+        <div className="w-8 h-8 bg-canvas rounded-lg flex items-center justify-center flex-shrink-0">
+          <GitBranch className="w-4 h-4 text-muted" />
         </div>
         <div className="flex-1">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-gray-700">Auto-generated PR</span>
-            <span className="px-2 py-0.5 bg-gray-100 rounded text-xs text-gray-600">#1847</span>
+            <span className="font-semibold text-foreground">Auto-generated PR</span>
+            <span className="px-2 py-0.5 bg-canvas rounded text-xs text-muted">#1847</span>
           </div>
           <p className="text-sm text-muted mt-1">
-            <code className="text-blue-600 bg-blue-50 px-1 rounded border border-blue-200">fix: increase postgres max_connections</code>
+            <code className="text-blue-500 dark:text-blue-300 bg-blue-500/10 px-1 rounded border border-blue-500/30">fix: increase postgres max_connections</code>
           </p>
           <div className="flex items-center gap-3 mt-2 text-xs">
-            <span className="text-green-600">+2 lines</span>
-            <span className="text-red-600">-1 line</span>
+            <span className="text-emerald-500">+2 lines</span>
+            <span className="text-rose-500">-1 line</span>
             <span className="text-muted">in config/database.yml</span>
           </div>
         </div>
@@ -233,7 +233,7 @@ function Reactions({ reactions }) {
   return (
     <div className="flex gap-1 mt-2">
       {reactions.map((r, i) => (
-        <span key={i} className="inline-flex items-center gap-1 px-2 py-0.5 bg-gray-100 rounded-full text-xs">
+        <span key={i} className="inline-flex items-center gap-1 px-2 py-0.5 bg-surface border border-border rounded-full text-xs">
           {r.emoji} <span className="text-muted">{r.count}</span>
         </span>
       ))}

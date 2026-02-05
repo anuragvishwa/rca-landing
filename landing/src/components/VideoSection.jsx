@@ -98,7 +98,7 @@ export function VideoSection() {
           {!isPlaying && (
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none bg-background/50">
               <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center">
-                <Play size={28} className="text-background ml-1" fill="currentColor" />
+                <Play size={28} className="text-primary-foreground ml-1" fill="currentColor" />
               </div>
             </div>
           )}

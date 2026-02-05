@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Zap, Menu, X } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -57,12 +58,13 @@ export function Navbar() {
         </div>
 
         {/* CTA Button */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
           <a
             href="https://cal.com/anuragvishwa/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:block bg-secondary text-background px-4 py-2 rounded-md font-mono text-sm font-medium hover:bg-secondary/90 transition-colors"
+            className="hidden sm:block bg-secondary text-primary-foreground px-4 py-2 rounded-md font-mono text-sm font-medium hover:bg-secondary/90 transition-colors"
           >
             Book Demo
           </a>
@@ -106,7 +108,7 @@ export function Navbar() {
               href="https://cal.com/anuragvishwa/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="block bg-secondary text-background px-4 py-2 rounded-md font-mono text-sm font-medium text-center"
+              className="block bg-secondary text-primary-foreground px-4 py-2 rounded-md font-mono text-sm font-medium text-center"
             >
               Book Demo
             </a>

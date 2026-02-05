@@ -8,8 +8,10 @@ export function GlobalParticleBackground() {
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
+    const theme = { accent: '142 71% 45%', base: '0 0% 30%' };
     let animationId;
     let particles = [];
+    let themeObserver;
 
     // Responsive particle count
     const getParticleCount = () => {
@@ -17,10 +19,17 @@ export function GlobalParticleBackground() {
       return window.innerWidth < 768 ? 40 : 80;
     };
 
+    const syncTheme = () => {
+      const styles = getComputedStyle(document.documentElement);
+      theme.accent = styles.getPropertyValue('--secondary').trim() || '142 71% 45%';
+      theme.base = styles.getPropertyValue('--border').trim() || '0 0% 30%';
+    };
+
     // Resize handler
     const resize = () => {
       canvas.width = window.innerWidth * window.devicePixelRatio;
       canvas.height = window.innerHeight * window.devicePixelRatio;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
       // Reinitialize particles on resize
@@ -48,7 +57,7 @@ export function GlobalParticleBackground() {
       ctx.clearRect(0, 0, width, height);
 
       // Draw connections first (behind particles)
-      ctx.lineWidth = 0.5;
+      ctx.lineWidth = 0.6;
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -56,12 +65,12 @@ export function GlobalParticleBackground() {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < 180) {
-            const opacity = 0.2 * (1 - dist / 180);
-            // Use green for accent connections, purple for others
+            const opacity = 0.18 * (1 - dist / 180);
+            // Use green for accent connections, neutral for others
             if (particles[i].isAccent || particles[j].isAccent) {
-              ctx.strokeStyle = `rgba(34, 197, 94, ${opacity * 0.5})`;
+              ctx.strokeStyle = `hsl(${theme.accent} / ${opacity * 0.7})`;
             } else {
-              ctx.strokeStyle = `rgba(139, 92, 246, ${opacity * 0.4})`;
+              ctx.strokeStyle = `hsl(${theme.base} / ${opacity * 0.45})`;
             }
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -90,11 +99,9 @@ export function GlobalParticleBackground() {
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
 
         if (p.isAccent) {
-          // Green accent particles
-          ctx.fillStyle = 'rgba(34, 197, 94, 0.5)';
+          ctx.fillStyle = `hsl(${theme.accent} / 0.55)`;
         } else {
-          // Purple base particles
-          ctx.fillStyle = 'rgba(139, 92, 246, 0.35)';
+          ctx.fillStyle = `hsl(${theme.base} / 0.35)`;
         }
         ctx.fill();
       });
@@ -102,12 +109,16 @@ export function GlobalParticleBackground() {
       animationId = requestAnimationFrame(animate);
     }
 
+    syncTheme();
     resize();
     window.addEventListener('resize', resize);
+    themeObserver = new MutationObserver(syncTheme);
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     animate();
 
     return () => {
       window.removeEventListener('resize', resize);
+      if (themeObserver) themeObserver.disconnect();
       if (animationId) cancelAnimationFrame(animationId);
     };
   }, []);
