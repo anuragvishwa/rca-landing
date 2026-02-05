@@ -9,7 +9,7 @@ const getInitialTheme = () => {
   } catch (e) {
     // Ignore storage access issues.
   }
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  return 'dark';
 };
 
 const applyTheme = (theme) => {
